@@ -7,7 +7,7 @@
       <div class="login-card">
         <h2 class="login-title">Iniciar sesión</h2>
         
-        <form [formGroup]="logInForm" (ngSubmit)="onSubmit()" class="login-form">
+        <form [formGroup]="logInForm" (ngSubmit)="login()" class="login-form">
           <div class="form-group">
             <input 
               pInputText
@@ -19,8 +19,9 @@
           </div>
           <div class="form-group">
             <input 
+              pInputText
+              formControlName="password"
               type="password" 
-              formControlName="********"
               placeholder="Contraseña"
               class="form-input"
             >
