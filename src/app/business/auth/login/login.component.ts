@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { HeaderComponent } from '../../shared/components/header/header.component';
-import { UserCreds } from '../../models/UserModel';
-import { AuthService } from '../../core/services/auth.service';
-import { UserService } from '../../core/services/User/user.service';
+import { HeaderComponent } from '../../../shared/components/header/header.component';
+import { UserCreds } from "../../../models/UserModel";
+import { AuthService } from '../../../core/services/auth.service';
+import { UserService } from '../../../core/services/User/user.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -31,14 +31,9 @@ export class LoginComponent {
         email: this.logInForm.get('email')?.value,
         password: this.logInForm.get('password')?.value
       };
-      this.authService.login(userCreds).subscribe({
-        next:response=>this.router.navigate(['/dashboard']),
-        error : error=>console.log(error)
-      });
+      this.authService.login(userCreds).subscribe((response => {
+        this.router.navigate(['/dashboard']);
+      }));
     }
   }
-  onSubmit(){
-
-  }
-  
 }

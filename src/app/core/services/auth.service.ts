@@ -17,6 +17,7 @@ export class AuthService {
       tap(response => {
         if(response.token){
           console.log(response.token);
+          this.setToken(response.token);
         }
       }))
   }
@@ -39,4 +40,18 @@ export class AuthService {
     localStorage.removeItem(this.tokenkey);
     this.router.navigate(['/login']);
   }
+  /*
+  autoRefreshToken():void{
+    if(!this.isAutenticated()){
+      return;
+    }
+    const token = this.getToken();
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    const exp = payload.exp * 1000;
+    const now = Date.now();
+    const refreshTime = exp - now;
+    this.httpClient.post<any>(this.api_url + '/refresh', {}).subscribe(response => {
+      this.setToken(response.token);
+    });
+  }*/
 }

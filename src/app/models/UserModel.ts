@@ -3,6 +3,6 @@ export interface UserCreds{
     password: string;
 }
 export interface User{
-    username: string;
-    token: string;
+    email: string;
+    role:string |null;
 }

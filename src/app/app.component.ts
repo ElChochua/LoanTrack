@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { LoginComponent } from './auth/login/login.component';
+import { Component, OnInit } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
+import { AuthService } from './core/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +9,13 @@ import { LoginComponent } from './auth/login/login.component';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'LoanTrack';
+  constructor(private authService: AuthService, private router:Router) {
+  }
+  ngOnInit(): void {
+    if(this.authService.isAutenticated()){
+      console.log('User is authenticated');
+    }
+}
 }

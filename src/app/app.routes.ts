@@ -1,27 +1,26 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './auth/login/login.component';
-import { DashboardComponent } from './business/dashboard/dashboard.component';
-
+import { LoginComponent } from './business/auth/login/login.component';
+import { GuardService } from './core/guards/auth.guard';
+import { PreventGuard } from './core/guards/prevent.guard';
 export const routes: Routes = [
     {
-        path: 'login',
-        component: LoginComponent
+        path: '',
+        loadComponent:() => import('./shared/components/landingpage/landingpage.component')
     },
     {
-        path: 'dashboard',
-        component: DashboardComponent
-    }
-    /*
+        path:'login',
+            component: LoginComponent, 
+            canActivate:[PreventGuard]
+        },
     {
-        path:'dashboard',
-            loadChildren:()=>import('./business/dashboard/dashboard.component'),
-            children:[
-                {}
-            ]
-
-    }
-    {
-        path='dashboard',
-        loadComponent:()=>import('./dashboard/dashboard.module').then(m=>m.DashboardModule)
-    }*/
+        path: '',
+        loadComponent: () => import('./shared/components/layout/layout.component'),
+        canActivate:[GuardService],
+        children:[
+            {
+             path: 'dashboard',
+             loadComponent:() => import('./business/dashboard/dashboard.component')
+            }
+        ]
+    }  
 ];
