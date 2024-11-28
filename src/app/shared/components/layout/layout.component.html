@@ -1,18 +1,9 @@
-<div class="flex min-h-screen ">
-  <!-- SideBar -->
-  <div class="w-auto absolute ">
-    <SideBar />
-  </div>
-  <div class="display flex-grow">
-    <nav class="block w-full max-w-full  text-white shadow-none rounded-xl transition-all ">
-      <app-header />
-    </nav>
-    <div class="mt-5">
-      <router-outlet />
-    </div>
-    <!-- Footer -->
-    <div>
-      <app-footer />
-    </div>
+<div class="flex w-full bg-white">
+  <SideBar class="w-60 bg-gray-200"></SideBar>
+  <div class="flex-1 flex flex-col">
+      <app-header class="ml-16"></app-header>
+      <div class="scrollable-content flex-1 ml-16">
+          <router-outlet></router-outlet>
+      </div>
   </div>
 </div>
