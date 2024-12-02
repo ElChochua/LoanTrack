@@ -30,8 +30,8 @@ export const routes: Routes = [
                 loadComponent:() => import('./business/loans/loans.component')
             },
             {
-                path: 'loans',
-                loadComponent:() => import('./business/loans/loans.component')
+                path: 'administration',
+                loadComponent:() => import('./business/user-management/user-management.component') 
             },
             {
                 path: 'notifications',

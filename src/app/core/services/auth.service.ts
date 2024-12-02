@@ -22,6 +22,8 @@ export class AuthService {
         if(response.token){
           console.log(response.token);
           this.setToken(response.token);
+          this.setRefreshToken(response.refreshToken);
+          this.autoRefreshToken();
         }
       }))
   }
