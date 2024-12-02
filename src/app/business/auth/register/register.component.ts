@@ -26,7 +26,7 @@ export default class RegisterComponent {
     if(this.registerForm.valid){
        const registerDto:UserRegister = {
         email: this.registerForm.get('email')?.value,
-        username: this.registerForm.get('username')?.value,
+        user: this.registerForm.get('username')?.value,
         password: this.registerForm.get('password')?.value
       }
       this.auth.register(registerDto).subscribe((response) => {

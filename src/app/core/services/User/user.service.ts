@@ -1,17 +1,24 @@
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject, Observer } from 'rxjs';
-import { UserCreds } from '../../../models/UserModel';
+import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { Observable, BehaviorSubject, Observer, tap } from 'rxjs';
+import { User, UserCreds } from '../../../models/UserModel';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private userSubject: BehaviorSubject<UserCreds|null> = new BehaviorSubject<UserCreds | null>(null);
-  constructor() { }
-  getUser():Observable<UserCreds | null>{
-    return this.userSubject.asObservable();
+  private api_url = 'http://localhost:8080/api/v1/';
+  constructor(private httpClient: HttpClient, private router:Router) {
   }
-  setUser(user:UserCreds){
-    this.userSubject.next(user);
+  getAllUsers():Observable<User[]>{
+    return this.httpClient.get<User[]>(`${this.api_url}superadmin/get-all-users`).pipe(
+      tap(response => {console.log(response)})
+    );
+  }
+  getAllUnassignedUsers():Observable<User[]>{
+    return this.httpClient.get<User[]>(`${this.api_url}superadmin/get-users-unassigned`).pipe(
+      tap(response => {console.log(response)})
+    );
   }
 }

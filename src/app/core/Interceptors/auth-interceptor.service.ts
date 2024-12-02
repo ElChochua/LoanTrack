@@ -11,24 +11,22 @@ export class AuthInterceptorService implements HttpInterceptor{
   private toastTest = new Subject<string>();
   toast = this.toastTest.asObservable();
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-      const token = this.auth.getToken();
-      let request = req;
-      if(token){
-        request = req.clone({
-          setHeaders:{
-            authorization: `Bearer ${ token }`
-          }
-        })
-      }
+    const token = this.auth.getToken();
+    let request = req;
+    if(token){
+      request = req.clone({
+        setHeaders:{
+          authorization: `Bearer ${ token }`
+        }
+      })
+    }
       return next.handle(request).pipe(catchError((error:HttpErrorResponse)=>
         {
-          if(error.status === 401){
-            this.toastTest.next('Session expired, please login again');
-            this.auth.logout();
-            this.router.navigate(['/login']);
-          }else if(error.status === 403){
-            this.toastTest.next('You do not have permission to access this resource');
-            this.router.navigate(['/login']);
+          if(error.status === 401 && error.error?.error === 'TokenExpired'){
+          console.log('Token Expired');
+          this.auth.logout();
+          }else{
+            console.log('You do not have permission to access this resource');
           }
           return throwError(error);
         }

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { UserCreds, User, UserRegister } from '../../models/UserModel';
 
 @Injectable({
@@ -9,7 +9,11 @@ import { UserCreds, User, UserRegister } from '../../models/UserModel';
 })
 export class AuthService {
   private api_url = 'http://localhost:8080/api/v1/auth';
+  private refresh_url = 'http://localhost:8080/api/v1/auth/refresh';
   private tokenkey = 'authToken'
+  private refreshTokenKey = 'refreshToken';
+  private userSubject = new BehaviorSubject<User | null>(null);
+  user$ = this.userSubject.asObservable();
   constructor(private httpClient: HttpClient, private router:Router) {
   }
   login(userCreds: UserCreds):Observable<any>{
@@ -53,18 +57,39 @@ export class AuthService {
     const payload = JSON.parse(atob(token.split('.')[1]));
     return payload.role;
   }
-  /*
+  refreshToken():Observable<any>{
+    const refreshToken = this.getRefreshToken();
+    return this.httpClient.post<any>(this.refresh_url, {refreshToken}).pipe(
+      tap(response=>{
+        if(response.token){
+          this.setToken(response.token);
+          this.setRefreshToken(response.refreshToken);
+          this.autoRefreshToken();
+        }
+      })
+    )
+  }
+  setRefreshToken(refreshToken:string):void{
+    localStorage.setItem(this.refreshTokenKey, refreshToken);
+  }
+  getRefreshToken():string|null{
+    if(typeof window !== 'undefined'){
+      return localStorage.getItem('refreshToken');
+    }else{
+      return null;
+    }
+  }
   autoRefreshToken():void{
-    if(!this.isAutenticated()){
+    const token = this.getToken();
+    if(!token){
       return;
     }
-    const token = this.getToken();
     const payload = JSON.parse(atob(token.split('.')[1]));
     const exp = payload.exp * 1000;
-    const now = Date.now();
-    const refreshTime = exp - now;
-    this.httpClient.post<any>(this.api_url + '/refresh', {}).subscribe(response => {
-      this.setToken(response.token);
-    });
-  }*/
+    const timeout = exp - Date.now() - (60*1000);
+    setTimeout(() => {
+      this.refreshToken().subscribe();
+    }, timeout);
+  }
+
 }

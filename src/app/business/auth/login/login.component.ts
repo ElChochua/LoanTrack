@@ -31,7 +31,6 @@ export class LoginComponent {
         email: this.logInForm.get('email')?.value,
         password: this.logInForm.get('password')?.value
       };
-      console.log("qwe");
       this.authService.login(userCreds).subscribe((response => {
         this.router.navigate(['/dashboard']);
       }));
