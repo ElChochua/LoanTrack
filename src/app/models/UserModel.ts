@@ -6,3 +6,8 @@ export interface User{
     email: string;
     role:string |null;
 }
+export interface UserRegister{
+    email: string;
+    username: string;
+    password: string;
+}

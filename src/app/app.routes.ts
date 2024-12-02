@@ -8,6 +8,10 @@ export const routes: Routes = [
         loadComponent:() => import('./shared/components/landingpage/landingpage.component')
     },
     {
+        path: 'register',
+        loadComponent:() => import('./business/auth/register/register.component')
+    },
+    {
         path:'login',
             component: LoginComponent, 
             canActivate:[PreventGuard]
@@ -20,6 +24,30 @@ export const routes: Routes = [
             {
              path: 'dashboard',
              loadComponent:() => import('./business/dashboard/dashboard.component')
+            },
+            {
+                path: 'loans',
+                loadComponent:() => import('./business/loans/loans.component')
+            },
+            {
+                path: 'loans',
+                loadComponent:() => import('./business/loans/loans.component')
+            },
+            {
+                path: 'notifications',
+                loadComponent:() => import('./business/notifications/notifications.component')
+            },
+            {
+                path: 'organizations',
+                loadComponent:() => import('./business/organizations/organizations.component')
+            },
+            {
+                path: 'profile',
+                loadComponent:() => import('./business/profile/profile.component')
+            },
+            {
+                path: 'settings',
+                loadComponent:() => import('./business/settings/settings.component')
             }
         ]
     }  

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, tap } from 'rxjs';
-import { UserCreds, User } from '../../models/UserModel';
+import { UserCreds, User, UserRegister } from '../../models/UserModel';
 
 @Injectable({
   providedIn: 'root'
@@ -21,10 +21,15 @@ export class AuthService {
         }
       }))
   }
+  register(user: UserRegister):Observable<any>{
+    return this.httpClient.post<any>(this.api_url + '/register', user).pipe(
+      tap(response => {console.log(response)})
+    );
+  }
   private setToken(token:string): void{
       localStorage.setItem(this.tokenkey, token);
   }
-  private getToken():string|null{
+  public getToken():string|null{
     return localStorage.getItem(this.tokenkey);
   }
   isAutenticated():boolean{
@@ -39,6 +44,14 @@ export class AuthService {
   logout():void{
     localStorage.removeItem(this.tokenkey);
     this.router.navigate(['/login']);
+  }
+  userGetRole():string |null{
+    const token = this.getToken()
+    if(!token){
+      return null;
+    }
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    return payload.role;
   }
   /*
   autoRefreshToken():void{

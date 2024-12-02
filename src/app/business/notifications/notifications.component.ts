@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
   templateUrl: './notifications.component.html',
   styleUrl: './notifications.component.css'
 })
-export class NotificationsComponent {
+export default class NotificationsComponent {
 
 }

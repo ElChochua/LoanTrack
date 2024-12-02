@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [HeaderComponent, ReactiveFormsModule],
+  imports: [HeaderComponent, ReactiveFormsModule,],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -31,9 +31,15 @@ export class LoginComponent {
         email: this.logInForm.get('email')?.value,
         password: this.logInForm.get('password')?.value
       };
+      console.log("qwe");
       this.authService.login(userCreds).subscribe((response => {
         this.router.navigate(['/dashboard']);
       }));
+    }else{
+      console.log('Form is invalid');
     }
+  }
+  resetForm():void{
+    this.logInForm.reset();
   }
 }
