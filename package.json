@@ -19,6 +19,7 @@
     "@angular/platform-browser-dynamic": "^18.1.0",
     "@angular/router": "^18.1.0",
     "@tanstack/angular-table": "^8.20.5",
+    "flowbite": "^2.5.2",
     "primeng": "^17.18.12",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../../core/services/auth.service';
-import { UserService } from '../../../core/services/User/user.service';
-import { User } from '../../../models/UserModel';
+import { AuthService } from '../../../../../core/services/auth.service';
+import { UserService } from '../../../../../core/services/User/user.service';
+import { User } from '../../../../../models/Users/UserModel';
 
 @Component({
   selector: 'app-unassigned-users',

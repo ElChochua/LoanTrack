@@ -1,8 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
-import { UserCreds, User, UserRegister } from '../../models/UserModel';
+import { BehaviorSubject, Observable, tap, map } from 'rxjs';
+import { UserCreds, User, UserRegister } from '../../models/Users/UserModel';
 
 @Injectable({
   providedIn: 'root'
@@ -16,16 +16,35 @@ export class AuthService {
   user$ = this.userSubject.asObservable();
   constructor(private httpClient: HttpClient, private router:Router) {
   }
-  login(userCreds: UserCreds):Observable<any>{
-    return this.httpClient.post<any>(this.api_url + '/login', userCreds).pipe(
-      tap(response => {
-        if(response.token){
-          console.log(response.token);
-          this.setToken(response.token);
-          this.setRefreshToken(response.refreshToken);
+  login(userCreds: UserCreds){
+    return this.httpClient.post<any>(this.api_url + '/login', userCreds, {observe:'response'}).pipe(
+      map((response: HttpResponse<any>)=>{
+        const body = response.body;
+        console.log(body.token);
+        if(body && body.token && body.refreshToken && body.user){
+          console.log("This shit should be working here ");
+          this.setToken(body.token);
+          this.setRefreshToken(body.refreshToken);
+          console.log(body.user);
+        }
+      })
+    );
+  }
+  refreshToken():Observable<any>{
+    const refreshToken = this.getRefreshToken();
+    return this.httpClient.post<any>(this.refresh_url, {refreshToken},{observe:'response'}).pipe(
+      map((response:HttpResponse<any>)=>{
+        const body = response.body;
+        if(body.token){
+          this.setToken(body.token);
+          this.setRefreshToken(body.refreshToken);
           this.autoRefreshToken();
         }
-      }))
+      })
+    )
+  }
+  setRefreshToken(refreshToken:string):void{
+    localStorage.setItem(this.refreshTokenKey, refreshToken);
   }
   register(user: UserRegister):Observable<any>{
     return this.httpClient.post<any>(this.api_url + '/register', user).pipe(
@@ -49,6 +68,8 @@ export class AuthService {
   }
   logout():void{
     localStorage.removeItem(this.tokenkey);
+    localStorage.removeItem(this.refreshTokenKey);
+
     this.router.navigate(['/login']);
   }
   userGetRole():string |null{
@@ -59,21 +80,7 @@ export class AuthService {
     const payload = JSON.parse(atob(token.split('.')[1]));
     return payload.role;
   }
-  refreshToken():Observable<any>{
-    const refreshToken = this.getRefreshToken();
-    return this.httpClient.post<any>(this.refresh_url, {refreshToken}).pipe(
-      tap(response=>{
-        if(response.token){
-          this.setToken(response.token);
-          this.setRefreshToken(response.refreshToken);
-          this.autoRefreshToken();
-        }
-      })
-    )
-  }
-  setRefreshToken(refreshToken:string):void{
-    localStorage.setItem(this.refreshTokenKey, refreshToken);
-  }
+ 
   getRefreshToken():string|null{
     if(typeof window !== 'undefined'){
       return localStorage.getItem('refreshToken');

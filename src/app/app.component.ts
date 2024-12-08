@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { AuthService } from './core/services/auth.service';
-
+import { initFlowbite } from 'flowbite';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
   constructor(private authService: AuthService, private router:Router) {
   }
   ngOnInit(): void {
+    initFlowbite();
     if(this.authService.isAutenticated()){
         this.authService.autoRefreshToken();
     }

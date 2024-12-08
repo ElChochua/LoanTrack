@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HeaderComponent } from '../../../shared/components/header/header.component';
-import { UserCreds } from "../../../models/UserModel";
+import { UserCreds } from "../../../models/Users/UserModel";
 import { AuthService } from '../../../core/services/auth.service';
 import { UserService } from '../../../core/services/User/user.service';
 import { Router } from '@angular/router';

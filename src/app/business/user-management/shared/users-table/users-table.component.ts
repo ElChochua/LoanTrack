@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from '../../../core/services/User/user.service';
-import { User } from '../../../models/UserModel';
+import { UserService } from '../../../../core/services/User/user.service';
+import { User } from '../../../../models/Users/UserModel';
 @Component({
   selector: 'app-users-table',
   standalone: true,

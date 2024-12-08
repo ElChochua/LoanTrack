@@ -3,7 +3,7 @@ import { HeaderComponent } from '../../../shared/components/header/header.compon
 import { AuthService } from '../../../core/services/auth.service';
 import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators  } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserRegister } from '../../../models/UserModel';
+import { UserRegister } from '../../../models/Users/UserModel';
 @Component({
   selector: 'app-register',
   standalone: true,
