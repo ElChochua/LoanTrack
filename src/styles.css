@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@layer components {
+    .pending {
+      @apply relative grid items-center font-sans font-bold uppercase whitespace-nowrap select-none bg-red-500/20 text-red-700 py-1 px-2 text-xs rounded-md;
+    }
+    .active{
+      @apply relative grid items-center font-sans font-bold uppercase whitespace-nowrap select-none bg-green-500/20 text-green-700 py-1 px-2 text-xs rounded-md;
+    }
+    .inactive{
+      @apply relative grid items-center font-sans font-bold uppercase whitespace-nowrap select-none bg-gray-500/20 text-gray-700 py-1 px-2 text-xs rounded-md;
+    }
+    .unassigned{
+      @apply relative grid items-center font-sans font-bold uppercase whitespace-nowrap select-none bg-yellow-500/20 text-yellow-700 py-1 px-2 text-xs rounded-md;
+    }
+  }

@@ -2,7 +2,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, tap, map } from 'rxjs';
-import { UserCreds, User, UserRegister } from '../../models/Users/UserModel';
+import { UserCreds, User, UserRegister } from '../../../models/Users/UserModel';
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +12,12 @@ export class AuthService {
   private refresh_url = 'http://localhost:8080/api/v1/auth/refresh';
   private tokenkey = 'authToken'
   private refreshTokenKey = 'refreshToken';
+
   private userSubject = new BehaviorSubject<User | null>(null);
   user$ = this.userSubject.asObservable();
-  constructor(private httpClient: HttpClient, private router:Router) {
-  }
+  
+  constructor(private httpClient: HttpClient, private router:Router) {}
+  
   login(userCreds: UserCreds){
     return this.httpClient.post<any>(this.api_url + '/login', userCreds, {observe:'response'}).pipe(
       map((response: HttpResponse<any>)=>{
@@ -32,12 +34,12 @@ export class AuthService {
   }
   refreshToken():Observable<any>{
     const refreshToken = this.getRefreshToken();
-    return this.httpClient.post<any>(this.refresh_url, {refreshToken},{observe:'response'}).pipe(
-      map((response:HttpResponse<any>)=>{
-        const body = response.body;
-        if(body.token){
-          this.setToken(body.token);
-          this.setRefreshToken(body.refreshToken);
+    return this.httpClient.post<any>(this.refresh_url, {refreshToken}).pipe(
+      tap((response)=>{
+        if(response.token){
+          console.log("Esta madre trono aca");
+          this.setToken(response.token);
+          this.setRefreshToken(response.refreshToken);
           this.autoRefreshToken();
         }
       })
@@ -69,7 +71,6 @@ export class AuthService {
   logout():void{
     localStorage.removeItem(this.tokenkey);
     localStorage.removeItem(this.refreshTokenKey);
-
     this.router.navigate(['/login']);
   }
   userGetRole():string |null{
@@ -83,7 +84,7 @@ export class AuthService {
  
   getRefreshToken():string|null{
     if(typeof window !== 'undefined'){
-      return localStorage.getItem('refreshToken');
+      return localStorage.getItem(this.refreshTokenKey);
     }else{
       return null;
     }

@@ -1,149 +1,181 @@
-    <span
-      class="absolute text-white text-4xl top-5 left-4 cursor-pointer">
-      <i class="bi bi-filter-left px-2 bg-gray-900 rounded-md"></i>
-    </span>
-    <!-- Begining of sidebar -->
-    <div class="sidebar fixed top-0 left-0 bottom-0 w-64 bg-azul-perron text-white">
-      <!-- Header -->
-      <div class="flex items-center justify-center py-6">
-        <img
-          src="https://pnganime.com/web/images/d/dfa9sy5-205439f7-70eb-473e-9242-692492b5baff.png"
-          alt="Logo"
-          class="w-10 h-auto"
-        />
-        <h1 class="ml-3 text-xl font-bold">LoanTrack</h1>
-      </div>
-      <div class="border-t border-gray-600"></div>
-    
-      <!-- Menú -->
-      <nav class="mt-6">
-        <!-- Inicio -->
-        <a
-          href="dashboard"
-          class="flex items-center px-6 py-3 text-sm font-medium rounded hover:bg-blue-600"
-        >
-          <i class="bi bi-house-door-fill"></i>
-          <span class="ml-4">Inicio</span>
-        </a>
-    
-        <!-- Organizaciones -->
-        <div class="relative group">
-          <button
-            class="flex items-center w-full px-6 py-3 text-sm font-medium rounded hover:bg-blue-600"
-          >
-            <i class="bi bi-diagram-3-fill"></i>
-            <a href="organizations"class="ml-4">Organizaciones</a>
-            <i
-              class="bi bi-chevron-down ml-auto transform group-hover:rotate-180"
-            ></i>
-          </button>
-          <!-- Submenú -->
-          <div
-            class="hidden group-hover:block pl-12 mt-2 space-y-1 text-sm font-normal"
-          >
-            <a href="#" class="block py-2 hover:text-gray-300">Crear organización</a>
-            <a href="#" class="block py-2 hover:text-gray-300">Activas</a>
-            <a href="#" class="block py-2 hover:text-gray-300">Inhabilitadas</a>
-          </div>
-        </div>
-    
-        <!-- Usuarios -->
-        <div class="relative group">
-          <button
-            class="flex items-center w-full px-6 py-3 text-sm font-medium rounded hover:bg-blue-600"
-          >
-            <i class="bi bi-person-fill"></i>
-            <span class="ml-4">Usuarios</span>
-            <i
-              class="bi bi-chevron-down ml-auto transform group-hover:rotate-180"
-            ></i>
-          </button>
-          <!-- Submenú -->
-          <div
-            class="hidden group-hover:block pl-12 mt-2 space-y-1 text-sm font-normal"
-          >
-            <a href="#" class="block py-2 hover:text-gray-300">Agregar usuarios</a>
-            <a href="#" class="block py-2 hover:text-gray-300">Pendientes</a>
-            <a href="#" class="block py-2 hover:text-gray-300">Inhabilitados</a>
-          </div>
-        </div>
-    
-        <!-- Administración -->
-        <div class="relative group">
-          <button 
-            class="flex items-center w-full px-6 py-3 text-sm font-medium rounded hover:bg-blue-600"
-          >
-            <i class="bi bi-people-fill"></i>
-            <a href="administration" class="ml-4">Administración</a>
-            <i
-              class="bi bi-chevron-down ml-auto transform group-hover:rotate-180"
-            ></i>
-          </button>
-          <!-- Submenú -->
-          <div
-            class="hidden group-hover:block pl-12 mt-2 space-y-1 text-sm font-normal"
-          >
-            <a href="#" class="block py-2 hover:text-gray-300">Clientes</a>
-            <a href="#" class="block py-2 hover:text-gray-300">Pendientes</a>
-            <a href="#" class="block py-2 hover:text-gray-300">Suspendidos</a>
-          </div>
-        </div>
-    
-        <!-- Notificaciones -->
-        <a
-          href="#"
-          class="flex items-center px-6 py-3 text-sm font-medium rounded hover:bg-blue-600"
-        >
-          <i class="bi bi-bell-fill"></i>
-          <span class="ml-4">Notificaciones</span>
-        </a>
-    
-        <!-- Reportes -->
-        <div class="relative group">
-          <button
-            class="flex items-center w-full px-6 py-3 text-sm font-medium rounded hover:bg-blue-600"
-          >
-            <i class="bi bi-bar-chart-fill"></i>
-            <span class="ml-4">Reportes</span>
-            <i
-              class="bi bi-chevron-down ml-auto transform group-hover:rotate-180"
-            ></i>
-          </button>
-          <!-- Submenú -->
-          <div
-            class="hidden group-hover:block pl-12 mt-2 space-y-1 text-sm font-normal"
-          >
-            <a href="#" class="block py-2 hover:text-gray-300">Generales</a>
-            <a href="#" class="block py-2 hover:text-gray-300">Estadísticas</a>
-          </div>
-        </div>
-      </nav>
-      <div class="border-t border-gray-600"></div>
+<div class="flex h-screen">
+  <!-- Botón para alternar sidebar (visible solo en pantallas pequeñas) -->
+  <span
+    class="absolute sm:hidden text-white text-4xl top-5 left-4 cursor-pointer z-50"
+    onclick="toggleSidebar()"
+  >
+    <i class="bi bi-filter-left px-2 bg-gray-900 rounded-md"></i>
+  </span>
 
-      <div class="mt-auto px-6">
-        <!-- Ajustes -->
-        <a
-          href="#"
-          class="flex items-center px-6 py-3 text-sm font-medium rounded hover:bg-blue-600"
-        >
-          <i class="bi bi-gear-fill"></i>
-          <span class="ml-4">Ajustes</span>
-        </a>
-    
-        <!-- Cerrar Sesión -->
-        <a
-          href="login"
-          class="flex items-center px-6 py-3 text-sm font-medium rounded hover:bg-blue-600"
-        >
-          <i class="bi bi-box-arrow-right"></i>
-          <span class="ml-4" (click)="logOut()">Cerrar Sesión</span>
-        </a>
-      </div>
-    
-      <!-- Footer -->
-      <div class="absolute bottom-0 px-6 py-4 text-center text-sm text-gray-400">
-        Privacy Policy | Terms of Service <br />
-        2022 Rareblocks
-      </div>
+  <!-- Sidebar -->
+  <div
+    id="sidebar"
+    class="sidebar fixed top-0 left-0 bottom-0 w-64 bg-azul-perron text-white transform -translate-x-full sm:translate-x-0 transition-transform duration-300"
+  >
+    <!-- Header -->
+    <div class="flex items-center justify-center py-6">
+      <img
+        src="https://pnganime.com/web/images/d/dfa9sy5-205439f7-70eb-473e-9242-692492b5baff.png"
+        alt="Logo"
+        class="w-10 h-auto"
+      />
+      <h1 class="ml-3 text-xl font-bold">LoanTrack</h1>
     </div>
-    <!-- End of Sidebar -->
+    <div class="border-t border-gray-600"></div>
+
+    <!-- Menú -->
+    <nav class="mt-6">
+      <!-- Inicio -->
+      <a
+        href="dashboard"
+        class="flex items-center px-6 py-3 text-sm font-medium rounded hover:bg-blue-600"
+      >
+        <i class="bi bi-house-door-fill"></i>
+        <span class="ml-4">Inicio</span>
+      </a>
+
+      <!-- Organizaciones -->
+      <div class="relative group">
+        <a href="organizations">
+          <button href="organizations"
+          class="flex items-center w-full px-6 py-3 text-sm font-medium rounded hover:bg-blue-600"
+        >
+
+          <i class="bi bi-diagram-3-fill"></i>
+          <span class="ml-4">Organizaciones</span>
+          <i class="bi bi-chevron-down ml-auto transform group-hover:rotate-180"></i>
+        </button>
+        </a>
+        <div
+          class="hidden group-hover:block pl-12 mt-2 space-y-1 text-sm font-normal"
+        >
+          <a href="#" class="block py-2 hover:text-gray-300">Crear organización</a>
+          <a href="#" class="block py-2 hover:text-gray-300">Activas</a>
+          <a href="#" class="block py-2 hover:text-gray-300">Inhabilitadas</a>
+        </div>
+      </div>
+
+      <!-- Usuarios -->
+      <div class="relative group">
+        <a href="administration">
+          <button
+          class="flex items-center w-full px-6 py-3 text-sm font-medium rounded hover:bg-blue-600"
+        >
+          <i class="bi bi-person-fill"></i>
+          <span class="ml-4">Usuarios</span>
+          <i class="bi bi-chevron-down ml-auto transform group-hover:rotate-180"></i>
+        </button>
+        </a>
+        <div
+          class="hidden group-hover:block pl-12 mt-2 space-y-1 text-sm font-normal"
+        >
+          <a href="#" class="block py-2 hover:text-gray-300">Agregar usuarios</a>
+          <a href="#" class="block py-2 hover:text-gray-300">Pendientes</a>
+          <a href="#" class="block py-2 hover:text-gray-300">Inhabilitados</a>
+        </div>
+      </div>
+
+      <!-- Administración -->
+      <div class="relative group">
+        <button
+          class="flex items-center w-full px-6 py-3 text-sm font-medium rounded hover:bg-blue-600"
+        >
+          <i class="bi bi-people-fill"></i>
+          <span class="ml-4">Administración</span>
+          <i class="bi bi-chevron-down ml-auto transform group-hover:rotate-180"></i>
+        </button>
+        <div
+          class="hidden group-hover:block pl-12 mt-2 space-y-1 text-sm font-normal"
+        >
+          <a href="#" class="block py-2 hover:text-gray-300">Clientes</a>
+          <a href="#" class="block py-2 hover:text-gray-300">Pendientes</a>
+          <a href="#" class="block py-2 hover:text-gray-300">Suspendidos</a>
+        </div>
+      </div>
+
+      <!-- Notificaciones -->
+      <a
+        href="#"
+        class="flex items-center px-6 py-3 text-sm font-medium rounded hover:bg-blue-600"
+      >
+        <i class="bi bi-bell-fill"></i>
+        <span class="ml-4">Notificaciones</span>
+      </a>
+
+      <!-- Reportes -->
+      <div class="relative group">
+        <button
+          class="flex items-center w-full px-6 py-3 text-sm font-medium rounded hover:bg-blue-600"
+        >
+          <i class="bi bi-bar-chart-fill"></i>
+          <span class="ml-4">Reportes</span>
+          <i class="bi bi-chevron-down ml-auto transform group-hover:rotate-180"></i>
+        </button>
+        <div
+          class="hidden group-hover:block pl-12 mt-2 space-y-1 text-sm font-normal"
+        >
+          <a href="#" class="block py-2 hover:text-gray-300">Generales</a>
+          <a href="#" class="block py-2 hover:text-gray-300">Estadísticas</a>
+        </div>
+      </div>
+      <div class="relative group">
+        <a href="loans">
+          <button
+          class="flex items-center w-full px-6 py-3 text-sm font-medium rounded hover:bg-blue-600"
+        >
+          <i class="bi bi-bar-chart-fill"></i>
+          <span class="ml-4">Prestamos</span>
+          <i class="bi bi-chevron-down ml-auto transform group-hover:rotate-180"></i>
+        </button>
+        </a>
+        <div
+          class="hidden group-hover:block pl-12 mt-2 space-y-1 text-sm font-normal"
+        >
+          <a href="#" class="block py-2 hover:text-gray-300">Activos</a>
+          <a href="#" class="block py-2 hover:text-gray-300">Inactivos</a>
+          <a href="#" class="block py-2 hover:text-gray-300">Rechazados</a>
+        </div>
+      </div>
+    </nav>
+    <div class="border-t border-gray-600"></div>
+
+    <div class="mt-auto px-6">
+      <!-- Ajustes -->
+      <a
+        href="#"
+        class="flex items-center px-6 py-3 text-sm font-medium rounded hover:bg-blue-600"
+      >
+        <i class="bi bi-gear-fill"></i>
+        <span class="ml-4">Ajustes</span>
+      </a>
+
+      <!-- Cerrar Sesión -->
+      <button
+        class="flex items-center px-6 py-3 text-sm font-medium rounded hover:bg-blue-600"
+        (click)="logOut()"
+      >
+        <i class="bi bi-box-arrow-right"></i>
+        <span class="ml-4">Cerrar Sesión</span>
+      </button>
+    </div>
+
+    <!-- Footer -->
+    <div class="absolute bottom-0 px-6 py-4 text-center text-sm text-gray-400">
+      Privacy Policy | Terms of Service <br />
+      2024 LoanTrack
+    </div>
+  </div>
+
+  <!-- Contenido principal -->
+  <div class="flex-1 bg-gray-100 p-6">
+    <h1 class="text-2xl font-semibold">Contenido Principal</h1>
+    <p class="mt-4">Aquí irá el contenido...</p>
+  </div>
+</div>
+
+<script>
+  function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.toggle('-translate-x-full');
+  }
+</script>

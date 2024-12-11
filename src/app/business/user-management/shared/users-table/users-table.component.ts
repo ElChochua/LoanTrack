@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../../../../core/services/User/user.service';
 import { User } from '../../../../models/Users/UserModel';
@@ -10,24 +10,15 @@ import { User } from '../../../../models/Users/UserModel';
   styleUrl: './users-table.component.css'
 })
 export  class UsersTableComponent {
-  constructor(private router:Router,
-              private userService:UserService
-  ){}
-  users: User[] = [];
-  goToEdit(userId:number):void{
-    this.router.navigate(['/edit-user', userId]);
+  @Input() headers: string[] = [];
+  @Input() users: User[] = [];
+  @Output() edit = new EventEmitter<number>();
+  @Output() delete = new EventEmitter<number>();
+
+  editUser(id: number): void {
+    this.edit.emit(id);
   }
-  ngOnInit(): void {
-    this.loadUsers();
-  }
-  loadUsers():void{
-    this.userService.getAllUsers().subscribe({
-      next:(users) =>{
-        this.users = users;
-      },
-      error:(err) =>{
-        console.log(err);
-      }
-    });
+  deleteUser(id: number): void {
+    this.delete.emit(id);
   }
 }

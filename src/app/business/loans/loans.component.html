@@ -1,1 +1,76 @@
-<p>loans works!</p>
+<div >
+    <h1 class="text-2xl font-bold mb-4">Préstamos</h1>
+  
+    <!-- Ver Préstamos Activos -->
+    <div class="mb-6">
+      <h2 class="text-xl font-semibold mb-2">Préstamos Activos</h2>
+      <div class="bg-white p-4 rounded shadow">
+        <p>Listado de préstamos activos aquí...</p>
+      </div>
+    </div>
+  
+    <!-- Ver Estado de Préstamos -->
+    <div class="mb-6">
+      <h2 class="text-xl font-semibold mb-2">Estado de Préstamos</h2>
+      <div class="bg-white p-4 rounded shadow">
+        <p>Información detallada del estado de préstamos aquí...</p>
+      </div>
+    </div>
+  
+    <!-- Ver Préstamos Rechazados -->
+    <div class="mb-6">
+      <h2 class="text-xl font-semibold mb-2">Préstamos Rechazados</h2>
+      <div class="bg-white p-4 rounded shadow">
+        <p>Listado de préstamos rechazados aquí...</p>
+      </div>
+    </div>
+  
+    <!-- Hacer Préstamo -->
+    <div class="mb-6">
+      <h2 class="text-xl font-semibold mb-2">Hacer Préstamo</h2>
+      <form class="bg-white p-4 rounded shadow space-y-4">
+        <div>
+          <label for="loanAmount" class="block text-sm font-medium">
+            Monto del Préstamo
+          </label>
+          <input
+            id="loanAmount"
+            type="number"
+            placeholder="Ingresa el monto"
+            class="mt-1 block w-full px-3 py-2 border rounded"
+          />
+        </div>
+        <button
+          type="submit"
+          class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+        >
+          Solicitar Préstamo
+        </button>
+      </form>
+    </div>
+  
+    <!-- Cancelar Préstamo -->
+    <div>
+      <h2 class="text-xl font-semibold mb-2">Cancelar Préstamo</h2>
+      <form class="bg-white p-4 rounded shadow space-y-4">
+        <div>
+          <label for="loanId" class="block text-sm font-medium">
+            ID del Préstamo
+          </label>
+          <input
+            id="loanId"
+            type="text"
+            placeholder="Ingresa el ID del préstamo"
+            class="mt-1 block w-full px-3 py-2 border rounded"
+          />
+        </div>
+        <button
+          type="submit"
+          class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
+        >
+          Cancelar
+        </button>
+      </form>
+    </div>
+  </div>
+  

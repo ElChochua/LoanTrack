@@ -1,0 +1,41 @@
+
+    <!-- Línea divisoria  -->
+<div class="relative overflow-x-auto">
+  <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+      <thead class="text-xs text-gray-900 uppercase dark:text-gray-400">
+          <tr>
+              <th scope="col" class="px-6 py-3">
+                  ID
+              </th>
+              <th scope="col" class="px-6 py-3">
+                  Nombre
+              </th>
+              <th scope="col" class="px-6 py-3">
+                  Dueño ID
+              </th>
+              <th scope="col" class="px-6 py-3">
+                Descripción
+            </th>
+          </tr>
+      </thead>
+      <tbody>
+          @for(organization of organizations; track $index){
+              <tr class="bg-white dark:bg-gray-800">
+                  <td class="px-6 py-4">
+                        {{ organization.organization_id }}
+                  </td>
+                  <td class="px-6 py-4">
+                      {{ organization.organization_name }}
+                  </td>
+                  <td class="px-6 py-4">
+                      {{ organization.owner_id }}
+                  </td>
+                  <td class="px-6 py-4">
+                    {{ organization.description }}
+                </td>
+              </tr>
+          }
+        
+      </tbody>
+  </table>
+</div>

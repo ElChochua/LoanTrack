@@ -8,7 +8,7 @@ module.exports = {
       colors:{
         'azul-perron': '#0F172A',
         'azul-claro': '#253865',
-      }
+      },
     },
   },
   plugins: [

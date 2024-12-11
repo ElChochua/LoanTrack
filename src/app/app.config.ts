@@ -3,7 +3,7 @@ import { provideRouter } from '@angular/router';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideHttpClient, HTTP_INTERCEPTORS, withInterceptors,withFetch, withInterceptorsFromDi } from '@angular/common/http';
 import { AuthInterceptorService } from './core/Interceptors/auth-interceptor.service';
-import { AuthService } from './core/services/auth.service';
+import { AuthService } from './core/services/auth/auth.service';
 import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {

@@ -1,4 +1,10 @@
 export interface OrganizationModel{
+    organization_id: number
+    organization_name: string
+    owner_id: number
+    description: string
+}
+export interface OrganizationDetailsModel{
     organization_ID: number
     organization_name: string
     organization_owner_ID: number
