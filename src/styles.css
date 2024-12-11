@@ -14,4 +14,10 @@
     .unassigned{
       @apply relative grid items-center font-sans font-bold uppercase whitespace-nowrap select-none bg-yellow-500/20 text-yellow-700 py-1 px-2 text-xs rounded-md;
     }
-  }
+    .delete{
+      @apply relative grid items-center font-sans font-bold uppercase whitespace-nowrap select-none bg-red-500/20 text-red-700 py-1 px-2 text-xs rounded-md;
+    }
+    .modify{
+      @apply relative grid items-center font-sans font-bold uppercase whitespace-nowrap select-none bg-blue-500/20 text-blue-700 py-1 px-2 text-xs rounded-md;
+    }
+}

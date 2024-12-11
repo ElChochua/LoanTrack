@@ -3,15 +3,16 @@
   
     <!-- Filtros de Usuarios -->
     <div class="flex mb-6 space-x-4">
-      <button class="unassigned" >Usuarios sin Asignar</button>
-      <button class="inactive" >Usuarios Inactivos</button>
-      <button class="active" >Usuarios Activos</button>
+      <button class="modify" (click)="filterUsers('all')">Mostrar Todos</button>
+      <button class="unassigned" (click)="filterUsers('unassigned')" >Usuarios sin Asignar</button>
+      <button class="inactive" (click)="filterUsers('inactive')">Usuarios Inactivos</button>
+      <button class="active" (click)="filterUsers('active')">Usuarios Activos</button>
     </div>
   
     <!-- Tabla de Usuarios -->
     <div >
       <h2 class="text-xl font-semibold mb-3">Users</h2>
-      <app-user-detail-table [users]="users" [headers]="headers" ></app-user-detail-table>
+      <app-user-detail-table [users]="users" [headers]="headers" (delete)="deleteUser($event)"></app-user-detail-table>
     </div>
   </div>
   

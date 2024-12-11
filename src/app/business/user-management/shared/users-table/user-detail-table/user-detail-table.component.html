@@ -40,7 +40,6 @@
                           </div>
                             </div>
                         } @else {
-                            
                           <div class="inactive">
                             <span>Inactivo</span>
                           </div>
@@ -49,9 +48,12 @@
                       <td class="px-6 py-4 border-b border-gray-300 text-base">
                         {{ user.created_at }}
                       </td>
-                      <td class="px-6 py-4 border-b border-gray-300 text-base">
-                        actions
-                    </td>
+                      <td class="px-6 py-4 flex justify-end border-b border-gray-300 text-base">
+                        <button type="button" class="modify " (click)="editUser(user)">Modificar</button>
+                        <button type="button" class="delete"(click)="deleteUser(user.user_id)">Eliminar</button>
+
+                        </td>
+                        
                   </tr>
               }
               

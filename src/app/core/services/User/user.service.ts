@@ -26,4 +26,9 @@ export class UserService {
       tap(response => {console.log(response)
       }));
   }
+  deleteUserById(id: number):Observable<any>{
+    return this.httpClient.delete<any>(`${this.api_url}superadmin/delete-user/${id}`).pipe(
+      tap(response => {console.log(response)})
+    );
+  }
 }

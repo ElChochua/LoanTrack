@@ -12,6 +12,8 @@ export class AuthService {
   private refresh_url = 'http://localhost:8080/api/v1/auth/refresh';
   private tokenkey = 'authToken'
   private refreshTokenKey = 'refreshToken';
+  private user_name = 'User';
+  private role = 'Role';
 
   private userSubject = new BehaviorSubject<User | null>(null);
   user$ = this.userSubject.asObservable();
@@ -27,17 +29,35 @@ export class AuthService {
           console.log("This shit should be working here ");
           this.setToken(body.token);
           this.setRefreshToken(body.refreshToken);
-          console.log(body.user);
+          this.setUsername(body.user.user)
+          this.setUser(body.user);
         }
       })
     );
   }
+  setUser(user:User):void{
+    this.userSubject.next(user);
+  }
+  setUsername(user:string):void{
+    localStorage.setItem(this.user_name, user);
+  }
+  getUser():string | null{
+    return localStorage.getItem(this.user_name);
+  }
+  getRole():string|null{
+    const token = this.getToken();
+    if(!token){
+      return null;
+    }
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    return payload.role; 
+  }
   refreshToken():Observable<any>{
     const refreshToken = this.getRefreshToken();
+    console.log(refreshToken);
     return this.httpClient.post<any>(this.refresh_url, {refreshToken}).pipe(
       tap((response)=>{
         if(response.token){
-          console.log("Esta madre trono aca");
           this.setToken(response.token);
           this.setRefreshToken(response.refreshToken);
           this.autoRefreshToken();

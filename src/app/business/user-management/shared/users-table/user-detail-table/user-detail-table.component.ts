@@ -12,11 +12,11 @@ import { User, UserDetails } from '../../../../../models/Users/UserModel';
 export class UserDetailTableComponent {
     @Input() headers: string[] = [];
     @Input() users: UserDetails[] = [];
-    @Output() edit = new EventEmitter<number>();
+    @Output() edit = new EventEmitter<UserDetails>();
     @Output() delete = new EventEmitter<number>();
   
-    editUser(id: number): void {
-      this.edit.emit(id);
+    editUser(user: UserDetails): void {
+      this.edit.emit(user);
     }
     deleteUser(id: number): void {
       this.delete.emit(id);
