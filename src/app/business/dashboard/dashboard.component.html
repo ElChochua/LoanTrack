@@ -1,4 +1,7 @@
 <div class="flex flex-col h-screen bg-gray-100">
+  @if(spinner.loading$ | async){
+    <app-spinner/>
+    }
   <!-- Área de contenido principal -->
   <div class="flex-1 p-4">
     <!-- Contenedor de las 4 secciones (Matriz 2x2) -->

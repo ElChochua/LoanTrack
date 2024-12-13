@@ -13,36 +13,37 @@ export class AuthService {
   private tokenkey = 'authToken'
   private refreshTokenKey = 'refreshToken';
   private user_name = 'User';
-  private role = 'Role';
-
   private userSubject = new BehaviorSubject<User | null>(null);
-  user$ = this.userSubject.asObservable();
+  public user$ = this.userSubject.asObservable();
   
   constructor(private httpClient: HttpClient, private router:Router) {}
-  
-  login(userCreds: UserCreds){
-    return this.httpClient.post<any>(this.api_url + '/login', userCreds, {observe:'response'}).pipe(
-      map((response: HttpResponse<any>)=>{
+  login(userCreds: UserCreds) {
+    return this.httpClient.post<any>(this.api_url + '/login', userCreds, { observe: 'response' }).pipe(
+      map((response: HttpResponse<any>) => {
         const body = response.body;
-        console.log(body.token);
-        if(body && body.token && body.refreshToken && body.user){
-          console.log("This shit should be working here ");
+        if (body && body.token && body.refreshToken && body.user) {
           this.setToken(body.token);
-          this.setRefreshToken(body.refreshToken);
-          this.setUsername(body.user.user)
-          this.setUser(body.user);
+          this.setRefreshToken(body.refreshToken);  
+          this.setUsername(body.user.user);    
         }
       })
     );
-  }
+  }  
+
   setUser(user:User):void{
     this.userSubject.next(user);
+    console.log(user);
   }
   setUsername(user:string):void{
     localStorage.setItem(this.user_name, user);
   }
+
   getUser():string | null{
-    return localStorage.getItem(this.user_name);
+    if(typeof window !== 'undefined'){
+      return localStorage.getItem(this.user_name);
+    }else{
+      return null;
+    }
   }
   getRole():string|null{
     const token = this.getToken();
@@ -91,6 +92,7 @@ export class AuthService {
   logout():void{
     localStorage.removeItem(this.tokenkey);
     localStorage.removeItem(this.refreshTokenKey);
+    localStorage.removeItem(this.user_name);
     this.router.navigate(['/login']);
   }
   userGetRole():string |null{
@@ -121,5 +123,4 @@ export class AuthService {
       this.refreshToken().subscribe();
     }, timeout);
   }
-
 }

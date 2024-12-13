@@ -3,6 +3,7 @@ import { provideRouter } from '@angular/router';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideHttpClient, HTTP_INTERCEPTORS, withInterceptors,withFetch, withInterceptorsFromDi } from '@angular/common/http';
 import { AuthInterceptorService } from './core/Interceptors/auth-interceptor.service';
+import { SpinnerInterceptor } from './core/Interceptors/spinner.interceptor';
 import { AuthService } from './core/services/auth/auth.service';
 import { routes } from './app.routes';
 
@@ -16,6 +17,11 @@ export const appConfig: ApplicationConfig = {
     useClass: AuthInterceptorService,
     multi: true,
     deps: [AuthService]
+  },
+  {
+  provide: HTTP_INTERCEPTORS,
+  useClass: SpinnerInterceptor,
+  multi: true
   }
 ]
 };

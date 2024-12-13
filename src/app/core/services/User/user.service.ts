@@ -13,22 +13,24 @@ export class UserService {
   }
   getAllUsers():Observable<User[]>{
     return this.httpClient.get<User[]>(`${this.api_url}superadmin/get-all-users`).pipe(
-      tap(response => {console.log(response)})
+      tap(
+      //  response => {console.log(response)}
+      )
     );
   }
   getAllUnassignedUsers():Observable<User[]>{
     return this.httpClient.get<User[]>(`${this.api_url}superadmin/get-users-unassigned`).pipe(
-      tap(response => {console.log(response)})
+     // tap(response => {console.log(response)})
     );
   }
   getAllUsersDetails():Observable<UserDetails[]>{
     return this.httpClient.get<UserDetails[]>(`${this.api_url}superadmin/get-all-users-details`).pipe(
-      tap(response => {console.log(response)
-      }));
+    //  tap(response => {console.log(response)}  )
+  );
   }
   deleteUserById(id: number):Observable<any>{
     return this.httpClient.delete<any>(`${this.api_url}superadmin/delete-user/${id}`).pipe(
-      tap(response => {console.log(response)})
+    //  tap(response => {console.log(response)})
     );
   }
 }

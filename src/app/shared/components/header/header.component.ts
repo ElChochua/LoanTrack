@@ -11,13 +11,11 @@ import { User } from '../../../models/Users/UserModel';
 export class HeaderComponent implements OnInit {
   constructor(private authService: AuthService) {
   }
-  user: User|null = null;
+user_name:string|null='';
   ngOnInit(): void {
-    this.authService.user$.subscribe((user)=>{
-      console.log("Usuario recibido " + user);
-      this.user = user;
-    });
+    this.user_name = this.authService.getUser();
   }
+  
   isLogedIn():boolean{
     return this.authService.isAutenticated();
   }

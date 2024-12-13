@@ -1,63 +1,59 @@
-<div class="relative overflow-x-auto max-w-full">
-    <table class="w-full table-auto text-xs text-left text-gray-500 dark:text-gray-400">
-          <thead class="text-xs text-gray-900 uppercase dark:text-gray-400">
-              <tr>
-                @for(header of headers; track $index){
-                  <th scope="col" class="px-6 py-3 min-w-[150px]">
-                    {{ header }}
-                </th>            
-                }
-              </tr>
-          </thead>
-          <tbody>
-              @for(user of users; track $index){
-                  <tr class="bg-white text-black">
-                    
-                      <td class="px-6 py-4 border-b border-gray-300 text-base">
-                          {{ user.user_id }}
-                      </td >
-                      <td class="px-6 py-4 border-b border-gray-300 text-base">
-                        {{ user.user }}
-                      </td>
-                      <td class="px-6 py-4 border-b border-gray-300 text-base">
-                        {{ user.email }}
-                      </td>
-                      <td class="px-6 py-4 border-b border-gray-300 text-base">
-                        @if(!user.role){
-                          <div class="w-max">
-                            <div class="unassigned">
-                              <span>Sin Asignar</span>
-                            </div>
-                          </div>
-                        }      
-                        {{ user.role }}
-                      </td>
-                      <td class="px-6 py-4 border-b border-gray-300 text-base">
-                        @if(user.status === 'active'){
-                            <div class="w-max">
-                          <div class="active">
-                            <span>Activo</span>
-                          </div>
-                            </div>
-                        } @else {
-                          <div class="inactive">
-                            <span>Inactivo</span>
-                          </div>
-                        }
-                      </td>
-                      <td class="px-6 py-4 border-b border-gray-300 text-base">
-                        {{ user.created_at }}
-                      </td>
-                      <td class="px-6 py-4 flex justify-end border-b border-gray-300 text-base">
-                        <button type="button" class="modify " (click)="editUser(user)">Modificar</button>
-                        <button type="button" class="delete"(click)="deleteUser(user.user_id)">Eliminar</button>
 
-                        </td>
-                        
-                  </tr>
+
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+  <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+      
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <tr>
+            @for(header of headers; track $index){
+              <th scope="col" class="px-6 py-3">
+                {{header}}
+            </th>
+            }
+          </tr>
+      </thead>
+      <tbody>
+        @for(user of users; track $index){
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+              <td class="px-6 py-4">
+                    {{user.user_id}}
+              </td>
+              <td class="px-6 py-4">
+                    {{user.user_id}}
+              </td>
+              <td class="px-6 py-4">
+                    {{user.user}}
+              </td>
+              <td class="px-6 py-4">
+                    {{user.email}}
+              </td>
+              @if(!user.role){
+                <div class="w-max">
+                  <div class="unassigned">
+                    <span>Sin Asignar</span>
+                  </div>
+                </div>
               }
-              
-          </tbody>
-      </table>
-    </div>
-    
+              <td class="px-6 py-4">
+                    {{user.role}}
+              </td>
+              @if(user.status === 'active'){
+                    <span class="active">Activo</span>
+              }@else{
+                <div class="w-max">
+                  <div class="inactive">
+                    <span>Inactivo</span>
+                  </div>
+                </div>
+              }
+              <td class="px-6 py-4">
+                    {{user.created_at}}
+              </td>
+                <td class="px-6 py-4 text-right">
+                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                </td>
+              </tr>
+              }
+      </tbody>
+  </table>
+</div>
