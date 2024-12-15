@@ -1,5 +1,4 @@
 <div class="flex h-screen">
-  <!-- Botón para alternar sidebar (visible solo en pantallas pequeñas) -->
   <span
     class="absolute sm:hidden text-white text-4xl top-5 left-4 cursor-pointer z-50"
     onclick="toggleSidebar()"
@@ -49,49 +48,53 @@
         <div
           class="hidden group-hover:block pl-12 mt-2 space-y-1 text-sm font-normal"
         >
+        @if(userRole === 'Client' || userRole === 'SUPER_ADMIN'){
           <a href="#" class="block py-2 hover:text-gray-300">Crear organización</a>
           <a href="#" class="block py-2 hover:text-gray-300">Activas</a>
           <a href="#" class="block py-2 hover:text-gray-300">Inhabilitadas</a>
+        }@else{
+          <a href="#" class="block py-2 hover:text-gray-300">Mis Organizaciones</a>
+        }
         </div>
       </div>
 
-      <!-- Usuarios -->
-      <div class="relative group">
-        <a href="administration">
+      @if(userRole === 'SUPER_ADMIN'){
+        <div class="relative group">
+          <a href="administration">
+            <button
+            class="flex items-center w-full px-6 py-3 text-sm font-medium rounded hover:bg-blue-600"
+          >
+            <i class="bi bi-person-fill"></i>
+            <span class="ml-4">Administracion de usuarios</span>
+            <i class="bi bi-chevron-down ml-auto transform group-hover:rotate-180"></i>
+          </button>
+          </a>
+          <div
+            class="hidden group-hover:block pl-12 mt-2 space-y-1 text-sm font-normal"
+          >
+            <a href="#" class="block py-2 hover:text-gray-300">Agregar usuarios</a>
+            <a href="#" class="block py-2 hover:text-gray-300">Pendientes</a>
+            <a href="#" class="block py-2 hover:text-gray-300">Inhabilitados</a>
+          </div>
+        </div>
+        <div class="relative group">
           <button
-          class="flex items-center w-full px-6 py-3 text-sm font-medium rounded hover:bg-blue-600"
-        >
-          <i class="bi bi-person-fill"></i>
-          <span class="ml-4">Administracion de usuarios</span>
-          <i class="bi bi-chevron-down ml-auto transform group-hover:rotate-180"></i>
-        </button>
-        </a>
-        <div
-          class="hidden group-hover:block pl-12 mt-2 space-y-1 text-sm font-normal"
-        >
-          <a href="#" class="block py-2 hover:text-gray-300">Agregar usuarios</a>
-          <a href="#" class="block py-2 hover:text-gray-300">Pendientes</a>
-          <a href="#" class="block py-2 hover:text-gray-300">Inhabilitados</a>
+            class="flex items-center w-full px-6 py-3 text-sm font-medium rounded hover:bg-blue-600"
+          >
+            <i class="bi bi-people-fill"></i>
+            <span class="ml-4">Transacciones</span>
+            <i class="bi bi-chevron-down ml-auto transform group-hover:rotate-180"></i>
+          </button>
+          <div
+            class="hidden group-hover:block pl-12 mt-2 space-y-1 text-sm font-normal"
+          >
+            <a href="#" class="block py-2 hover:text-gray-300">Activas</a>
+            <a href="#" class="block py-2 hover:text-gray-300">Inactivas</a>
+          </div>
         </div>
-      </div>
+      }
 
-      <!-- Administración -->
-      <div class="relative group">
-        <button
-          class="flex items-center w-full px-6 py-3 text-sm font-medium rounded hover:bg-blue-600"
-        >
-          <i class="bi bi-people-fill"></i>
-          <span class="ml-4">Administración</span>
-          <i class="bi bi-chevron-down ml-auto transform group-hover:rotate-180"></i>
-        </button>
-        <div
-          class="hidden group-hover:block pl-12 mt-2 space-y-1 text-sm font-normal"
-        >
-          <a href="#" class="block py-2 hover:text-gray-300">Clientes</a>
-          <a href="#" class="block py-2 hover:text-gray-300">Pendientes</a>
-          <a href="#" class="block py-2 hover:text-gray-300">Suspendidos</a>
-        </div>
-      </div>
+
 
       <!-- Notificaciones -->
       <a

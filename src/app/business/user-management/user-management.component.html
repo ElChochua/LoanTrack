@@ -1,22 +1,18 @@
 <div class="container mx-auto p-4">
-    <h1 class="text-2xl font-bold mb-4">Gestión de Usuarios</h1>
-  
-    <!-- Filtros de Usuarios -->
+    <!-- Filtros de Usuarios 
     <div class="flex mb-6 space-x-4">
       <button class="modify" (click)="filterUsers('all')">Mostrar Todos</button>
       <button class="unassigned" (click)="filterUsers('unassigned')" >Usuarios sin Asignar</button>
       <button class="inactive" (click)="filterUsers('inactive')">Usuarios Inactivos</button>
       <button class="active" (click)="filterUsers('active')">Usuarios Activos</button>
     </div>
-  
+    
     <!-- Tabla de Usuarios -->
     <div >
       @if(spinner.loading$ | async){
         <app-spinner/>
       }
-      <h2 class="text-xl font-semibold mb-3">Users</h2>
-      <app-user-detail-table [users]="users" [headers]="headers" (delete)="deleteUser($event)"></app-user-detail-table>
-
+      <app-user-detail-table [users]="users" [headers]="headers" (delete)="deleteUser($event)" (edit)="modifyUser($event)"></app-user-detail-table>
     </div>
   </div>
   

@@ -32,11 +32,10 @@ export default class DashboardComponent implements OnInit {
     if(!this.auth.isAutenticated()){
       this.router.navigate(['/login']);
     }
-    this.auth.user$.subscribe((user)=>{
-      this.user = user;
-    })
-    this.loadUsers();
     this.userRole = this.auth.userGetRole();
+    if(this.userRole ==='SUPER_ADMIN'){
+      this.loadUsers();      
+    }
   }
   loadUsers(): void {
     this.usersService.getAllUsers().subscribe((users)=>{

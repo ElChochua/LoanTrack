@@ -18,7 +18,7 @@ export default class UserManagementComponent implements OnInit {
   users: UserDetails[] = [];
   filteredUsers: UserDetails[] = []; // Inicializado como vacío
   headers: string[] = ['User ID', 'User', 'Email', 'Role', 'Status', 'Created At', 'Action'];
-
+  search: string = '';
   constructor(private userService: UserService, public spinner: SpinnerService) {}
 
   ngOnInit() {
@@ -37,7 +37,9 @@ export default class UserManagementComponent implements OnInit {
       }
     });
   }
-
+  modifyUser(user: UserDetails): void {
+    console.log(user); // Depuración
+  }
   filterUsers(type: string): void {
     if (type === 'all') {
       this.filteredUsers = [...this.users];

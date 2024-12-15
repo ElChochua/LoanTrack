@@ -14,7 +14,6 @@ export class AppComponent implements OnInit {
   constructor(private authService: AuthService, private router:Router) {
   }
   ngOnInit(): void {
-    initFlowbite();
     if(this.authService.isAutenticated()){
         this.authService.autoRefreshToken();
     }

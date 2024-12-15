@@ -1,59 +1,134 @@
+<div class="container mx-auto px-4 py-8 min-h-screen">
+  <h1 class="text-3xl font-bold mb-6">Gestión de Usuarios</h1>
 
+  <!-- Search and Add User -->
+  <div
+    class="flex flex-col sm:flex-row justify-between items-center mb-6 space-y-4 sm:space-y-0"
+  >
+    <div class="relative w-full sm:w-64">
+      <input
+        type="text"
+        placeholder="Buscar usuarios..."
+        class="w-full pl-10 pr-4 py-2 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
+      />
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-5 w-5 text-gray-400 absolute left-3 top-3"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+        />
+      </svg>
+    </div>
+    <button
+      class="w-full sm:w-auto bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-300"
+    >
+      Agregar Usuario
+    </button>
+  </div>
 
-<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-  <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-      
-      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-          <tr>
-            @for(header of headers; track $index){
-              <th scope="col" class="px-6 py-3">
-                {{header}}
-            </th>
-            }
-          </tr>
+  <!-- User Table -->
+  <div class="overflow-x-auto bg-gray-500 shadow-md rounded-lg">
+    <table class="min-w-full table-auto">
+      <thead class="bg-[#2D3748]">
+        <tr>
+          @for(header of headers; track $index){
+          <th
+            class="px-6 py-3 text-left text-sm font-medium text-gray-300 uppercase tracking-wider"
+          >
+            {{header}}
+          </th>
+        }
+         
+        </tr>
       </thead>
-      <tbody>
+      <tbody class="bg-white divide-y divide-gray-700">
         @for(user of users; track $index){
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-              <td class="px-6 py-4">
-                    {{user.user_id}}
+          <tr>
+            <td class="px-6 py-4 whitespace-nowrap">{{user.user_id}}</td>
+            <td class="px-6 py-4 whitespace-nowrap">{{user.user}}</td>
+            <td class="px-6 py-4 whitespace-nowrap">{{user.email}}</td>
+            <td class="px-6 py-4 whitespace-nowrap">{{user.email}}</td>
+            @if(user.status === 'active'){
+              <td class="px-6 py-4 whitespace-nowrap uppercase">
+                <span
+                  class="bg-green-100 text-green-800 px-2 inline-flex text-sm leading-5 font-semibold rounded-full"
+                >
+                {{user.status}}
+                </span>
               </td>
-              <td class="px-6 py-4">
-                    {{user.user_id}}
+            }@else {
+              <td class="px-6 py-4 whitespace-nowrap uppercase">
+                <span
+                  class="bg-red-100 text-red-800 px-2 inline-flex text-sm leading-5 font-semibold rounded-full "
+                >
+                {{user.status}}
+                </span>
               </td>
-              <td class="px-6 py-4">
-                    {{user.user}}
-              </td>
-              <td class="px-6 py-4">
-                    {{user.email}}
-              </td>
-              @if(!user.role){
-                <div class="w-max">
-                  <div class="unassigned">
-                    <span>Sin Asignar</span>
-                  </div>
-                </div>
-              }
-              <td class="px-6 py-4">
-                    {{user.role}}
-              </td>
-              @if(user.status === 'active'){
-                    <span class="active">Activo</span>
-              }@else{
-                <div class="w-max">
-                  <div class="inactive">
-                    <span>Inactivo</span>
-                  </div>
-                </div>
-              }
-              <td class="px-6 py-4">
-                    {{user.created_at}}
-              </td>
-                <td class="px-6 py-4 text-right">
-                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                </td>
-              </tr>
-              }
+            }
+            <td class="px-6 py-4 whitespace-nowrap">{{user.created_at}}</td>
+
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+              <button
+                class="pi pi-eye text-xl text-blue-400 hover:text-blue-300 mr-4 transition duration-150 ease-in-out"
+                (click)="editUser(user)"
+              ></button>
+              <button
+                class="pi pi-trash text-xl text-red-400 hover:text-red-300 transition duration-150 ease-in-out"
+                (click)="deleteUser(user.user_id)"
+              ></button>
+            </td>
+          </tr>
+        }
       </tbody>
-  </table>
+    </table>
+  </div>
+
+  <!-- Edit User Modal 
+  <div  class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center">
+    <div class="bg-[#1E293B] p-8 rounded-lg shadow-xl w-full max-w-md">
+      <h2 class="text-2xl font-bold mb-4 text-white">Editar Usuario</h2>
+      <form >
+        <div class="mb-4">
+          <label for="name" class="block text-gray-300 text-sm font-bold mb-2">Nombre</label>
+          <input type="text" id="name" name="name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-white">
+        </div>
+        <div class="mb-4">
+          <label for="email" class="block text-gray-300 text-sm font-bold mb-2">Email</label>
+          <input type="email" id="email" name="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-white">
+        </div>
+        <div class="mb-4">
+          <label for="role" class="block text-gray-300 text-sm font-bold mb-2">Rol</label>
+          <select id="role" name="role" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-white">
+            <option value="Admin">Admin</option>
+            <option value="User">Usuario</option>
+          </select>
+        </div>
+        <div class="mb-4">
+          <label for="status" class="block text-gray-300 text-sm font-bold mb-2">Estado</label>
+          <select id="status" name="status"  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-white">
+            <option value="Active">Activo</option>
+            <option value="Inactive">Inactivo</option>
+          </select>
+        </div>
+        <div class="flex items-center justify-between">
+          <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300">
+            Actualizar
+          </button>
+          <button type="button"  class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300">
+            Cancelar
+          </button>
+        </div>
+      </form>
+      
+    </div>
+  </div>
+</div>
+-->
 </div>
