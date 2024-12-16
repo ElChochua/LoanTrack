@@ -5,12 +5,12 @@ export interface OrganizationModel{
     description: string
 }
 export interface OrganizationDetailsModel{
-    organization_ID: number
+    organization_id: number
     organization_name: string
-    organization_owner_ID: number
-    organization_description: string
-    organization_total_members: number
-    organization_total_transactions: number
+    owner_id: number
+    description: string
+    total_members: number
+    total_transactions: number
     created_at: string
     status: string
 }

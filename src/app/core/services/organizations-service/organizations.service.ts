@@ -15,8 +15,8 @@ export class OrganizationsService {
       tap(response => {console.log(response)})
     );
   }
-  getAllOrganizations():Observable<OrganizationModel[]>{
-    return this.httpClient.get<OrganizationModel[]>(`${this.api_url}get-all-organizations`).pipe(
+  getAllOrganizations():Observable<OrganizationDetailsModel[]>{
+    return this.httpClient.get<OrganizationDetailsModel[]>(`${this.api_url}get-all-organizations`).pipe(
       tap(response => {console.log(response)})
     );
   }
@@ -25,8 +25,8 @@ export class OrganizationsService {
       //tap(response => {console.log(response)})
     );
   }
-  getAllInactiveOrganizations():Observable<OrganizationModel[]>{
-    return this.httpClient.get<OrganizationModel[]>(`${this.api_url}get-all-inactive-organizations`).pipe(
+  getAllInactiveOrganizations():Observable<OrganizationDetailsModel[]>{
+    return this.httpClient.get<OrganizationDetailsModel[]>(`${this.api_url}get-all-inactive-organizations`).pipe(
      // tap(response => {console.log(response)})
     );
   }
@@ -35,9 +35,14 @@ export class OrganizationsService {
       //tap(response => {console.log(response)})
     );
   }
-  getOrganizationByOwner(id:number):Observable<OrganizationModel>{
-    return this.httpClient.get<OrganizationModel>(`${this.api_url}get-all-organizations-by-owner/${id}`).pipe(
+  getOrganizationByOwner(id:number):Observable<OrganizationDetailsModel>{
+    return this.httpClient.get<OrganizationDetailsModel>(`${this.api_url}get-all-organizations-by-owner/${id}`).pipe(
      // tap(response => {console.log(response)})
+    );
+  }
+  getAllOrganizationsByMember(userId:number):Observable<OrganizationDetailsModel[]>{
+    return this.httpClient.get<OrganizationDetailsModel[]>(`${this.api_url}get-all-organizations-by-user/${userId}`).pipe(
+      //tap(response => {console.log(response)})
     );
   }
   addUserToOrganization(userId:number, organizationId:number):Observable<any>{
@@ -55,8 +60,8 @@ export class OrganizationsService {
       //tap(response => {console.log(response)})
     );
   }
-  getAllOrganizationsByUser(userId:number):Observable<OrganizationModel[]>{ 
-    return this.httpClient.get<OrganizationModel[]>(`${this.api_url}get-all-organizations-by-user/${userId}`).pipe(
+  getAllOrganizationsByOwner(userId:number):Observable<OrganizationDetailsModel[]>{ 
+    return this.httpClient.get<OrganizationDetailsModel[]>(`${this.api_url}get-all-organizations-by-owner/${userId}`).pipe(
       //tap(response => {console.log(response)})
     );
   }

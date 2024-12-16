@@ -13,6 +13,7 @@ export class AuthService {
   private tokenkey = 'authToken'
   private refreshTokenKey = 'refreshToken';
   private user_name = 'User';
+  private user_id = 'user_id';
   private userSubject = new BehaviorSubject<User | null>(null);
   public user$ = this.userSubject.asObservable();
   
@@ -25,11 +26,22 @@ export class AuthService {
           this.setToken(body.token);
           this.setRefreshToken(body.refreshToken);  
           this.setUsername(body.user.user);    
+          this.setUserId(body.user.user_id);
         }
       })
     );
   }  
-
+  setUserId(userId:number):void{
+    localStorage.setItem(this.user_id.toString(), userId.toString());
+  }
+  getUserId():number{
+    const userId = localStorage.getItem(this.user_id);
+    if(userId){
+      return parseInt(userId);
+    }else{
+      return 0;
+    }
+  }
   setUser(user:User):void{
     this.userSubject.next(user);
     console.log(user);
@@ -93,6 +105,7 @@ export class AuthService {
     localStorage.removeItem(this.tokenkey);
     localStorage.removeItem(this.refreshTokenKey);
     localStorage.removeItem(this.user_name);
+    localStorage.removeItem(this.user_id);
     this.router.navigate(['/login']);
   }
   userGetRole():string |null{

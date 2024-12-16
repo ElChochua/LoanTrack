@@ -1,0 +1,133 @@
+<div class="container mx-auto px-4 py-8 bg-white   min-h-screen">
+    <h1 class="text-3xl font-bold mb-6">Gestión de Organizaciones</h1>
+  
+    <!-- Search and Add Organization -->
+    <div class="flex flex-col sm:flex-row justify-between items-center mb-6 space-y-4 sm:space-y-0">
+      <div class="relative w-full sm:w-64">
+        <input
+          type="text"
+          [(ngModel)]="searchValue"
+          (ngModelChange)="searchOrganization()"
+          placeholder="Buscar organizaciones..."
+          class="w-full pl-10 pr-4 py-2 bg-white border border-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500  "
+        />
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 absolute left-3 top-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+      </div>
+      @if(user_role != 'User'){
+        <button class="w-full sm:w-auto bg-blue-500   px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-300">
+          Agregar Organización
+        </button>
+      }
+
+    </div>
+  
+    <!-- Organizations Table -->
+    <div class="overflow-x-auto bg-white shadow-md rounded-lg">
+      <table class="min-w-full table-auto">
+        <thead class="bg-[#2D3748]">
+          <tr>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">ID</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Nombre</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Propietario</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Descripción</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Miembros</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Transacciones</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Creado</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Estado</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Acciones</th>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-700">
+          <tr class="">
+            @for(organization of filteredOrganizations; track $index){
+                <td class="px-6 py-4 whitespace-nowrap">{{organization.organization_id}}</td>
+                <td class="px-6 py-4 whitespace-nowrap">{{organization.organization_name}}</td>
+                <td class="px-6 py-4 whitespace-nowrap">{{organization.owner_id}}</td>
+                <td class="px-6 py-4 whitespace-nowrap">{{organization.description}}</td>
+                <td class="px-6 py-4 whitespace-nowrap">{{organization.total_members}}</td>
+                <td class="px-6 py-4 whitespace-nowrap">{{organization.total_transactions}}</td>
+                <td class="px-6 py-4 whitespace-nowrap">{{organization.created_at}}</td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <!--
+                  [(ngModel)]="org.status"
+                  (ngModelChange)="changeStatus(org)"
+                -->
+                  @if(user_role === 'User'){
+                    <td class="px-6 py-4 whitespace-nowrap uppercase">
+                      <span
+                        class="bg-green-100 text-green-800 px-2 inline-flex text-sm leading-5 font-semibold rounded-full"
+                      >
+                      {{organization.status}}
+                      </span>                  }@else {
+                    <select 
+                    class=" border border-gray-600   rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    >
+                    <option value="Active">Activo</option>
+                    <option value="Inactive">Inactivo</option>
+                    <option value="Pending">Pendiente</option>
+                  </select>
+                  }
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                  <button  class=" pi pi-eye text-blue-400 hover:text-blue-300 transition duration-150 ease-in-out text-xl p-2">
+                  </button>
+                  @if(user_role != 'User'){
+                    <button  class=" pi pi-trash text-red-400 hover:text-red-300 transition duration-150 ease-in-out text-xl p-2">
+                    </button>
+                  }
+                </td>
+            }
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- Organization Details Modal
+    <div  class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center">
+      <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-2xl">
+        <h2 class="text-2xl font-bold mb-4">{{ selectedOrganization.name }}</h2>
+        <div class="grid grid-cols-2 gap-4 mb-4">
+          <div>
+            <p class="text-gray-400">Propietario:</p>
+            <p class=" ">{{ selectedOrganization.owner }}</p>
+          </div>
+          <div>
+            <p class="text-gray-400">Total de Miembros:</p>
+            <p class=" ">{{ selectedOrganization.totalMembers }}</p>
+          </div>
+          <div>
+            <p class="text-gray-400">Fecha de Creación:</p>
+            <p class=" ">{{ selectedOrganization.createdAt | date:'dd/MM/yyyy' }}</p>
+          </div>
+          <div>
+            <p class="text-gray-400">Estado:</p>
+            <p class=" ">{{ selectedOrganization.status }}</p>
+          </div>
+        </div>
+        <div class="mb-4">
+          <p class="text-gray-400">Descripción:</p>
+          <p class=" ">{{ selectedOrganization.description }}</p>
+        </div>
+        <div class="grid grid-cols-3 gap-4 mb-4">
+          <div class="bg-[#2D3748] p-4 rounded-lg">
+            <p class="text-gray-400">Total de Préstamos:</p>
+            <p class="text-2xl font-bold  ">{{ selectedOrganization.totalLoans }}</p>
+          </div>
+          <div class="bg-[#2D3748] p-4 rounded-lg">
+            <p class="text-gray-400">Total de Transacciones:</p>
+            <p class="text-2xl font-bold  ">{{ selectedOrganization.totalTransactions }}</p>
+          </div>
+          <div class="bg-[#2D3748] p-4 rounded-lg">
+            <p class="text-gray-400">Monto Total:</p>
+            <p class="text-2xl font-bold  ">{{ selectedOrganization.totalAmount | currency:'USD':'symbol':'1.0-0' }}</p>
+          </div>
+        </div>
+        <button (click)="closeDetails()" class="bg-blue-500 hover:bg-blue-600   font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300">
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+  -->

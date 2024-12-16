@@ -16,9 +16,7 @@ import { SpinnerService } from '../../core/services/spinner/spinner.service';
 })
 export default class UserManagementComponent implements OnInit {
   users: UserDetails[] = [];
-  filteredUsers: UserDetails[] = []; // Inicializado como vacío
   headers: string[] = ['User ID', 'User', 'Email', 'Role', 'Status', 'Created At', 'Action'];
-  search: string = '';
   constructor(private userService: UserService, public spinner: SpinnerService) {}
 
   ngOnInit() {
@@ -30,7 +28,6 @@ export default class UserManagementComponent implements OnInit {
     this.userService.getAllUsersDetails().subscribe({
       next: (users) => {
         this.users = users;
-        this.filteredUsers = [...this.users];
       },
       error: (err) => {
         console.error(err);
@@ -39,18 +36,6 @@ export default class UserManagementComponent implements OnInit {
   }
   modifyUser(user: UserDetails): void {
     console.log(user); // Depuración
-  }
-  filterUsers(type: string): void {
-    if (type === 'all') {
-      this.filteredUsers = [...this.users];
-    } else if (type === 'active') {
-      this.filteredUsers = this.users.filter(user => user.status === 'active');
-    } else if (type === 'inactive') {
-      this.filteredUsers = this.users.filter(user => user.status === 'inactive');
-    } else if (type === 'unassigned') {
-      this.filteredUsers = this.users.filter(user => !user.role);
-    }
-    console.log(this.filteredUsers); // Depuración
   }
   deleteUser(id: number): void {
     this.userService.deleteUserById(id).subscribe({

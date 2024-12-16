@@ -8,8 +8,10 @@
     <div class="relative w-full sm:w-64">
       <input
         type="text"
+        [(ngModel)]="search"
+        (ngModelChange)="searchUser()"
         placeholder="Buscar usuarios..."
-        class="w-full pl-10 pr-4 py-2 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
+        class="w-full pl-10 pr-4 py-2 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 "
       />
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -49,12 +51,21 @@
         </tr>
       </thead>
       <tbody class="bg-white divide-y divide-gray-700">
-        @for(user of users; track $index){
+        @for(user of filteredUsers; track $index){
           <tr>
             <td class="px-6 py-4 whitespace-nowrap">{{user.user_id}}</td>
             <td class="px-6 py-4 whitespace-nowrap">{{user.user}}</td>
             <td class="px-6 py-4 whitespace-nowrap">{{user.email}}</td>
-            <td class="px-6 py-4 whitespace-nowrap">{{user.email}}</td>
+            @if(!user.role){
+              <td class="px-6 py-4 whitespace-nowrap uppercase">
+              <span
+              class="bg-red-100 text-red-800 px-2 inline-flex text-sm leading-5 font-semibold rounded-full ">
+              Sin asignar
+              </span>
+              </td>
+            }@else {
+              <td class="px-6 py-4 whitespace-nowrap">{{user.role}}</td> 
+            }
             @if(user.status === 'active'){
               <td class="px-6 py-4 whitespace-nowrap uppercase">
                 <span
