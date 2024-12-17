@@ -16,118 +16,83 @@
         </svg>
       </div>
       @if(user_role != 'User'){
-        <button class="w-full sm:w-auto bg-blue-500   px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-300">
+        @if(createOrganizationModalIsOpen){
+          <app-create-organization (closeModal)="closeCreateOrganizationModal()" (submitOrganization)="createOrganization($event)"></app-create-organization>
+        }
+        <button (click)="openCreateOrganizationModal()" class="w-full sm:w-auto bg-blue-500   px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-300">
           Agregar Organización
         </button>
+        
       }
 
     </div>
   
     <!-- Organizations Table -->
-    <div class="overflow-x-auto bg-white shadow-md rounded-lg">
-      <table class="min-w-full table-auto">
-        <thead class="bg-[#2D3748]">
-          <tr>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">ID</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Nombre</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Propietario</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Descripción</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Miembros</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Transacciones</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Creado</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Estado</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Acciones</th>
-          </tr>
-        </thead>
-        <tbody class="bg-white divide-y divide-gray-700">
-          <tr class="">
-            @for(organization of filteredOrganizations; track $index){
-                <td class="px-6 py-4 whitespace-nowrap">{{organization.organization_id}}</td>
-                <td class="px-6 py-4 whitespace-nowrap">{{organization.organization_name}}</td>
-                <td class="px-6 py-4 whitespace-nowrap">{{organization.owner_id}}</td>
-                <td class="px-6 py-4 whitespace-nowrap">{{organization.description}}</td>
-                <td class="px-6 py-4 whitespace-nowrap">{{organization.total_members}}</td>
-                <td class="px-6 py-4 whitespace-nowrap">{{organization.total_transactions}}</td>
-                <td class="px-6 py-4 whitespace-nowrap">{{organization.created_at}}</td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                  <!--
-                  [(ngModel)]="org.status"
-                  (ngModelChange)="changeStatus(org)"
-                -->
-                  @if(user_role === 'User'){
-                    <td class="px-6 py-4 whitespace-nowrap uppercase">
-                      <span
-                        class="bg-green-100 text-green-800 px-2 inline-flex text-sm leading-5 font-semibold rounded-full"
+    @if(organizations.length <= 0){
+      <p class="text-center text-gray-400">No se encontraron organizaciones</p>
+    }@else {
+      <div class="overflow-x-auto bg-white shadow-md rounded-lg">
+        <table class="min-w-full table-auto">
+          <thead class="bg-[#2D3748]">
+            <tr>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">ID</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Nombre</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Propietario</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Descripción</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Miembros</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Transacciones</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Creado</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Estado</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Acciones</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-700">
+              @for(organization of filteredOrganizations; track $index){
+                <tr class="">
+                  <td class="px-6 py-4 whitespace-nowrap">{{organization.organization_id}}</td>
+                  <td class="px-6 py-4 whitespace-nowrap">{{organization.organization_name}}</td>
+                  <td class="px-6 py-4 whitespace-nowrap">{{organization.owner_id}}</td>
+                  <td class="px-6 py-4 whitespace-nowrap">{{organization.description}}</td>
+                  <td class="px-6 py-4 whitespace-nowrap">{{organization.total_members}}</td>
+                  <td class="px-6 py-4 whitespace-nowrap">{{organization.total_transactions}}</td>
+                  <td class="px-6 py-4 whitespace-nowrap">{{organization.created_at}}</td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <!--
+                    [(ngModel)]="org.status"
+                    (ngModelChange)="changeStatus(org)"
+                  -->
+                    @if(user_role === 'User'){
+                      <td class="px-6 py-4 whitespace-nowrap uppercase">
+                        <span
+                          class="bg-green-100 text-green-800 px-2 inline-flex text-sm leading-5 font-semibold rounded-full"
+                        >
+                        {{organization.status}}
+                        </span>
+                      }@else {
+                      <select 
+                      class=" border border-gray-600   rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                       >
-                      {{organization.status}}
-                      </span>                  }@else {
-                    <select 
-                    class=" border border-gray-600   rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                    >
-                    <option value="Active">Activo</option>
-                    <option value="Inactive">Inactivo</option>
-                    <option value="Pending">Pendiente</option>
-                  </select>
-                  }
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                  <button  class=" pi pi-eye text-blue-400 hover:text-blue-300 transition duration-150 ease-in-out text-xl p-2">
-                  </button>
-                  @if(user_role != 'User'){
-                    <button  class=" pi pi-trash text-red-400 hover:text-red-300 transition duration-150 ease-in-out text-xl p-2">
+                      <option value="Active">Activo</option>
+                      <option value="Inactive">Inactivo</option>
+                      <option value="Pending">Pendiente</option>
+                    </select>
+                    }
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                    <button (click)="openManageOrganizationModal()" class=" pi pi-eye text-blue-400 hover:text-blue-300 transition duration-150 ease-in-out text-xl p-2">
                     </button>
-                  }
-                </td>
-            }
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  
-    <!-- Organization Details Modal
-    <div  class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center">
-      <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-2xl">
-        <h2 class="text-2xl font-bold mb-4">{{ selectedOrganization.name }}</h2>
-        <div class="grid grid-cols-2 gap-4 mb-4">
-          <div>
-            <p class="text-gray-400">Propietario:</p>
-            <p class=" ">{{ selectedOrganization.owner }}</p>
-          </div>
-          <div>
-            <p class="text-gray-400">Total de Miembros:</p>
-            <p class=" ">{{ selectedOrganization.totalMembers }}</p>
-          </div>
-          <div>
-            <p class="text-gray-400">Fecha de Creación:</p>
-            <p class=" ">{{ selectedOrganization.createdAt | date:'dd/MM/yyyy' }}</p>
-          </div>
-          <div>
-            <p class="text-gray-400">Estado:</p>
-            <p class=" ">{{ selectedOrganization.status }}</p>
-          </div>
-        </div>
-        <div class="mb-4">
-          <p class="text-gray-400">Descripción:</p>
-          <p class=" ">{{ selectedOrganization.description }}</p>
-        </div>
-        <div class="grid grid-cols-3 gap-4 mb-4">
-          <div class="bg-[#2D3748] p-4 rounded-lg">
-            <p class="text-gray-400">Total de Préstamos:</p>
-            <p class="text-2xl font-bold  ">{{ selectedOrganization.totalLoans }}</p>
-          </div>
-          <div class="bg-[#2D3748] p-4 rounded-lg">
-            <p class="text-gray-400">Total de Transacciones:</p>
-            <p class="text-2xl font-bold  ">{{ selectedOrganization.totalTransactions }}</p>
-          </div>
-          <div class="bg-[#2D3748] p-4 rounded-lg">
-            <p class="text-gray-400">Monto Total:</p>
-            <p class="text-2xl font-bold  ">{{ selectedOrganization.totalAmount | currency:'USD':'symbol':'1.0-0' }}</p>
-          </div>
-        </div>
-        <button (click)="closeDetails()" class="bg-blue-500 hover:bg-blue-600   font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300">
-          Cerrar
-        </button>
+                    @if(manageOrganizationModalIsOpen){
+                      <app-organization-members-modal (closeModal)="closeCreateOrganizationModal()" [organizationId]="organization.organization_id"></app-organization-members-modal>
+                    }
+                    @if(user_role != 'User'){
+                      <button  class=" pi pi-trash text-red-400 hover:text-red-300 transition duration-150 ease-in-out text-xl p-2">
+                      </button>
+                    }
+                  </td>
+                </tr>
+              }
+          </tbody>
+        </table>
       </div>
-    </div>
-  </div>
-  -->
+    }
+  

@@ -1,76 +1,301 @@
-<div >
-    <h1 class="text-2xl font-bold mb-4">Préstamos</h1>
-  
-    <!-- Ver Préstamos Activos -->
-    <div class="mb-6">
-      <h2 class="text-xl font-semibold mb-2">Préstamos Activos</h2>
-      <div class="bg-white p-4 rounded shadow">
-        <p>Listado de préstamos activos aquí...</p>
+<div class="container mx-auto px-4 py-8 bg-white text-black min-h-screen">
+  <h1 class="text-3xl font-bold mb-6">Gestión de Préstamos</h1>
+
+  @if(user_role === 'Client'){
+    <div class="bg-white rounded-lg p-6">
+      <h2 class="text-2xl font-bold mb-4">Solicitudes de Préstamos</h2>
+      <p class="mb-4 text-gray-400">Gestiona las solicitudes de préstamos para tu organización.</p>
+      
+      <div class="overflow-x-auto">
+        <table class="min-w-full table-auto">
+          <thead class="bg-[#2D3748]">
+            <tr>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">ID</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Estado</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Organizacion</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Solicitado</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Monto</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Interes</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Propósito</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Acciones</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            @for(loan of loans; track $index){
+              <tr  class="border-b border-gray-700">
+                <td class="px-4 py-2">
+                  {{loan.loan_id}}
+                </td>
+                @if(loan.status === 'approved'){
+                  <td class="px-4 py-2 ">
+                  <span class="active">
+                    {{loan.status}}
+                  </span>
+                  </td>
+                } @else if(loan.status === 'rejected'){
+                  <td  class="px-6 py-4 whitespace-nowrap uppercase">
+                    <span
+                    class="rejected"
+                  >
+                  {{loan.status}}
+                  </span>{{loan.status}}</td>
+                }@else {
+                  <td  class="px-6 py-4 whitespace-nowrap uppercase">
+                    <span
+                    class="pending"
+                  >
+                  {{loan.status}}
+                  </span>
+                  </td>
+                }
+                <td class="px-4 py-2">{{getOrganizationNameById(loan.organization_id)}}</td>
+                <td class="px-4 py-2">{{loan.issued_at}}</td>
+                <td class="px-4 py-2">${{loan.amount}}.00</td>
+                <td class="px-4 py-2">{{loan.interest_rate}}%</td>
+                <td class="px-4 py-2">{{loan.purpose}}</td>
+                @if(loan.status === 'pending'){
+                  <td class="px-4 py-2">
+                      <div class="flex space-x-2">
+                        <button  (click)="approveLoan(loan.loan_id)" class="pi pi-check  text-green-500 hover:text-green-400 text-2xl "></button>
+                        <button  (click)="rejectLoan(loan.loan_id)" class="pi pi-times text-red-500 hover:text-red-400 text-2xl "></button>
+                        <button  class="pi pi-eye text-blue-500 hover:text-blue-400 text-2xl "></button>
+                      </div>
+                    </td>
+                  }@else {
+                    <td class="px-4 py-2">
+                      <div class="content-center align-middle">
+                        <button  class="pi pi-eye text-blue-500 hover:text-blue-400 text-2xl "></button>
+                      </div>
+                    </td>
+                  }
+              </tr>
+              }
+ 
+          </tbody>
+        </table>
       </div>
     </div>
-  
-    <!-- Ver Estado de Préstamos -->
-    <div class="mb-6">
-      <h2 class="text-xl font-semibold mb-2">Estado de Préstamos</h2>
-      <div class="bg-white p-4 rounded shadow">
-        <p>Información detallada del estado de préstamos aquí...</p>
+    
+  }@else if(user_role === 'SUPER_ADMIN') {
+    <div class="bg-white rounded-lg p-6">
+      <h2 class="text-2xl font-bold mb-4">Solicitudes de Préstamos</h2>
+      <p class="mb-4 text-gray-400">Gestiona las solicitudes de préstamos para tu organización.</p>
+      
+      <div class="overflow-x-auto">
+        <table class="min-w-full table-auto">
+          <thead class="bg-[#2D3748]">
+            <tr>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">ID</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Estado</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Organizacion</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Solicitado</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Monto</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Interes</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Propósito</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for(loan of loans; track $index){
+                <tr  class="border-b border-gray-700">
+                <td class="px-4 py-2">
+                  {{loan.loan_id}}
+                </td>
+                @if(loan.status === 'approved'){
+                  <td class="px-6 py-4 whitespace-nowrap uppercase">
+                  <span class="active">
+                    {{loan.status}}
+                  </span>
+                  </td>
+                } @else if(loan.status === 'rejected'){
+                  <td  class="px-6 py-4 whitespace-nowrap uppercase">
+                    <span
+                    class="rejected"
+                  >
+                  {{loan.status}}
+                  </span>{{loan.status}}</td>
+                }@else {
+                  <td  class="px-6 py-4 whitespace-nowrap uppercase">
+                    <span
+                    class="pending"
+                  >
+                  {{loan.status}}
+                  </span>
+                  </td>
+                }
+                <td class="px-4 py-2">{{getOrganizationNameById(loan.organization_id)}}</td>
+                <td class="px-4 py-2">{{loan.issued_at}}</td>
+                <td class="px-4 py-2">${{loan.amount}}.00</td>
+                <td class="px-4 py-2">{{loan.interest_rate}}%</td>
+                <td class="px-4 py-2">{{loan.purpose}}</td>
+                @if(loan.status === 'pending'){
+                <td class="px-4 py-2">
+                    <div class="flex space-x-2">
+                      <button  (click)="approveLoan(loan.loan_id)" class="pi pi-check  text-green-500 hover:text-green-400 text-2xl "></button>
+                      <button  (click)="rejectLoan(loan.loan_id)" class="pi pi-times text-red-500 hover:text-red-400 text-2xl "></button>
+                      <button  (click)="openModal()" class="pi pi-eye text-blue-500 hover:text-blue-400 text-2xl"></button>
+                      @if(modalIsOpen){
+                        <app-loan-details-modal [loan]="loan" (closeModal)="closeModal()"></app-loan-details-modal>
+                      }
+                    </div>
+                  </td>
+                }@else {
+                  <td class="px-4 py-2">
+                    <div class="content-center align-middle">
+                      <button  (click)="openModal()" class="pi pi-eye text-blue-500 hover:text-blue-400 text-2xl "></button>
+                      @if(modalIsOpen){
+                        <app-loan-details-modal [loan]="loan" (closeModal)="closeModal()"></app-loan-details-modal>
+                      }                      
+                    </div>
+                  </td>
+                }
+              </tr>
+              }
+ 
+          </tbody>
+        </table>
       </div>
     </div>
-  
-    <!-- Ver Préstamos Rechazados -->
-    <div class="mb-6">
-      <h2 class="text-xl font-semibold mb-2">Préstamos Rechazados</h2>
-      <div class="bg-white p-4 rounded shadow">
-        <p>Listado de préstamos rechazados aquí...</p>
+  }
+  <div class="bg-white rounded-lg p-6">
+    @if(user_role === 'User'){
+      <h2 class="text-2xl font-bold mb-4">Solicitar Préstamo</h2>
+      <p class="mb-4 text-gray-600">Completa el formulario para solicitar un nuevo préstamo.</p>
+      
+      <button (click)="openRequestModal()"  class="bg-blue-500 hover:bg-blue-600 text-black px-4 py-2 rounded mb-4">
+        Solicitar Nuevo Préstamo 
+      </button>
+      @if(requestModalIsOpen){
+        <app-request-loan-modal [organizations]="organizations" (closeModal)="closeRequestModal()" (submitLoanDetails)="loanApply($event)"></app-request-loan-modal>
+      }
+      <h3 class="text-xl font-semibold mb-4">Mis Préstamos</h3>
+      <div class="overflow-x-auto bg-white shadow-md rounded-lg">
+        <table class="min-w-full table-auto">
+          <thead class="bg-[#2D3748]">
+            <tr>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">ID</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Estado</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Organizacion</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Solicitado</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Monto</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Interes</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Propósito</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for(loan of loans; track $index){
+              <tr  class="border-b border-gray-700">
+                <td class="px-4 py-2">
+                  {{loan.loan_id}}
+                </td>
+                @if(loan.status === 'approved'){
+                  <td class="px-4 py-2">
+                  <span class="active">
+                    {{loan.status}}
+                  </span>
+                  </td>
+                } @else if(loan.status === 'rejected'){
+                  <td  class="px-6 py-4 whitespace-nowrap uppercase">
+                    <span
+                    class="rejected"
+                  >
+                  {{loan.status}}
+                  </span>{{loan.status}}</td>
+                }@else {
+                  <td  class="px-6 py-4 whitespace-nowrap uppercase">
+                    <span
+                    class="pending"
+                  >
+                  {{loan.status}}
+                  </span>
+                  </td>
+                }
+                <td class="px-4 py-2">{{getOrganizationNameById(loan.organization_id)}}</td>
+                <td class="px-4 py-2">{{loan.issued_at}}</td>
+                <td class="px-4 py-2">${{loan.amount}}.00</td>
+                <td class="px-4 py-2">{{loan.interest_rate}}%</td>
+                <td class="px-4 py-2">{{loan.purpose}}</td>
+                <td class="px-4 py-2">
+                  <div class="content-center align-middle">
+                    <button  (click)="openModal()" class="pi pi-eye text-blue-500 hover:text-blue-400 text-2xl "></button>
+                    @if(modalIsOpen){
+                      <app-loan-details-modal [loan]="loan" (closeModal)="closeModal()"></app-loan-details-modal>
+                    }                      
+                  </div>
+                </td>
+              </tr>
+              }
+          </tbody>
+        </table>
       </div>
-    </div>
-  
-    <!-- Hacer Préstamo -->
-    <div class="mb-6">
-      <h2 class="text-xl font-semibold mb-2">Hacer Préstamo</h2>
-      <form class="bg-white p-4 rounded shadow space-y-4">
-        <div>
-          <label for="loanAmount" class="block text-sm font-medium">
-            Monto del Préstamo
-          </label>
-          <input
-            id="loanAmount"
-            type="number"
-            placeholder="Ingresa el monto"
-            class="mt-1 block w-full px-3 py-2 border rounded"
-          />
-        </div>
-        <button
-          type="submit"
-          class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
-        >
-          Solicitar Préstamo
-        </button>
-      </form>
-    </div>
-  
-    <!-- Cancelar Préstamo -->
-    <div>
-      <h2 class="text-xl font-semibold mb-2">Cancelar Préstamo</h2>
-      <form class="bg-white p-4 rounded shadow space-y-4">
-        <div>
-          <label for="loanId" class="block text-sm font-medium">
-            ID del Préstamo
-          </label>
-          <input
-            id="loanId"
-            type="text"
-            placeholder="Ingresa el ID del préstamo"
-            class="mt-1 block w-full px-3 py-2 border rounded"
-          />
-        </div>
-        <button
-          type="submit"
-          class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
-        >
-          Cancelar
-        </button>
-      </form>
-    </div>
+    }
+   
   </div>
+
+  <!-- Loan Application Dialog 
+  <div  class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+    @if(dialogIsOpen){
+      <div class="bg-[#1E293B] p-6 rounded-lg w-full max-w-md">
+        <h2 class="text-2xl font-bold mb-4">Solicitud de Préstamo</h2>
+        <form >
+          <div class="mb-4">
+            <label for="amount" class="block mb-2">Monto</label>
+            <input type="number" id="amount" formControlName="amount" class="w-full px-3 py-2 bg-white rounded text-black">
+          </div>
+          <div class="mb-4">
+            <label for="purpose" class="block mb-2">Propósito</label>
+            <input type="text" id="purpose" formControlName="purpose" class="w-full px-3 py-2 bg-white rounded text-black">
+          </div>
+          <div class="mb-4">
+            <label for="organization" class="block mb-2">Organización</label>
+            <select id="organization" formControlName="organization" class="w-full px-3 py-2 bg-white rounded text-black">
+              <option >
+                @for(organization of organizations; track $index){
+                  {{organization.organization_name}}
+                }
+              </option>
+            </select>
+          </div>
+          <div class="flex justify-end">
+            <button type="button" (click)="dialogIsOpen = false" class="bg-gray-500 hover:bg-gray-600 text-black px-4 py-2 rounded mr-2">Cancelar</button>
+            <button type="submit"  class="bg-blue-500 hover:bg-blue-600 text-black px-4 py-2 rounded">
+            <!--[disabled]="!loanApplicationForm.valid"
+              Enviar Solicitud</button>
+          </div>
+        </form>
+      </div>
+    }
+    
+  </div>
+-->
+
+  <!-- Loan Approval Dialog 
+  @if(loanDetailModalIsOpen){
+  <div  class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+    <div class="bg-[#1E293B] p-6 rounded-lg w-full max-w-md">
+      <h2 class="text-2xl font-bold mb-4">Informacion del Préstamo</h2>
+        <div class="mb-4">
+          <label for="deadline" class="block mb-2">Fecha Límite</label>
+          <input type="date" id="deadline" formControlName="deadline" class="w-full px-3 py-2 bg-white rounded text-black">
+        </div>
+        <div class="mb-4">
+          <label for="interestRate" class="block mb-2">Tasa de Interés (%)</label>
+          <input type="number" id="interestRate" formControlName="interestRate" class="w-full px-3 py-2 bg-white rounded text-black">
+        </div>
+        <div class="mb-4">
+          <label for="lateInterestRate" class="block mb-2">Tasa de Interés Tardío (%)</label>
+          <input type="number" id="lateInterestRate" formControlName="lateInterestRate" class="w-full px-3 py-2 bg-white rounded text-black">
+        </div>
+        <div class="flex justify-end">
+          <button type="button"  (click)="loanDetailModalIsOpen = false" class="bg-blue-500 hover:bg-blue-600 text-black px-4 py-2 rounded">
+            Cerrar Informacion
+          </button>
+        </div>
+      </div>
+  </div>
+      }
+-->
   
+</div>

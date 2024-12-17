@@ -1,5 +1,5 @@
 export interface OrganizationModel{
-    organization_id: number
+    organization_id?: number
     organization_name: string
     owner_id: number
     description: string
@@ -16,8 +16,8 @@ export interface OrganizationDetailsModel{
 }
 export interface OrganizationRegisterModel{
     organization_name: string
-    organization_description: string
-    organization_owner_ID: number
+    description: string
+    owner_id: number
 }
 export interface OrganizationMembers{
     organization_ID: number

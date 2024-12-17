@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, tap,map} from 'rxjs';
-import { OrganizationDetailsModel, OrganizationModel, OrganizationRegisterModel } from '../../../models/Organizations/OrganizationModel';
+import { OrganizationDetailsModel, OrganizationMembers, OrganizationModel, OrganizationRegisterModel } from '../../../models/Organizations/OrganizationModel';
+import { UserDetails } from '../../../models/Users/UserModel';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class OrganizationsService {
   constructor(private httpClient: HttpClient, private router:Router) { }
   createOrganization(organization:OrganizationRegisterModel):Observable<any>{
     return this.httpClient.post<any>(`${this.api_url}register-organization`, organization).pipe(
-      tap(response => {console.log(response)})
+      tap(response => {console.log(response.message)})
     );
   }
   getAllOrganizations():Observable<OrganizationDetailsModel[]>{
@@ -75,5 +76,19 @@ export class OrganizationsService {
       //tap(response => {console.log(response)})
     );
   }
-
+  getOrganizationMembers(organizationId:number):Observable<UserDetails[]>{
+    return this.httpClient.get<UserDetails[]>(`${this.api_url}get-organization-members/${organizationId}`).pipe(
+      //tap(response => {console.log(response)})
+    );
+  }
+  getAllOutOfOrganizationUsers(organizationId:number):Observable<UserDetails[]>{ 
+    return this.httpClient.get<UserDetails[]>(`${this.api_url}get-users-outside-organization/${organizationId}`).pipe(
+      //tap(response => {console.log(response)})
+    );
+  }
+  updateMemberRole(member:OrganizationMembers):Observable<any>{
+    return this.httpClient.put<any>(`${this.api_url}update-member-role`,member).pipe(
+      //tap(response => {console.log(response)})
+    );
+  }
 }

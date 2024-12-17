@@ -48,6 +48,18 @@ export const routes: Routes = [
             {
                 path: 'settings',
                 loadComponent:() => import('./business/settings/settings.component')
+            },
+            {
+                path: 'loans/active',
+                loadComponent:() => import('./business/loans/shared/active-loans/active-loans.component')
+            },
+            {
+                path: 'loans/inactive',
+                loadComponent:() => import('./business/loans/shared/inactive-component/inactive-loans.component')
+            },
+            {
+                path: 'loans/rejected',
+                loadComponent:() => import('./business/loans/shared/rejected-loans/rejected-loans.component')
             }
         ]
     }  

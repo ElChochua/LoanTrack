@@ -28,7 +28,7 @@ export class UserDetailTableComponent implements OnChanges {
         return;
       }else{
         const search = this.search.toLocaleLowerCase();
-        this.filteredUsers = this.users.filter(user=>user.user.toLowerCase().includes(search) ||
+        this.filteredUsers = this.users.filter(user=>user.user_name.toLowerCase().includes(search) ||
         user.email.toLowerCase().includes(search)
       );
       }

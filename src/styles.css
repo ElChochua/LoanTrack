@@ -6,22 +6,19 @@
 @tailwind utilities;
 @layer components {
     .pending {
-      @apply font-sans font-bold uppercase whitespace-nowrap select-none bg-red-500/20 text-red-700 py-1 px-2 text-xs rounded-xl;
+      @apply bg-yellow-100 text-yellow-800 px-2 inline-flex text-sm leading-5 font-semibold rounded-full uppercase;
     }
     .active{
-      @apply font-sans font-bold uppercase whitespace-nowrap  bg-green-500/20 text-green-700 py-1 px-2 text-xs rounded-xl;
+      @apply bg-green-100 text-green-800 px-2 inline-flex text-sm leading-5 font-semibold rounded-full uppercase;
     }
     .inactive{
-      @apply font-sans font-bold uppercase whitespace-nowrap select-none bg-gray-500/20 text-gray-700 py-1 px-2 text-xs rounded-xl;
-    }
-    .unassigned{
-      @apply font-sans font-bold uppercase whitespace-nowrap select-none bg-yellow-500/20 text-yellow-700 py-1 px-2 text-xs rounded-xl;
+      @apply bg-red-100 text-red-800 px-2 inline-flex text-sm leading-5 font-semibold rounded-full uppercase;
     }
     .delete{
-      @apply  font-sans font-bold uppercase whitespace-nowrap select-none bg-red-500/20 text-red-700 py-1 px-2 text-xs rounded-xl;
+      @apply  font-sans font-bold uppercase whitespace-nowrap select-none bg-red-500/20 text-red-700 py-1 px-2 text-xs rounded-xl uppercase;
     }
     .modify{
-      @apply font-sans font-bold uppercase whitespace-nowrap select-none bg-blue-500/20 text-blue-700 py-1 px-2 text-xs rounded-xl;
+      @apply font-sans font-bold uppercase whitespace-nowrap select-none bg-blue-500/20 text-blue-700 py-1 px-2 text-xs rounded-xl uppercase;
     }
 }
 

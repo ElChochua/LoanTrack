@@ -54,7 +54,7 @@
         @for(user of filteredUsers; track $index){
           <tr>
             <td class="px-6 py-4 whitespace-nowrap">{{user.user_id}}</td>
-            <td class="px-6 py-4 whitespace-nowrap">{{user.user}}</td>
+            <td class="px-6 py-4 whitespace-nowrap">{{user.user_name}}</td>
             <td class="px-6 py-4 whitespace-nowrap">{{user.email}}</td>
             @if(!user.role){
               <td class="px-6 py-4 whitespace-nowrap uppercase">

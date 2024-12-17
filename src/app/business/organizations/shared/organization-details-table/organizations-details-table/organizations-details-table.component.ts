@@ -1,22 +1,27 @@
 import { Component, Inject, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { OrganizationDetailsModel } from '../../../../../models/Organizations/OrganizationModel';
+import { OrganizationDetailsModel, OrganizationModel, OrganizationRegisterModel } from '../../../../../models/Organizations/OrganizationModel';
 import { OrganizationsService } from '../../../../../core/services/organizations-service/organizations.service';
 import { AuthService } from '../../../../../core/services/auth/auth.service';
 import { FormsModule } from '@angular/forms';
+import { CreateOrganizationComponent } from '../../create-organization/create-organization.component';
+import { ToastrService } from 'ngx-toastr';
+import { OrganizationMembersModalComponent } from '../../manage-organization-modal/manage-organization.component';
 @Component({
   selector: 'app-organizations-details-table',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CreateOrganizationComponent, OrganizationMembersModalComponent],
   templateUrl: './organizations-details-table.component.html',
   styleUrl: './organizations-details-table.component.css'
 })
 export class OrganizationsDetailsTableComponent implements OnInit{
   organizations: OrganizationDetailsModel[] = [];
-  constructor(private organizationsService: OrganizationsService, private auth: AuthService) {
+  constructor(private organizationsService: OrganizationsService, private auth: AuthService, private toastService:ToastrService) {
   }
   filteredOrganizations: OrganizationDetailsModel[] = [];
   user_role: string|null = null;
   searchValue: string = '';
+  createOrganizationModalIsOpen: boolean = false;
+  manageOrganizationModalIsOpen: boolean = false;
   ngOnInit(): void {
     this.user_role = this.auth.getRole();
     this.loadOrganizationsByRole();
@@ -71,6 +76,30 @@ export class OrganizationsDetailsTableComponent implements OnInit{
     }
 
   }
-
+  createOrganization(organization: OrganizationRegisterModel){
+    console.log(organization);
+    this.organizationsService.createOrganization(organization).subscribe({
+      next: (response) => {
+        this.loadOrganizationsByRole();
+        this.toastService.success('Organization created successfully ' + response);
+      },
+      error: (err) => {
+        console.error(err);
+        this.toastService.error('Organization creation failed' + err);
+      }
+    });
+  }
+  openCreateOrganizationModal(){
+    this.createOrganizationModalIsOpen = true;
+  }
+  closeCreateOrganizationModal(){
+    this.createOrganizationModalIsOpen = false;
+  }
+  openManageOrganizationModal(){
+    this.manageOrganizationModalIsOpen = true;
+  }
+  closeManageOrganizationModal(){
+    this.manageOrganizationModalIsOpen = false;
+  }
 }
 
