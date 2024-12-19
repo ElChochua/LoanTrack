@@ -24,3 +24,12 @@ export interface LoanApply{
     purpose: string;
     currency: string;
 }
+export interface UserCredits{
+    credit_ID: number;
+    User_ID:number,
+    organization_ID:number,
+    credit_score:number,
+    credit_limit:number,
+    credit_available:number,
+    updated_at:string
+}

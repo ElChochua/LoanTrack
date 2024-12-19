@@ -1,0 +1,44 @@
+<div class="relative overflow-x-auto max-w-full">
+    <table class="w-full table-auto text-xs text-left text-gray-500 dark:text-gray-400">
+          <thead class="text-xs text-gray-900 uppercase dark:text-gray-400">
+              <tr>
+                  <th scope="col" class="px-6 py-3 min-w-[150px]">
+                    Cedito Disponible
+                </th>            
+                  <th scope="col" class="px-6 py-3 min-w-[150px]">
+                    Limite de Credito
+                </th>            
+                <th scope="col" class="px-6 py-3 min-w-[150px]">
+                      Puntuacion de credito
+                </th>            
+                
+                  <th scope="col" class="px-6 py-3 min-w-[150px]">
+                    Organizacion
+                </th>            
+                
+              </tr>
+          </thead>
+          <tbody>
+              @for(credits of userCredits; track $index){
+                  <tr class="bg-white text-black">
+                    
+                      <td class="px-6 py-4 border-b border-gray-300">
+                          {{ credits.credit_available }}
+                      </td >
+                      <td class="px-6 py-4 border-b border-gray-300">
+                        {{ credits.credit_limit }}
+                      </td>
+                      <td class="px-6 py-4 border-b border-gray-300">
+                        {{ credits.credit_score }}
+                      </td>
+                      <td class="px-6 py-4 border-b border-gray-300">
+                        {{ credits.organization_ID }}
+
+                      </td>
+                  </tr>
+              }
+              
+          </tbody>
+      </table>
+    </div>
+    

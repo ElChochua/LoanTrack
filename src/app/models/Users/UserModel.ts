@@ -7,7 +7,8 @@ export interface UserDetails{
     user_name: string;
     name?: string;
     last_name?: string;
-    birth_date?: string;
+    birthdate?: string;
+    curp?:string;
     email: string;
     status: string;
     role:string |null;

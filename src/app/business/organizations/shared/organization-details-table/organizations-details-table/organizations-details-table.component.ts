@@ -20,6 +20,8 @@ export class OrganizationsDetailsTableComponent implements OnInit{
   filteredOrganizations: OrganizationDetailsModel[] = [];
   user_role: string|null = null;
   searchValue: string = '';
+  selectedStatus: string = '';
+  selectedOrganization:number = 0;
   createOrganizationModalIsOpen: boolean = false;
   manageOrganizationModalIsOpen: boolean = false;
   ngOnInit(): void {
@@ -89,17 +91,31 @@ export class OrganizationsDetailsTableComponent implements OnInit{
       }
     });
   }
+  changeOrganizationStatus(organization_id:number, organization_status:string){
+    this.organizationsService.updateOrganizationStatus(organization_id, organization_status).subscribe({
+      next: (response) => {
+        this.loadOrganizationsByRole();
+        this.toastService.success('Organization status updated successfully');
+      },
+      error: (err) => {
+        console.error(err);
+        this.toastService.error('Organization status update failed');
+      }
+    });
+  }
   openCreateOrganizationModal(){
     this.createOrganizationModalIsOpen = true;
   }
   closeCreateOrganizationModal(){
-    this.createOrganizationModalIsOpen = false;
-  }
-  openManageOrganizationModal(){
-    this.manageOrganizationModalIsOpen = true;
+    this.manageOrganizationModalIsOpen = false;
   }
   closeManageOrganizationModal(){
-    this.manageOrganizationModalIsOpen = false;
+    this.createOrganizationModalIsOpen = false;
+    this.selectedOrganization = 0;
+  }
+  openManageOrganizationModal(organization_id:number){
+    this.selectedOrganization = organization_id;
+    this.manageOrganizationModalIsOpen = true;
   }
 }
 

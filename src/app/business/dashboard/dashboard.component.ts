@@ -10,11 +10,15 @@ import { UserService } from '../../core/services/User/user.service';
 import { SpinnerComponent } from '../../shared/components/spinner/spinner.component';
 import { SpinnerService } from '../../core/services/spinner/spinner.service';
 import { CommonModule } from '@angular/common';
+import { LoansService } from '../../core/services/loans/loans.service';
+import { Loans } from '../../models/Loans/LoansModel';
+import { LoansTableComponent } from '../loans/shared/loans-table/loans-table.component';
+import { CreditTableComponent } from '../loans/shared/credit-table/credit-table.component';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   imports: [CommonModule,UnassignedUsersComponent, OrganizationsTableComponent,
-            UsersTableComponent, SpinnerComponent],
+            UsersTableComponent, SpinnerComponent, LoansTableComponent, CreditTableComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
@@ -23,9 +27,11 @@ export default class DashboardComponent implements OnInit {
   user: User|null = null;
   users: User[] = [];
   headers: string[] = ['ID', 'Usuario', 'Correo', 'Rol'];
+  loans:Loans[] =[];
   constructor(private auth: AuthService, private router: Router,
               private usersService: UserService,
-              public spinner:SpinnerService
+              public spinner:SpinnerService,
+              private loanService:LoansService
   ) {
   }
   ngOnInit(): void {
@@ -35,11 +41,23 @@ export default class DashboardComponent implements OnInit {
     this.userRole = this.auth.userGetRole();
     if(this.userRole ==='SUPER_ADMIN'){
       this.loadUsers();      
-    }
+      }else if(this.userRole === 'User'){
+        this.loadLoansByUser(this.auth.getUserId());
+      }
   }
   loadUsers(): void {
     this.usersService.getAllUsers().subscribe((users)=>{
       this.users = users;
+    });
+  }
+  loadLoansByUser(id: number): void {
+    this.loanService.getLoansByApplicantId(id).subscribe({
+      next: (loans) => {
+        this.loans = loans;
+      },
+      error: (err) => {
+        console.error(err);
+      }
     });
   }
 }

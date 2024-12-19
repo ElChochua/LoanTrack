@@ -17,7 +17,7 @@
       </div>
       @if(user_role != 'User'){
         @if(createOrganizationModalIsOpen){
-          <app-create-organization (closeModal)="closeCreateOrganizationModal()" (submitOrganization)="createOrganization($event)"></app-create-organization>
+          <app-create-organization (closeModal)="closeCreateOrganizationModal()" (submitOrganization)="createOrganization($event) "></app-create-organization>
         }
         <button (click)="openCreateOrganizationModal()" class="w-full sm:w-auto bg-blue-500   px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-300">
           Agregar Organización
@@ -61,35 +61,39 @@
                     [(ngModel)]="org.status"
                     (ngModelChange)="changeStatus(org)"
                   -->
-                    @if(user_role === 'User'){
-                      <td class="px-6 py-4 whitespace-nowrap uppercase">
-                        <span
-                          class="bg-green-100 text-green-800 px-2 inline-flex text-sm leading-5 font-semibold rounded-full"
-                        >
-                        {{organization.status}}
+                    @if(user_role === 'User' ){
+                      @if (organization.status === 'active') {
+                        <span class="active">
+                          Activo
                         </span>
                       }@else {
+                        <span class="inactive">
+                          Inactivo
+                        </span>
+                      }
+                      }@else {
                       <select 
+                      [(ngModel)]="organization.status"
+                      (ngModelChange)="changeOrganizationStatus(organization.organization_id, organization.status)"
                       class=" border border-gray-600   rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                       >
-                      <option value="Active">Activo</option>
-                      <option value="Inactive">Inactivo</option>
-                      <option value="Pending">Pendiente</option>
+                      <option value="Active" [selected]="organization.status === 'Active'">Activo</option>
+  <option value="Inactive" [selected]="organization.status === 'Inactive'">Inactivo</option>
                     </select>
                     }
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                    <button (click)="openManageOrganizationModal()" class=" pi pi-eye text-blue-400 hover:text-blue-300 transition duration-150 ease-in-out text-xl p-2">
+                    <button (click)="openManageOrganizationModal(organization.organization_id)" class=" pi pi-eye text-blue-400 hover:text-blue-300 transition duration-150 ease-in-out text-xl p-2">
                     </button>
-                    @if(manageOrganizationModalIsOpen){
-                      <app-organization-members-modal (closeModal)="closeCreateOrganizationModal()" [organizationId]="organization.organization_id"></app-organization-members-modal>
-                    }
                     @if(user_role != 'User'){
                       <button  class=" pi pi-trash text-red-400 hover:text-red-300 transition duration-150 ease-in-out text-xl p-2">
                       </button>
                     }
                   </td>
                 </tr>
+              }
+              @if(manageOrganizationModalIsOpen){
+                <app-organization-members-modal (closeModal)="closeCreateOrganizationModal()" [organizationId]="selectedOrganization"></app-organization-members-modal>
               }
           </tbody>
         </table>

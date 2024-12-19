@@ -20,6 +20,7 @@ export default class LoansComponent implements OnInit {
   user_role: string|null = null;
   organizations: OrganizationDetailsModel[] = [];
   loans:Loans[] = [];
+  cosa: Loans = {} as Loans;
   modalIsOpen: boolean = false;
   requestModalIsOpen: boolean = false;
   constructor(private authService:AuthService, private organzizationService:OrganizationsService,private loanService:LoansService, 
@@ -76,41 +77,45 @@ export default class LoansComponent implements OnInit {
   approveLoan(loan_id:number):void{
     this.loanService.approveLoan(loan_id).subscribe({
       next: (response) => {
-        console.log(response);
+        this.toastService.success('Se ha aprobado el préstamo');
       },
       error: (err) => {
-        console.error(err);
+        this.toastService.error('No se ha podido aprobar el préstamo' + err);
       }
     });
-  }
-  loanApply(loan:Loans):void{
-   this.loanService.loanApply(loan).subscribe({
-      next: (response) => {
-        this.toastService.success('Loan request sent successfully');
-      },
-      error: (err) => {
-        this.toastService.error('Loan request failed' + err);
-      }
-   });
   }
   getOrganizationNameById(organization_id:number):string{
     let organization = this.organizations.find(organization => organization.organization_id === organization_id);
     return organization ? organization.organization_name : '';
   }
-  rejectLoan(loan_id:number):void{
-    this.loanService.rejectLoan(loan_id).subscribe({
+  loanApply(loan:Loans):void{
+   this.loanService.loanApply(loan).subscribe({
       next: (response) => {
-        console.log(response);
+        this.toastService.success('Se ha solicitado el préstamo con exito');
       },
       error: (err) => {
-        console.error(err);
+        this.toastService.error('No se ha podido solicitar el préstamo' + err);
+      }
+   });
+  }
+  rejectLoan(loan_id:number):void{
+    console.log(loan_id);
+    this.loanService.rejectLoan(loan_id).subscribe({
+      next: (response) => {
+        this.toastService.success('Se ha rechazado el préstamo');
+      },
+      error: (err) => {
+        this.toastService.error('No se ha podido rechazar el préstamo' + err);
       }
     });
   }
-  openModal():void{
+  openModal(loan:Loans):void{
+    this.cosa = loan;
+    console.log(this.cosa);
     this.modalIsOpen = true;
   }
   closeModal():void{
+    this.cosa = {} as Loans;
     this.modalIsOpen = false;
   }
   openRequestModal():void{

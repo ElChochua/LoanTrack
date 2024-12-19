@@ -40,6 +40,7 @@ export class LoanDetailsFormModalComponent {
   onSubmit() {
     if (this.loanForm.valid) {
       this.submitLoanDetails.emit(this.loanForm.value);
+      console.log(this.loanForm.value);
       this.onClose();
     }
   }

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, tap,map} from 'rxjs';
-import { OrganizationDetailsModel, OrganizationMembers, OrganizationModel, OrganizationRegisterModel } from '../../../models/Organizations/OrganizationModel';
+import { AddUserToOrganizationMemberDto, OrganizationDetailsModel, OrganizationMembers, OrganizationModel, OrganizationRegisterModel } from '../../../models/Organizations/OrganizationModel';
 import { UserDetails } from '../../../models/Users/UserModel';
 
 @Injectable({
@@ -46,13 +46,13 @@ export class OrganizationsService {
       //tap(response => {console.log(response)})
     );
   }
-  addUserToOrganization(userId:number, organizationId:number):Observable<any>{
-    return this.httpClient.post<any>(`${this.api_url}add-user-to-organization`,{userId, organizationId}).pipe(
-      //tap(response => {console.log(response)})
+  addUserToOrganization(member:AddUserToOrganizationMemberDto):Observable<any>{
+    return this.httpClient.post<any>(`${this.api_url}add-user-to-organization`,member).pipe(
+      tap(response => {console.log(response)})
     );
   }
   updateOrganizationStatus(organization_id:number, organization_status:string):Observable<any>{
-    return this.httpClient.put<any>(`${this.api_url}update-organization-status`,{organization_id, organization_status}).pipe(
+    return this.httpClient.put<any>(`${this.api_url}update-organization-status`,{"organization_id":organization_id, "status": organization_status}).pipe(
       //tap(response => {console.log(response)})
     );
   }
@@ -71,18 +71,18 @@ export class OrganizationsService {
       //tap(response => {console.log(response)})
     );
   }
-  deleteUserFromOrganization(userId:number, organizationId:number):Observable<any>{
-    return this.httpClient.delete<any>(`${this.api_url}delete-user-from-organization/${userId}/${organizationId}`).pipe(
+  deleteUserFromOrganization( organization_id:number,user_id:number):Observable<any>{
+    return this.httpClient.delete<any>(`${this.api_url}delete-user-from-organization/${organization_id}/${user_id}`).pipe(
+      tap(response => {console.log(response)})
+    );
+  }
+  getOrganizationMembers(organizationId:number):Observable<OrganizationMembers[]>{
+    return this.httpClient.get<OrganizationMembers[]>(`${this.api_url}get-organization-members/${organizationId}`).pipe(
       //tap(response => {console.log(response)})
     );
   }
-  getOrganizationMembers(organizationId:number):Observable<UserDetails[]>{
-    return this.httpClient.get<UserDetails[]>(`${this.api_url}get-organization-members/${organizationId}`).pipe(
-      //tap(response => {console.log(response)})
-    );
-  }
-  getAllOutOfOrganizationUsers(organizationId:number):Observable<UserDetails[]>{ 
-    return this.httpClient.get<UserDetails[]>(`${this.api_url}get-users-outside-organization/${organizationId}`).pipe(
+  getAllOutOfOrganizationUsers(organizationId:number):Observable<OrganizationMembers[]>{ 
+    return this.httpClient.get<OrganizationMembers[]>(`${this.api_url}get-users-outside-organization/${organizationId}`).pipe(
       //tap(response => {console.log(response)})
     );
   }

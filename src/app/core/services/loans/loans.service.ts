@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, Observer, tap } from 'rxjs';
-import { LoanApply, Loans } from '../../../models/Loans/LoansModel';
+import { LoanApply, Loans, UserCredits } from '../../../models/Loans/LoansModel';
+import { UserCreds } from '../../../models/Users/UserModel';
 @Injectable({
   providedIn: 'root'
 })
@@ -85,6 +86,13 @@ export class LoansService {
       tap(
          response => {console.log(response)}
       )
+    );
+  }
+  getAllCreditsByUser(user_id:number):Observable<UserCredits[]>{
+    return this.httpClient.get<UserCredits[]>(`${this.api_url}get-all-credits-by-user/${user_id}`).pipe(
+      tap(
+         response => {console.log(response)}
+        ),
     );
   }
 }

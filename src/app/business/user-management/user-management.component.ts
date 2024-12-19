@@ -28,6 +28,7 @@ export default class UserManagementComponent implements OnInit {
     this.userService.getAllUsersDetails().subscribe({
       next: (users) => {
         this.users = users;
+        console.log(users); // Depuración
       },
       error: (err) => {
         console.error(err);

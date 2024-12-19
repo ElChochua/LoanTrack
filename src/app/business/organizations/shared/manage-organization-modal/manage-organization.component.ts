@@ -1,10 +1,11 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { OrganizationMembers } from '../../../../models/Organizations/OrganizationModel';
+import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChange, SimpleChanges, DestroyRef } from '@angular/core';
+import { AddUserToOrganizationMemberDto, OrganizationMembers } from '../../../../models/Organizations/OrganizationModel';
 import { OrganizationsService } from '../../../../core/services/organizations-service/organizations.service';
 import { UserDetails } from '../../../../models/Users/UserModel';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Toast } from 'ngx-toastr';
 import { AuthService } from '../../../../core/services/auth/auth.service';
+import { ToastService } from '../../../../core/services/toast.service';
 
 @Component({
   selector: 'app-organization-members-modal',
@@ -14,32 +15,43 @@ import { AuthService } from '../../../../core/services/auth/auth.service';
 })
 export class OrganizationMembersModalComponent implements OnInit{
   @Input() organizationId: number = 0;
-  @Input() organizationName: string | null = null;
   @Output() closeModal = new EventEmitter<void>();
-  members: UserDetails[] = [];
+  members: OrganizationMembers[] = [];
+  potentialMembers: OrganizationMembers[] = [];
+
   searchTerm: string = '';
   newMemberSearchTerm: string = '';
+
   user_role: string | null = null;
-    potentialMembers: UserDetails[] = [];
-    constructor (private organizationService: OrganizationsService, private authService: AuthService) {}
-  filteredMembers: UserDetails[] = [];
+    constructor (private organizationService: OrganizationsService, private authService: AuthService, private toast: ToastService) {}
+  filteredMembers: OrganizationMembers[] = [];
+  filteredPotentialMembers: OrganizationMembers[] = [];
     ngOnInit() {
         this.loadMembers();
     }
-    loadMembers(){
+
+    loadMembers() {
         this.user_role = this.authService.getRole();
-        if(this.organizationId){
+        if (this.organizationId) {
             this.organizationService.getOrganizationMembers(this.organizationId).subscribe({
                 next: (members) => {
-                    this.members = members;
+                    this.members = []; // Limpiar lista antes de asignar
+                    this.filteredMembers = []; // Limpiar lista antes de asignar
+                    this.filteredMembers = members;
+                    console.log("Aqui se cargan miembros de la org",members);
                 },
                 error: (err) => {
                     console.error(err);
                 }
             });
+    
             this.organizationService.getAllOutOfOrganizationUsers(this.organizationId).subscribe({
                 next: (members) => {
+                    this.potentialMembers = []; // Limpiar lista antes de asignar
+                    this.filteredPotentialMembers = []; // Limpiar lista antes de asignar
                     this.potentialMembers = members;
+                    this.filteredPotentialMembers = members;
+                    console.log("Aqui se cargan miembros potenciales",members);
                 },
                 error: (err) => {
                     console.error(err);
@@ -47,14 +59,26 @@ export class OrganizationMembersModalComponent implements OnInit{
             });
         }
     }
-  searchPotentialMembers():void {
+    
+    searchMembers(): void {
+        if(!this.searchTerm){
+            this.filteredMembers = this.members;
+            return;
+        }else{
+            const search = this.searchTerm.toLocaleLowerCase();
+            this.filteredMembers = this.members.filter((member)=>{
+                 return member.name.toLowerCase().includes(search);  
+            })
+        }
+    }
+    searchPotentialMembers():void {
     if(!this.newMemberSearchTerm){
-        this.potentialMembers = this.members;
+        this.filteredPotentialMembers = this.potentialMembers;
         return;
     }else{
         const search = this.newMemberSearchTerm.toLocaleLowerCase();
-        this.potentialMembers = this.members.filter((member) => {
-            return member.user_name.toLowerCase().includes(search)|| member.email.toLowerCase().includes(search) ;
+        this.filteredPotentialMembers = this.potentialMembers.filter((member) => {
+             return member.name.toLowerCase().includes(search);
         });
     }
   }
@@ -63,38 +87,57 @@ export class OrganizationMembersModalComponent implements OnInit{
 
   onClose() {
     this.closeModal.emit();
+    this.members = []; // Limpiar lista antes de asignar
+    this.filteredMembers = []; // Limpiar lista antes de asignar
+    this.potentialMembers = []; // Limpiar lista antes de asignar
+    this.filteredPotentialMembers = []; // Limpiar lista antes
   }
 
-  updateMemberRole(member:number, role:string) {
-    let organizationMember: OrganizationMembers = {
-        organization_ID: this.organizationId,
-        user_ID: member,
-        role: role
-    };
-    this.organizationService.updateMemberRole(organizationMember).subscribe({
-        next: (member) => {
-            this.loadMembers();
+  updateMemberRole(member:OrganizationMembers, role:string) {
+    member.role = role;
+    this.organizationService.updateMemberRole(member).subscribe({
+        next: (response) => {
+            
+            this.toast.success('Rol Actualizado Correctamente');
         },
         error: (err) => {
-            console.error(err);
+            this.toast.error('Error al actualizar rol');
         }
     });
 
   }
 
   removeMember(memberId:number) {
-    this.organizationService.deleteUserFromOrganization(memberId, this.organizationId).subscribe({
+    console.log(memberId, this.organizationId);
+    this.organizationService.deleteUserFromOrganization(this.organizationId, memberId).subscribe({
         next: (response) => {
             this.loadMembers();
+            this.toast.success('Usuario Eliminado Correctamente');
         },
         error: (err) => {
-            console.error(err);
+            this.toast.error('Error al eliminar usuario');
         }
     });
 
   }
 
-  addMember(userId:number) {
-    
+  addMember(user_id:number) {
+    const addOrganizationDto={
+        user_id: user_id,
+        organization_id: this.organizationId,
+        role: 'member'
+    } as AddUserToOrganizationMemberDto;
+    console.log(addOrganizationDto.user_id);
+    this.organizationService.addUserToOrganization(addOrganizationDto).subscribe({
+        next: (response) => {
+            this.loadMembers();
+            this.toast.success('Usuario Agregado Correctamente');
+        },
+        error: (err) => {
+            console.error(err);
+            console.log(err);
+            this.toast.error('Error al agregar usuario');
+        }
+    });
   }
 }

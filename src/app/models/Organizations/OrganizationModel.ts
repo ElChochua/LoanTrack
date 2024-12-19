@@ -20,7 +20,15 @@ export interface OrganizationRegisterModel{
     owner_id: number
 }
 export interface OrganizationMembers{
-    organization_ID: number
-    user_ID: number
+    organization_id: number
+    user_id: number
+    name:string
+    email:string
+    status:string
     role: string
+}
+export interface AddUserToOrganizationMemberDto{
+    user_id:number
+    organization_id:number
+    role?:string
 }

@@ -1,0 +1,37 @@
+<div class="relative overflow-x-auto max-w-full">
+    @if(loans.length <= 0){
+    <p class="text-center text-gray-400">No se encontraron prestamos</p>
+    }@else {
+        <table class="w-full table-auto text-xs text-left text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-900 uppercase dark:text-gray-400">
+                <tr>
+                      <th class="px-6 py-3">ID</th>
+                      <th class="px-6 py-3">Organizacion</th>
+                      <th class="px-6 py-3">Fecha</th>
+                      <th class="px-6 py-3">Monto</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for(loan of loans; track $index){
+                    <tr class="bg-white text-black">
+                      
+                        <td class="px-6 py-4 border-b border-gray-300">
+                            {{ loan.loan_id }}
+                        </td >
+                        <td class="px-6 py-4 border-b border-gray-300">
+                          {{ loan.organization_id }}
+                        </td>
+                        <td class="px-6 py-4 border-b border-gray-300">
+                          {{ loan.issued_at }}
+                        </td>
+                        <td class="px-6 py-4 border-b border-gray-300">
+                          {{ loan.amount }}
+                        </td>
+                    </tr>
+                }
+                
+            </tbody>
+        </table>
+    }
+</div>
+    

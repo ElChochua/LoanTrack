@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Loans } from '../../../../models/Loans/LoansModel';
+import LoansComponent from '../../loans.component';
 
 
 @Component({
