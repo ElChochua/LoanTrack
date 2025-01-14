@@ -68,11 +68,11 @@ export class OrganizationsService {
   }
   deleteOrganization(organizationId:number):Observable<any>{
     return this.httpClient.delete<any>(`${this.api_url}delete-organization/${organizationId}`).pipe(
-      //tap(response => {console.log(response)})
+      tap(response => {console.log(response)})
     );
   }
-  deleteUserFromOrganization( organization_id:number,user_id:number):Observable<any>{
-    return this.httpClient.delete<any>(`${this.api_url}delete-user-from-organization/${organization_id}/${user_id}`).pipe(
+  deleteUserFromOrganization( user_id:number,organization_id:number,):Observable<any>{
+    return this.httpClient.delete<any>(`${this.api_url}delete-user-from-organization/${user_id}/${organization_id}`).pipe(
       tap(response => {console.log(response)})
     );
   }

@@ -35,6 +35,7 @@ export class OrganizationMembersModalComponent implements OnInit{
         if (this.organizationId) {
             this.organizationService.getOrganizationMembers(this.organizationId).subscribe({
                 next: (members) => {
+                    console.log("Members before clean list",members);
                     this.members = []; // Limpiar lista antes de asignar
                     this.filteredMembers = []; // Limpiar lista antes de asignar
                     this.filteredMembers = members;
@@ -109,10 +110,11 @@ export class OrganizationMembersModalComponent implements OnInit{
 
   removeMember(memberId:number) {
     console.log(memberId, this.organizationId);
-    this.organizationService.deleteUserFromOrganization(this.organizationId, memberId).subscribe({
+    this.organizationService.deleteUserFromOrganization(memberId,this.organizationId).subscribe({
         next: (response) => {
             this.loadMembers();
             this.toast.success('Usuario Eliminado Correctamente');
+            console.log(response);
         },
         error: (err) => {
             this.toast.error('Error al eliminar usuario');

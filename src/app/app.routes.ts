@@ -34,10 +34,6 @@ export const routes: Routes = [
                 loadComponent:() => import('./business/user-management/user-management.component') 
             },
             {
-                path: 'notifications',
-                loadComponent:() => import('./business/notifications/notifications.component')
-            },
-            {
                 path: 'organizations',
                 loadComponent:() => import('./business/organizations/organizations.component')
             },

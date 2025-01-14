@@ -117,5 +117,19 @@ export class OrganizationsDetailsTableComponent implements OnInit{
     this.selectedOrganization = organization_id;
     this.manageOrganizationModalIsOpen = true;
   }
+  removeOrganization(organization_id:number){
+    console.log(organization_id);
+    this.organizationsService.deleteOrganization(organization_id).subscribe({
+      next: (response) => {
+        this.loadOrganizationsByRole();
+        this.toastService.success('Organization deleted successfully');
+        console.log("",response," Organizacion ",organization_id );
+      },
+      error: (err) => {
+        console.error(err);
+        this.toastService.error('Organization deletion failed');
+      }
+    });
+  }
 }
 

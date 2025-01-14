@@ -86,7 +86,7 @@
                     <button (click)="openManageOrganizationModal(organization.organization_id)" class=" pi pi-eye text-blue-400 hover:text-blue-300 transition duration-150 ease-in-out text-xl p-2">
                     </button>
                     @if(user_role != 'User'){
-                      <button  class=" pi pi-trash text-red-400 hover:text-red-300 transition duration-150 ease-in-out text-xl p-2">
+                      <button (click)="removeOrganization(organization.organization_id)" class=" pi pi-trash text-red-400 hover:text-red-300 transition duration-150 ease-in-out text-xl p-2">
                       </button>
                     }
                   </td>
