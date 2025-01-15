@@ -22,7 +22,14 @@ export default class ActiveLoansComponent{
     }
     loadForRole():void{
         if(this.user_role === 'SUPER_ADMIN'){
-
+            this.loansService.getAllActiveLoans().subscribe({
+                next: (loans) => {
+                    this.loans = loans;
+                },
+                error: (err) => {
+                    console.error(err);
+                }
+            });
         }else if(this.user_role === 'Client'){
         }else if(this.user_role === 'User'){
             this.loansService.getAllActiveLoansByMember().subscribe({

@@ -1,48 +1,57 @@
-<div class="container mx-auto px-4 py-8 bg-white text-black min-h-screen">
-      <div class="bg-white rounded-lg p-6">
-        <h2 class="text-2xl font-bold mb-4">Solicitudes Activas</h2>
-        @if(loans.length === 0){
-          <p class="mb-4 ">No hay solicitudes activas en este momento.</p>
-        }@else {
-            <p class="mb-4 text-gray-400">Gestiona las solicitudes de préstamos para tu organización.</p>
-        
-        <div class="overflow-x-auto">
-          <table class="min-w-full table-auto">
-            <thead class="bg-gray-500"> 
-              <tr>
-                <th class="px-4 py-2 text-left">Solicitante</th>
-                <th class="px-4 py-2 text-left">Monto</th>
-                <th class="px-4 py-2 text-left">Propósito</th>
-                <th class="px-4 py-2 text-left">Estado</th>
-                <th class="px-4 py-2 text-left">Fecha Límite</th>
-                <th class="px-4 py-2 text-left">Tasa de Interés</th>
-                <th class="px-4 py-2 text-left">Tasa de Interés (Tardío)</th>
-                <th class="px-4 py-2 text-left">Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              @for(loan of loans; track $index){
-  
-                <tr class="border-b border-gray-700">
-                  <td class="px-4 py-2">{{loan.loan_id}}</td>
-                  <td class="px-4 py-2">${{loan.amount}}</td>
-                  <td class="px-4 py-2">{{loan.purpose}}</td>
-                  <td class="px-4 py-2">{{loan.status}}</td>
-                  <td class="px-4 py-2">{{loan.due_at}}</td>
-                  <td class="px-4 py-2">{{loan.interest_rate}}</td>
-                  <td class="px-4 py-2">
-                    @if(loan.status === 'Pending'){
-                      <div class="flex space-x-2">
-                        <button  class="bg-green-500 hover:bg-green-600 text-black px-2 py-1 rounded">Aprobar</button>
-                        <button  class="bg-red-500 hover:bg-red-600 text-black px-2 py-1 rounded">Rechazar</button>
-                      </div>
-                    }
-                  </td>
-                </tr>
+<div class="relative overflow-x-auto max-w-full">
+  @if(loans.length <= 0){
+  <p class="text-center text-gray-400">No se encontraron prestamos</p>
+  }@else {
+    <div class="overflow-x-auto bg-white shadow-md rounded-lg">
+      <table class="min-w-full table-auto">
+        <thead class="bg-[#2D3748]">
+          <tr>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">ID</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Estado</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Organizacion</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Solicitado</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Monto</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Interes</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for(loan of loans; track $index){
+            <tr  class="border-b border-gray-700">
+              <td class="px-4 py-2">
+                {{loan.loan_id}}
+              </td>
+              @if(loan.status === 'approved'){
+                <td class="px-4 py-2">
+                <span class="active">
+                  {{loan.status}}
+                </span>
+                </td>
+              } @else if(loan.status === 'declined'){
+                <td  class="px-6 py-4 whitespace-nowrap uppercase">
+                  <span
+                  class="inactive"
+                >
+                {{loan.status}}
+                </span>
+              </td>
+              }@else {
+                <td  class="px-6 py-4 whitespace-nowrap uppercase">
+                  <span
+                  class="pending"
+                >
+                {{loan.status}}
+                </span>
+                </td>
               }
-            </tbody>
-          </table>
-        </div>
-        }
-      </div>
+              <td class="px-4 py-2">{{loan.issued_at}}</td>
+              <td class="px-4 py-2">${{loan.amount}}.00</td>
+              <td class="px-4 py-2">{{loan.interest_rate}}%</td>
+              <td class="px-4 py-2">{{loan.purpose}}</td>
+            </tr>
+            }
+        </tbody>
+      </table>
+    </div>
+  }
 </div>
+  

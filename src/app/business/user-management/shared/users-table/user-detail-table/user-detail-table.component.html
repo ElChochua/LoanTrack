@@ -88,12 +88,15 @@
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
               <button
                 class="pi pi-eye text-xl text-blue-400 hover:text-blue-300 mr-4 transition duration-150 ease-in-out"
-                (click)="editUser(user)"
+                (click)="openEditUserModal(user)"
               ></button>
               <button
                 class="pi pi-trash text-xl text-red-400 hover:text-red-300 transition duration-150 ease-in-out"
                 (click)="deleteUser(user.user_id)"
               ></button>
+              @if(editUserModalIsOpen){
+                <app-user-details-modal [user]="this.selected_User" (close)="closeEditUserModal()"></app-user-details-modal>
+              }
             </td>
           </tr>
         }

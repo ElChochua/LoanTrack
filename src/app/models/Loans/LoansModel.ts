@@ -26,10 +26,19 @@ export interface LoanApply{
 }
 export interface UserCredits{
     credit_ID: number;
-    User_ID:number,
+    user_ID:number,
     organization_ID:number,
     credit_score:number,
     credit_limit:number,
-    credit_available:number,
+    available_credit:number,
     updated_at:string
+}
+export interface Transaction{
+    transaction_ID: number;
+    loan_ID: number;
+    user_ID: number;
+    transaction_type: string;
+    amount: number;
+    issued_at: string;
+    description: string;
 }

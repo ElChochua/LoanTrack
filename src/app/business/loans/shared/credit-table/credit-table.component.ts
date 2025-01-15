@@ -16,6 +16,7 @@ export class CreditTableComponent {
     }
     ngOnInit(): void {
         this.loadcredits();
+        console.log(this.userCredits.forEach(credit => {credit.available_credit}));
     }
     loadcredits():void{
         this.loanService.getAllCreditsByUser(this.authService.getUserId()).subscribe({

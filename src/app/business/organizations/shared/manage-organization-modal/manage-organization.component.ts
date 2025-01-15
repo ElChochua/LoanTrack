@@ -87,11 +87,11 @@ export class OrganizationMembersModalComponent implements OnInit{
 
 
   onClose() {
-    this.closeModal.emit();
-    this.members = []; // Limpiar lista antes de asignar
-    this.filteredMembers = []; // Limpiar lista antes de asignar
-    this.potentialMembers = []; // Limpiar lista antes de asignar
-    this.filteredPotentialMembers = []; // Limpiar lista antes
+      this.members = []; // Limpiar lista antes de asignar
+      this.filteredMembers = []; // Limpiar lista antes de asignar
+      this.potentialMembers = []; // Limpiar lista antes de asignar
+      this.filteredPotentialMembers = []; // Limpiar lista antes
+      this.closeModal.emit();
   }
 
   updateMemberRole(member:OrganizationMembers, role:string) {
@@ -102,7 +102,7 @@ export class OrganizationMembersModalComponent implements OnInit{
             this.toast.success('Rol Actualizado Correctamente');
         },
         error: (err) => {
-            this.toast.error('Error al actualizar rol');
+            this.toast.error('Error al actualizar rol ',err);
         }
     });
 

@@ -83,11 +83,11 @@ export class OrganizationsDetailsTableComponent implements OnInit{
     this.organizationsService.createOrganization(organization).subscribe({
       next: (response) => {
         this.loadOrganizationsByRole();
-        this.toastService.success('Organization created successfully ' + response);
+        this.toastService.success('Organizacion Creada correctamente ' + response);
       },
       error: (err) => {
         console.error(err);
-        this.toastService.error('Organization creation failed' + err);
+        this.toastService.error('Hubo un error al crear la organizacion' + err);
       }
     });
   }
@@ -95,11 +95,11 @@ export class OrganizationsDetailsTableComponent implements OnInit{
     this.organizationsService.updateOrganizationStatus(organization_id, organization_status).subscribe({
       next: (response) => {
         this.loadOrganizationsByRole();
-        this.toastService.success('Organization status updated successfully');
+        this.toastService.success('Se ha actualizado el estado exitosamente');
       },
       error: (err) => {
         console.error(err);
-        this.toastService.error('Organization status update failed');
+        this.toastService.error('No se ha actualizar el estado');
       }
     });
   }
@@ -107,15 +107,18 @@ export class OrganizationsDetailsTableComponent implements OnInit{
     this.createOrganizationModalIsOpen = true;
   }
   closeCreateOrganizationModal(){
-    this.manageOrganizationModalIsOpen = false;
+    this.createOrganizationModalIsOpen = false;
   }
   closeManageOrganizationModal(){
-    this.createOrganizationModalIsOpen = false;
+    this.manageOrganizationModalIsOpen = false;
+    console.log("Cosa 2 ", this.manageOrganizationModalIsOpen);
     this.selectedOrganization = 0;
+
   }
   openManageOrganizationModal(organization_id:number){
     this.selectedOrganization = organization_id;
     this.manageOrganizationModalIsOpen = true;
+    console.log("Cosa ", this.manageOrganizationModalIsOpen);
   }
   removeOrganization(organization_id:number){
     console.log(organization_id);

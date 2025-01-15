@@ -31,17 +31,19 @@ export class LoginComponent {
         email: this.logInForm.get('email')?.value,
         password: this.logInForm.get('password')?.value
       };
-      this.toastService.success('Login successful','Successful login',
-        {
-          closeButton: true,
-          timeOut: 3000,
-          progressBar: true,
-          progressAnimation: 'decreasing',
-          positionClass: "toast-bottom-right"
-        }
-      );
+
       this.authService.login(userCreds).subscribe((response => {
         this.router.navigate(['/dashboard']);
+        this.toastService.success('Login successful','Successful login',
+          {
+            closeButton: true,
+            timeOut: 3000,
+            progressBar: true,
+            progressAnimation: 'decreasing',
+            positionClass: "toast-bottom-right"
+          }
+        );
+        console.log("Respuesta: ",response);
       }));
     }else{
       console.log('Form is invalid');

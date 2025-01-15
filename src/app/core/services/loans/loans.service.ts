@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, Observer, tap } from 'rxjs';
 import { LoanApply, Loans, UserCredits } from '../../../models/Loans/LoansModel';
 import { UserCreds } from '../../../models/Users/UserModel';
+import { PaymentDto } from '../../../models/loan_payment/Payment';
 @Injectable({
   providedIn: 'root'
 })
@@ -53,6 +54,13 @@ export class LoansService {
       )
     );
   }
+  getAllActiveLoans():Observable<Loans[]>{
+    return this.httpClient.get<Loans[]>(`${this.api_url}get-all-active-loans/`).pipe(
+      tap(
+         response => {console.log(response)}
+      )
+    );
+  }
   getAllActiveLoansByMember():Observable<Loans[]>{
     return this.httpClient.get<Loans[]>(`${this.api_url}get-all-active-loans-by-member/${this.authService.getUserId()}`).pipe(
       tap(
@@ -93,6 +101,13 @@ export class LoansService {
       tap(
          response => {console.log(response)}
         ),
+    );
+  }
+  makePayment(payment:PaymentDto):Observable<any>{
+    return this.httpClient.post<any>(`${this.api_url}make-payment/`,payment).pipe(
+      tap(
+         response => {console.log(response)}
+      )
     );
   }
 }

@@ -24,6 +24,6 @@ export interface User{
 }
 export interface UserRegister{
     email: string;
-    user: string;
+    username: string;
     password: string;
 }

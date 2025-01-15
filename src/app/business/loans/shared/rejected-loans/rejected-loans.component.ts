@@ -25,7 +25,7 @@ export default class RejectedLoansComponent{
 
         }else if(this.user_role === 'Client'){
         }else if(this.user_role === 'User'){
-            this.loansService.getAllActiveLoansByMember().subscribe({
+            this.loansService.getAllRejectedLoansByMember().subscribe({
                 next: (loans) => {
                     this.loans = loans;
                 },

@@ -4,6 +4,8 @@ import { OrganizationDetailsModel } from '../../../../models/Organizations/Organ
 import { AuthService } from '../../../../core/services/auth/auth.service';
 import { OrganizationsService } from '../../../../core/services/organizations-service/organizations.service';
 import { LoanApply, Loans } from '../../../../models/Loans/LoansModel';
+import { ToastrService } from 'ngx-toastr';
+
 
 
 
@@ -20,7 +22,7 @@ export class LoanDetailsFormModalComponent {
 
   loanForm: FormGroup;
   currencies = ['USD', 'EUR', 'GBP', 'MXN'];
-  constructor(private fb: FormBuilder, private authService: AuthService, private organizationService: OrganizationsService) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private organizationService: OrganizationsService, toadService: ToastrService) {
     this.loanForm = this.fb.group({
       organization_id: ['', Validators.required],
       loan_applicant_id: this.authService.getUserId(),
@@ -37,11 +39,12 @@ export class LoanDetailsFormModalComponent {
     this.closeModal.emit();
   }
 
-  onSubmit() {
+ async onSubmit() {
     if (this.loanForm.valid) {
       this.submitLoanDetails.emit(this.loanForm.value);
-      console.log(this.loanForm.value);
       this.onClose();
+      await new Promise (resolve => setTimeout(resolve, 2000));
+      window.location.reload();
     }
   }
 }

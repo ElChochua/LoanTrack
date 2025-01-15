@@ -3,10 +3,11 @@ import { Router } from '@angular/router';
 import { UserService } from '../../../../../core/services/User/user.service';
 import { User, UserDetails } from '../../../../../models/Users/UserModel';
 import { FormsModule } from '@angular/forms';
+import { UserDetailsModalComponent } from '../user-details-modal/user-details-modal.component';
 @Component({
   selector: 'app-user-detail-table',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, UserDetailsModalComponent, UserDetailsModalComponent],
   templateUrl: './user-detail-table.component.html',
   styleUrl: './user-detail-table.component.css'
 })
@@ -17,6 +18,8 @@ export class UserDetailTableComponent implements OnChanges {
     @Output() delete = new EventEmitter<number>();
     search: string= '';
     filteredUsers: UserDetails[] = [];
+    editUserModalIsOpen: boolean = false;
+    selected_User: UserDetails = {} as UserDetails;
     ngOnChanges(changes: SimpleChanges): void {
       if(changes['users']){
         this.filteredUsers = this.users;
@@ -33,8 +36,13 @@ export class UserDetailTableComponent implements OnChanges {
       );
       }
     }
-    editUser(user: UserDetails): void {
-      this.edit.emit(user);
+    openEditUserModal(user:UserDetails): void {
+      this.selected_User = user;
+      this.editUserModalIsOpen = true;
+    }
+    closeEditUserModal(): void {
+      this.selected_User = {} as UserDetails;
+      this.editUserModalIsOpen = false;
     }
     deleteUser(id: number): void {
       this.delete.emit(id);

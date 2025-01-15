@@ -60,7 +60,8 @@
                       <div class="flex space-x-2">
                         <button  (click)="approveLoan(loan.loan_id)" class="pi pi-check  text-green-500 hover:text-green-400 text-2xl "></button>
                         <button  (click)="rejectLoan(loan.loan_id)" class="pi pi-times text-red-500 hover:text-red-400 text-2xl "></button>
-                        <button  class="pi pi-eye text-blue-500 hover:text-blue-400 text-2xl "></button>
+                        <button  (click)="openModal(loan)" class="pi pi-eye text-blue-500 hover:text-blue-400 text-2xl"></button>
+                        
                       </div>
                     </td>
                   }@else {
@@ -69,7 +70,11 @@
                         <button  (click)="openModal(loan)" class="pi pi-eye text-blue-500 hover:text-blue-400 text-2xl "></button>
                         @if(modalIsOpen){
                           <app-loan-details-modal [loan]="this.cosa" (closeModal)="closeModal()"></app-loan-details-modal>
-                        }                      
+                        }    
+                        @if(payModalIsOpen){
+                          <app-pay-modal [loan_id]="loan.loan_id" (closeModal)="closePayModal()"></app-pay-modal>
+                        }        
+        
                       </div>
                     </td>
                   }
@@ -143,15 +148,13 @@
                       @if(modalIsOpen){
                         <app-loan-details-modal [loan]="this.cosa" (closeModal)="closeModal()"></app-loan-details-modal>
                       }
+    
                     </div>
                   </td>
                 }@else {
                   <td class="px-4 py-2">
                     <div class="content-center align-middle">
-                      <button  (click)="openModal(loan)" class="pi pi-eye text-blue-500 hover:text-blue-400 text-2xl "></button>
-                      @if(modalIsOpen){
-                        <app-loan-details-modal [loan]="this.cosa" (closeModal)="closeModal()"></app-loan-details-modal>
-                      }                      
+                      <button  (click)="openModal(loan)" class="pi pi-eye text-blue-500 hover:text-blue-400 text-2xl "></button>               
                     </div>
                   </td>
                 }
@@ -225,10 +228,16 @@
                 <td class="px-4 py-2">{{loan.purpose}}</td>
                 <td class="px-4 py-2">
                   <div class="content-center align-middle">
-                    <button  (click)="openModal(loan)" class="pi pi-eye text-blue-500 hover:text-blue-400 text-2xl "></button>
+                    <button  (click)="openModal(loan)" class="pi pi-eye text-blue-500 hover:text-blue-400 text-2xl p-2 "></button>
+                    @if(loan.status === 'approved'){
+                      <button  (click)="openPayModal(loan.loan_id)" class="pi pi-dollar text-green-500 hover:text-green-400 text-2xl p-2 "></button>
+                    }
                     @if(modalIsOpen){
                       <app-loan-details-modal [loan]="this.cosa" (closeModal)="closeModal()"></app-loan-details-modal>
-                    }                      
+                    }         
+                    @if(payModalIsOpen){
+                      <app-pay-modal [loan_id]="this.selectedId" (onClose)="closePayModal()"></app-pay-modal>
+                    }
                   </div>
                 </td>
               </tr>

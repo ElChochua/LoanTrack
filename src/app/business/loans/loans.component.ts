@@ -9,19 +9,22 @@ import { LoansService } from '../../core/services/loans/loans.service';
 import { LoanDetailsModalComponent } from './shared/loan-info-modal/loan-modal.component';
 import { LoanDetailsFormModalComponent } from "./shared/request-loan-modal/request-modal.component";
 import { ToastService } from '../../core/services/toast.service';
+import { PayModalClass } from './shared/pay-modal/pay-modal.component';
 @Component({
   selector: 'app-loans',
   standalone: true,
-  imports: [LoanDetailsModalComponent, LoanDetailsFormModalComponent],
+  imports: [LoanDetailsModalComponent, LoanDetailsFormModalComponent,PayModalClass],
   templateUrl: './loans.component.html',
-  styleUrl: './loans.component.css'
 })
 export default class LoansComponent implements OnInit {
   user_role: string|null = null;
   organizations: OrganizationDetailsModel[] = [];
   loans:Loans[] = [];
   cosa: Loans = {} as Loans;
+  selectedId: number = 0;
+  organization_id: number = 0;
   modalIsOpen: boolean = false;
+  payModalIsOpen: boolean = false;
   requestModalIsOpen: boolean = false;
   constructor(private authService:AuthService, private organzizationService:OrganizationsService,private loanService:LoansService, 
     private userService:UserService, private toastService:ToastService) {
@@ -53,6 +56,16 @@ export default class LoansComponent implements OnInit {
       this.organzizationService.getAllOrganizationsByOwner(this.authService.getUserId()).subscribe({
         next: (organizations) => {
           this.organizations = organizations;
+          this.organization_id = this.organizations[0].organization_id;
+          this.loanService.getLoansByOrganizationId(this.organization_id).subscribe({
+            next: (loans) => {
+              this.loans = loans;
+              console.log("cosa ",this.loans);
+            },
+            error: (err) => {
+              console.error(err);
+            }
+          });
         },
         error: (err) => {
           console.error(err);
@@ -69,7 +82,7 @@ export default class LoansComponent implements OnInit {
       });
       this.loanService.getLoansByApplicantId(this.authService.getUserId()).subscribe({
         next: (loans) => {
-          this.loans = loans;
+          this.loans = loans;          
         }
       });
     }
@@ -78,6 +91,7 @@ export default class LoansComponent implements OnInit {
     this.loanService.approveLoan(loan_id).subscribe({
       next: (response) => {
         this.toastService.success('Se ha aprobado el préstamo');
+        window.location.reload();
       },
       error: (err) => {
         this.toastService.error('No se ha podido aprobar el préstamo' + err);
@@ -92,9 +106,11 @@ export default class LoansComponent implements OnInit {
    this.loanService.loanApply(loan).subscribe({
       next: (response) => {
         this.toastService.success('Se ha solicitado el préstamo con exito');
+        console.log(response);
       },
       error: (err) => {
         this.toastService.error('No se ha podido solicitar el préstamo' + err);
+        console.log(err);
       }
    });
   }
@@ -103,6 +119,7 @@ export default class LoansComponent implements OnInit {
     this.loanService.rejectLoan(loan_id).subscribe({
       next: (response) => {
         this.toastService.success('Se ha rechazado el préstamo');
+        window.location.reload();
       },
       error: (err) => {
         this.toastService.error('No se ha podido rechazar el préstamo' + err);
@@ -114,8 +131,14 @@ export default class LoansComponent implements OnInit {
     console.log(this.cosa);
     this.modalIsOpen = true;
   }
+  closePayModal():void{
+    this.payModalIsOpen = false;
+  }
+  openPayModal(selected:number):void{
+    this.selectedId = selected;
+    this.payModalIsOpen = true;
+  }
   closeModal():void{
-    this.cosa = {} as Loans;
     this.modalIsOpen = false;
   }
   openRequestModal():void{

@@ -26,10 +26,11 @@ export default class RegisterComponent {
     if(this.registerForm.valid){
        const registerDto:UserRegister = {
         email: this.registerForm.get('email')?.value,
-        user: this.registerForm.get('username')?.value,
+        username: this.registerForm.get('username')?.value,
         password: this.registerForm.get('password')?.value
       }
       this.auth.register(registerDto).subscribe((response) => {
+        console.log('User registered', response, registerDto);
         this.router.navigate(['/login']);
       });
     }else{
