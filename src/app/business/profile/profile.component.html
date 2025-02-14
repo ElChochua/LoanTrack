@@ -1,84 +1,72 @@
-<div class="container mx-auto px-4 py-8 bg-[#0A1627] text-white min-h-screen">
-  <h1 class="text-3xl font-bold mb-6">Perfil de Usuario</h1>
-
-  <div class="bg-[#1E293B] rounded-lg p-6 shadow-lg">
-    <form  class="space-y-6">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <label for="firstName" class="block text-sm font-medium mb-2">Nombre</label>
-          <input type="text" id="firstName" formControlName="firstName" 
-                 class="w-full px-3 py-2 rounded text-white transition-colors duration-200"
-                ><!--  -->
+<div class="min-h-screen bg-gray-100 py-6 flex flex-col justify-start sm:py-20">
+  <div class="relative py-3 sm:max-w-xl sm:mx-auto">
+    <div class="absolute inset-0 bg-gradient-to-r from-blue-400 to-blue-600 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
+    <div class="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
+      <div class="max-w-md mx-auto">
+        <div class="flex justify-between items-center mb-6">
+          <h1 class="text-2xl font-semibold">Perfil de Usuario</h1>
+          @if(userProfile.name == null){
+            <button (click)="toggleEditMode()" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-300">
+              {{ editMode ? 'Cancelar' : 'Editar' }}
+            </button>
+          }
         </div>
-        <div>
-          <label for="lastName" class="block text-sm font-medium mb-2">Apellido</label>
-          <input type="text" id="lastName" formControlName="lastName" 
-                 class="w-full px-3 py-2 rounded text-white transition-colors duration-200"><!--  -->
-
-                </div>
-        <div>
-          <label for="email" class="block text-sm font-medium mb-2">Correo Electrónico</label>
-          <input type="email" id="email" formControlName="email" 
-                 class="w-full px-3 py-2 rounded text-white transition-colors duration-200"
-                 >
-        </div>
-        <div>
-          <label for="phoneNumber" class="block text-sm font-medium mb-2">Número de Teléfono</label>
-          <input type="tel" id="phoneNumber" formControlName="phoneNumber" 
-                 class="w-full px-3 py-2 rounded text-white transition-colors duration-200"
-                 >
-        </div>
-        <div>
-          <label for="dateOfBirth" class="block text-sm font-medium mb-2">Fecha de Nacimiento</label>
-          <input type="date" id="dateOfBirth" formControlName="dateOfBirth" 
-                 class="w-full px-3 py-2 rounded text-white transition-colors duration-200"
-                 >
-        </div>
-        <div>
-          <label for="address" class="block text-sm font-medium mb-2">Dirección</label>
-          <input type="text" id="address" formControlName="address" 
-                 class="w-full px-3 py-2 rounded text-white transition-colors duration-200"
-                  >
-        </div>
-        <div>
-          <label for="city" class="block text-sm font-medium mb-2">Ciudad</label>
-          <input type="text" id="city" formControlName="city" 
-                 class="w-full px-3 py-2 rounded text-white transition-colors duration-200"
-                  >
-        </div>
-        <div>
-          <label for="country" class="block text-sm font-medium mb-2">País</label>
-          <input type="text" id="country" formControlName="country" 
-                 class="w-full px-3 py-2 rounded text-white transition-colors duration-200"
-                  >
-        </div>
-        <div>
-          <label for="occupation" class="block text-sm font-medium mb-2">Ocupación</label>
-          <input type="text" id="occupation" formControlName="occupation" 
-                 class="w-full px-3 py-2 rounded text-white transition-colors duration-200"
-                  >
-        </div>
-        <div>
-          <label for="annualIncome" class="block text-sm font-medium mb-2">Ingreso Anual</label>
-          <input type="number" id="annualIncome" formControlName="annualIncome" 
-                 class="w-full px-3 py-2 rounded text-white transition-colors duration-200"
-                  >
-        </div>
+        @if (!editMode) {
+          <div class="divide-y divide-gray-200">
+            <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4">
+              <dt class="text-sm font-medium text-gray-500">Nombre</dt>
+              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ userProfile.name }}</dd>
+            </div>
+            <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4">
+              <dt class="text-sm font-medium text-gray-500">Apellido</dt>
+              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ userProfile.last_name }}</dd>
+            </div>
+            <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4">
+              <dt class="text-sm font-medium text-gray-500">Fecha de Nacimiento</dt>
+              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ userProfile.birthdate| date:'dd/MM/yyyy' }}</dd>
+            </div>
+            <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4">
+              <dt class="text-sm font-medium text-gray-500">CURP</dt>
+              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ userProfile.curp }}</dd>
+            </div>
+            <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4">
+              <dt class="text-sm font-medium text-gray-500">Número de Teléfono</dt>
+              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ userProfile.phone_number }}</dd>
+            </div>
+            <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4">
+              <dt class="text-sm font-medium text-gray-500">Fecha de Registro</dt>
+              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ userProfile.created_at | date:'dd/MM/yyyy HH:mm' }}</dd>
+            </div>
+          </div>
+        } @else {
+          <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="space-y-4">
+            <div>
+              <label for="firstName" class="block text-sm font-medium text-gray-700">Nombre</label>
+              <input type="text" id="firstName" formControlName="name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+            </div>
+            <div>
+              <label for="lastName" class="block text-sm font-medium text-gray-700">Apellido</label>
+              <input type="text" id="lastName" formControlName="last_name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+            </div>
+            <div>
+              <label for="dateOfBirth" class="block text-sm font-medium text-gray-700">Fecha de Nacimiento</label>
+              <input type="date" id="dateOfBirth" formControlName="birthdate" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+            </div>
+            <div>
+              <label for="curp" class="block text-sm font-medium text-gray-700">CURP</label>
+              <input type="text" id="curp" formControlName="curp" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+            </div>
+            <div>
+              <label for="phoneNumber" class="block text-sm font-medium text-gray-700">Número de Teléfono</label>
+              <input type="tel" id="phoneNumber" formControlName="phone_number" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+            </div>
+            <div class="flex justify-end space-x-3">
+              <button type="button" (click)="toggleEditMode()" class="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 transition duration-300">Cancelar</button>
+              <button type="submit" [disabled]="!profileForm.valid" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-300 disabled:opacity-50">Guardar Cambios</button>
+            </div>
+          </form>
+        }
       </div>
-
-      <div class="flex justify-end space-x-4">
-        <button type="button"  
-                class="px-4 py-2 rounded transition duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#1E293B] focus:ring-blue-500"
-                >
-                <!-- [ngClass]="{'bg-blue-500 hover:bg-blue-600 text-white': !isEditMode, 'bg-gray-500 hover:bg-gray-600 text-white': isEditMode}" -->
-          Editar/Cancelar
-        </button>
-        <button type="submit" >
-          Guardar Cambios <!--*ngIf="isEditMode"
-          class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#1E293B] focus:ring-green-500"
-          [disabled]="!userProfileForm.valid"-->
-        </button>
-      </div>
-    </form>
+    </div>
   </div>
 </div>

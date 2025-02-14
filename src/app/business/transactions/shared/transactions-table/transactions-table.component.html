@@ -1,32 +1,32 @@
 <div class="relative overflow-x-auto max-w-full">
-    @if(loans.length <= 0){
-    <p class="text-center text-gray-400">No se encontraron prestamos</p>
+    @if(transactions.length <= 0){
+    <p class="text-center text-gray-400">No se encontraron transacciones</p>
     }@else {
         <div class="max-h-64 overflow-y-auto">
         <table class="w-full table-auto text-xs text-left text-gray-500 dark:text-gray-400 overflow-scroll">
             <thead class="text-xs text-gray-900 uppercase dark:text-gray-400">
                 <tr>
-                      <th class="px-6 py-3">ID</th>
-                      <th class="px-6 py-3">Organizacion</th>
-                      <th class="px-6 py-3">Fecha</th>
+                      <th class="px-6 py-3">ID de Transaccion</th>
+                      <th class="px-6 py-3">Descripcion</th>
+                      <th class="px-6 py-3">Tipo</th>
                       <th class="px-6 py-3">Monto</th>
                 </tr>
             </thead>
             <tbody>
-                @for(loan of loans; track $index){
+                @for(transaction of transactions; track $index){
                     <tr class="bg-white text-black">
                       
                         <td class="px-6 py-4">
-                            {{ loan.loan_id }}
+                            {{ transaction.transaction_ID }}
                         </td >
                         <td class="px-6 py-4">
-                          {{ loan.organization_id }}
+                          {{ transaction.transaction_description }}
                         </td>
                         <td class="px-6 py-4">
-                          {{ loan.issued_at }}
+                          {{ transaction.transaction_type }}
                         </td>
                         <td class="px-6 py-4">
-                          ${{ loan.amount }}.00
+                          ${{ transaction.amount}}.00
                         </td>
                     </tr>
                 }

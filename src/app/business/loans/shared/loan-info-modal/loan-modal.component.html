@@ -2,70 +2,104 @@
     <div class="bg-[#1E293B] rounded-lg p-6 w-full max-w-md">
       <div class="flex justify-between items-center mb-4">
         <h2 class="text-2xl font-bold text-white">Detalles del Préstamo</h2>
+        @if (userRole !== 'User' && loan.status === 'pending') {
+          <button (click)="toggleEditMode()" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-300">
+            {{ editMode ? 'Cancelar' : 'Editar' }}
+          </button>
+        }
         <button (click)="onClose()" class="text-gray-400 hover:text-white">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
       </div>
-      <div class="space-y-4">
-        <div class="grid grid-cols-2 gap-4">
-          <div>
-            <p class="text-gray-400">ID del Préstamo</p>
-            <p class="text-white font-medium">{{loan.loan_id}}</p>
+      @if (!editMode) {
+        <div class="space-y-4">
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <p class="text-gray-400">ID del Préstamo</p>
+              <p class="text-white font-medium">{{loan.loan_id}}</p>
+            </div>
+            <div>
+              <p class="text-gray-400">ID de la Organización</p>
+              <p class="text-white font-medium">{{loan.organization_id}}</p>
+            </div>
+            <div>
+              <p class="text-gray-400">ID del Solicitante</p>
+              <p class="text-white font-medium">{{loan.loan_applicant_id}}</p>
+            </div>
+            <div>
+              <p class="text-gray-400">Monto</p>
+              <p class="text-white font-medium">{{loan.amount}}</p>
+            </div>
+            <div>
+              <p class="text-gray-400">Tasa de Interés</p>
+              <p class="text-white font-medium">{{loan.interest_rate}}%</p>
+            </div>
+            <div>
+              <p class="text-gray-400">Plazo</p>
+              <p class="text-white font-medium">{{loan.term_value}} {{loan.term_unit}}</p>
+            </div>
+            <div>
+              <p class="text-gray-400">Estado</p>
+              <p class="text-white font-medium">{{loan.status}}</p>
+            </div>
+            <div>
+              <p class="text-gray-400">Fecha de Emisión</p>
+              <p class="text-white font-medium">{{loan.issued_at }}</p>
+            </div>
+            <div>
+              <p class="text-gray-400">Fecha de Vencimiento</p>
+              <p class="text-white font-medium">{{loan.due_at }}</p>
+            </div>
+            @if(loan.approved_at){
+                <div>
+                  <p class="text-gray-400">Fecha de Aprobación</p>
+                  <p class="text-white font-medium">{{loan.approved_at }}</p>
+                </div>
+            }
           </div>
           <div>
-            <p class="text-gray-400">ID de la Organización</p>
-            <p class="text-white font-medium">{{loan.organization_id}}</p>
+            <p class="text-gray-400">Propósito</p>
+            <p class="text-white font-medium">{{loan.purpose}}</p>
           </div>
           <div>
-            <p class="text-gray-400">ID del Solicitante</p>
-            <p class="text-white font-medium">{{loan.loan_applicant_id}}</p>
+            <p class="text-gray-400">Monto Total a Pagar</p>
+            <p class="text-white font-medium">{{loan.total_amount_due}}</p>
+          </div>
+        </div>
+        <div class="mt-6">
+          <button (click)="onClose()" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+            Cerrar
+          </button>
+        </div>
+      }@else{
+        <form [formGroup]="loanForm" (ngSubmit)="onSubmit()" class="space-y-4">
+          <div>
+            <label for="amount" class="block text-sm font-medium text-gray-400">Monto</label>
+            <input type="number" id="amount" formControlName="amount" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
           </div>
           <div>
-            <p class="text-gray-400">Monto</p>
-            <p class="text-white font-medium">{{loan.amount}}</p>
+            <label for="interestRate" class="block text-sm font-medium text-gray-400">Tasa de Interés</label>
+            <input type="number" id="interestRate" formControlName="interest_rate" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
           </div>
           <div>
-            <p class="text-gray-400">Tasa de Interés</p>
-            <p class="text-white font-medium">{{loan.interest_rate}}%</p>
+            <label for="termValue" class="block text-sm font-medium text-gray-400">Plazo</label>
+            <input type="number" id="termValue" formControlName="term_value" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
           </div>
           <div>
-            <p class="text-gray-400">Plazo</p>
-            <p class="text-white font-medium">{{loan.term_value}} {{loan.term_unit}}</p>
+            <label for="termUnit" class="block text-sm font-medium text-gray-400">Unidad de Plazo</label>
+            <select id="termUnit" formControlName="term_unit" class="mt-1 block">
+              <option value="day">Días</option>
+              <option value="month">Meses</option>
+              <option value="year">Años</option>
+            </select>
           </div>
-          <div>
-            <p class="text-gray-400">Estado</p>
-            <p class="text-white font-medium">{{loan.status}}</p>
+        <!--Submit Button-->
+          <div class="flex justify-end space-x-3">
+            <button type="button" (click)="toggleEditMode()" class="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 transition duration-300">Cancelar</button>
+            <button type="submit" [disabled]="!loanForm.valid" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-300 disabled:opacity-50">Guardar Cambios</button>
           </div>
-          <div>
-            <p class="text-gray-400">Fecha de Emisión</p>
-            <p class="text-white font-medium">{{loan.issued_at }}</p>
-          </div>
-          <div>
-            <p class="text-gray-400">Fecha de Vencimiento</p>
-            <p class="text-white font-medium">{{loan.due_at }}</p>
-          </div>
-          @if(loan.approved_at){
-              <div>
-                <p class="text-gray-400">Fecha de Aprobación</p>
-                <p class="text-white font-medium">{{loan.approved_at }}</p>
-              </div>
+        </form>
           }
-        </div>
-        <div>
-          <p class="text-gray-400">Propósito</p>
-          <p class="text-white font-medium">{{loan.purpose}}</p>
-        </div>
-        <div>
-          <p class="text-gray-400">Monto Total a Pagar</p>
-          <p class="text-white font-medium">{{loan.total_amount_due}}</p>
-        </div>
-      </div>
-      <div class="mt-6">
-        <button (click)="onClose()" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-          Cerrar
-        </button>
-      </div>
-    </div>
   </div>

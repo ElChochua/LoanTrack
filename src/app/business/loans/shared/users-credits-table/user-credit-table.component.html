@@ -1,0 +1,29 @@
+<div class="relative overflow-x-auto max-w-full">
+    @if(user_credits.length <= 0){
+      <p class="text-center text-gray-400">No se encontraron créditos</p>
+    } @else {
+      <div class="max-h-64 overflow-y-auto">
+        <table class="w-full table-auto text-xs text-left text-gray-500 dark:text-gray-400">
+          <thead class="text-xs text-gray-900 uppercase dark:text-gray-400">
+            <tr>
+              <th class="px-6 py-3">User ID</th>
+              <th class="px-6 py-3">Organización</th>
+              <th class="px-6 py-3">Crédito Disponible</th>
+              <th class="px-6 py-3">Última Actualización</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for(credit of user_credits; track $index){
+              <tr class="bg-white text-black">
+                <td class="px-6 py-4">{{ credit.user_ID }}</td>
+                <td class="px-6 py-4">{{ credit.organization_ID }}</td>
+                <td class="px-6 py-4">{{ credit.available_credit }}</td>
+                <td class="px-6 py-4">{{ credit.updated_at }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+  </div>
+  

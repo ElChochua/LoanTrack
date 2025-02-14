@@ -12,7 +12,7 @@ export class UserDetailsModalComponent {
     @Output() closeModal = new EventEmitter<void>();
     constructor() {
     }
-    onClose() {
+    onClose():void {
         this.closeModal.emit();
     }
 }

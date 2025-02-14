@@ -15,7 +15,12 @@
             <app-users-table [headers]="headers" [users]="users"></app-users-table>
           </div>
         }@else if(userRole === 'User') {
+          <h2 class=" text-lg font-semibold pb-1">Mis Prestamos</h2>
+          <div class="bg-gradient-to-r from-cyan-300 to-cyan-500 h-px mb-6"></div>
           <app-loans-table [loans]="loans"></app-loans-table>
+        }@else if(userRole === 'Client'){
+          <h2 class=" text-lg font-semibold pb-1">Transacciones de la Organizacion</h2>
+          <app-transactions-table></app-transactions-table>
         }
       </div>
 
@@ -27,46 +32,36 @@
       </div>
 
       <div class="bg-white p-4 rounded-md">
-        <h2 class=" text-lg font-semibold pb-1">Usuarios Pendientes</h2>
-        <div class="bg-gradient-to-r from-cyan-300 to-cyan-500 h-px mb-6"></div>
-        <app-unassigned-users></app-unassigned-users>
+        @if(userRole === 'SUPER_ADMIN'){
+          <h2 class=" text-lg font-semibold pb-1">Usuarios Pendientes</h2>
+          <div class="bg-gradient-to-r from-cyan-300 to-cyan-500 h-px mb-6"></div>
+          <app-unassigned-users></app-unassigned-users>
+        }@else if(userRole === 'User') { 
+          <h2 class=" text-lg font-semibold pb-1">Mis Transacciones</h2>
+          <div class="bg-gradient-to-r from-cyan-300 to-cyan-500 h-px mb-6"></div>
+          <app-transactions-table></app-transactions-table>
+        }@else if(userRole === 'Client'){
+          <h2 class=" text-lg font-semibold pb-1">Mis Prestamos</h2>
+          <div class="bg-gradient-to-r from-cyan-300 to-cyan-500 h-px mb-6"></div>
+          <app-loans-table [loans]="loans"></app-loans-table>
+        }
       </div>
 
       <!-- Sección 4: Transacciones -->
       <div class="bg-white p-4 rounded-md">
-        <h2 class="  text-lg font-semibold pb-1">Credito del usuario</h2>
-        <div class="bg-gradient-to-r from-cyan-300 to-cyan-500 h-px mb-6"></div>
-        @if(userRole === 'User'){
-          <app-credit-table></app-credit-table>
-        }@else {
-            <div class="relative overflow-x-auto">
-            <table class="w-full table-auto text-sm">
-              <thead>
-                <tr>
-                  <th class="py-2 px-4 font-bold uppercase text-left">Nombre</th>
-                  <th class="py-2 px-4 font-bold uppercase text-left">Fecha</th>
-                  <th class="py-2 px-4 font-bold uppercase text-right">Monto</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="hover:bg-gray-100">
-                  <td class="py-2 px-4 border-b border-gray-300">Carlos Sánchez</td>
-                  <td class="py-2 px-4 border-b border-gray-300">27/07/2023</td>
-                  <td class="py-2 px-4 border-b border-gray-300 text-right">$1500</td>
-                </tr>
-                <tr class="hover:bg-gray-100">
-                  <td class="py-2 px-4 border-b border-gray-300">Ana Torres</td>
-                  <td class="py-2 px-4 border-b border-gray-300">28/07/2023</td>
-                  <td class="py-2 px-4 border-b border-gray-300 text-right">$2000</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="text-right mt-4">
-            <button class="bg-cyan-500 hover:bg-cyan-600 text-white font-semibold py-2 px-4 rounded">
-              Ver más
-            </button>
-          </div>
+        @if(userRole === 'Client'){
+          <h2 class="  text-lg font-semibold pb-1">Credito de usuarios</h2>
+          <div class="bg-gradient-to-r from-cyan-300 to-cyan-500 h-px mb-6"></div>
+          <app-user-credit-table></app-user-credit-table>
+
+        }@else if(userRole === 'SUPER_ADMIN'){
+          <h2 class=" text-lg font-semibold pb-1">Transacciones</h2>
+          <div class="bg-gradient-to-r from-cyan-300 to-cyan-500 h-px mb-6"></div>
+          <app-transactions-table></app-transactions-table>
+        }@else if(userRole === 'User'){
+          <h2 class=" text-lg font-semibold pb-1">Mis Creditos</h2>
+          <div class="bg-gradient-to-r from-cyan-300 to-cyan-500 h-px mb-6"></div>
+          <app-user-credit-table></app-user-credit-table>
         }
       </div>
     </div>

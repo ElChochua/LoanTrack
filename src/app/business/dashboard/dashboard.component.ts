@@ -14,13 +14,16 @@ import { LoansService } from '../../core/services/loans/loans.service';
 import { Loans } from '../../models/Loans/LoansModel';
 import { LoansTableComponent } from '../loans/shared/loans-table/loans-table.component';
 import { CreditTableComponent } from '../loans/shared/credit-table/credit-table.component';
+import { UserCreditsComponent } from '../loans/shared/users-credits-table/user-credit-table.component';
+import { TransactionsTable } from '../transactions/shared/transactions-table/transactions-table.component';
+import { OrganizationsService } from '../../core/services/organizations-service/organizations.service';
+
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   imports: [CommonModule,UnassignedUsersComponent, OrganizationsTableComponent,
-            UsersTableComponent, SpinnerComponent, LoansTableComponent, CreditTableComponent],
+            UsersTableComponent, SpinnerComponent, LoansTableComponent, CreditTableComponent, UserCreditsComponent,TransactionsTable],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css'
 })
 export default class DashboardComponent implements OnInit {
   userRole: string |null = null;
@@ -31,7 +34,8 @@ export default class DashboardComponent implements OnInit {
   constructor(private auth: AuthService, private router: Router,
               private usersService: UserService,
               public spinner:SpinnerService,
-              private loanService:LoansService
+              private loanService:LoansService,
+              private organizaionService:OrganizationsService
   ) {
   }
   ngOnInit(): void {
@@ -43,6 +47,8 @@ export default class DashboardComponent implements OnInit {
       this.loadUsers();      
       }else if(this.userRole === 'User'){
         this.loadLoansByUser(this.auth.getUserId());
+      }else if(this.userRole === 'Client'){
+        this.loadLoansByOrganization();
       }
   }
   loadUsers(): void {
@@ -54,6 +60,23 @@ export default class DashboardComponent implements OnInit {
     this.loanService.getLoansByApplicantId(id).subscribe({
       next: (loans) => {
         this.loans = loans;
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    });
+  }
+  loadLoansByOrganization(): void {
+    this.organizaionService.getOrganizationByOwner(this.auth.getUserId()).subscribe({
+      next: (organization) => {
+        this.loanService.getLoansByOrganizationId(organization[0].organization_id).subscribe({
+          next: (loans) => {
+            this.loans = loans;
+          },
+          error: (err) => {
+            console.error(err);
+          }
+        });
       },
       error: (err) => {
         console.error(err);

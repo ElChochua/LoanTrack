@@ -11,7 +11,6 @@ import { OrganizationMembersModalComponent } from '../../manage-organization-mod
   standalone: true,
   imports: [FormsModule, CreateOrganizationComponent, OrganizationMembersModalComponent],
   templateUrl: './organizations-details-table.component.html',
-  styleUrl: './organizations-details-table.component.css'
 })
 export class OrganizationsDetailsTableComponent implements OnInit{
   organizations: OrganizationDetailsModel[] = [];

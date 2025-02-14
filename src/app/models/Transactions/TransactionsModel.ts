@@ -5,6 +5,5 @@ export interface Transactions{
     amount: number;
     transaction_type: string;
     issued_at: string;
-    transaction_status: string;
     transaction_description: string;
 }

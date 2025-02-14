@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { afterNextRender, Component, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HeaderComponent } from '../../../shared/components/header/header.component';
 import { UserCreds } from "../../../models/Users/UserModel";
@@ -32,21 +32,34 @@ export class LoginComponent {
         password: this.logInForm.get('password')?.value
       };
 
-      this.authService.login(userCreds).subscribe((response => {
-        this.router.navigate(['/dashboard']);
-        this.toastService.success('Login successful','Successful login',
-          {
-            closeButton: true,
-            timeOut: 3000,
-            progressBar: true,
-            progressAnimation: 'decreasing',
-            positionClass: "toast-bottom-right"
-          }
-        );
-        console.log("Respuesta: ",response);
-      }));
+      this.authService.login(userCreds).subscribe({
+        next: (response) => {
+          this.router.navigate(['/dashboard']);
+          this.toastService.success('Login Exitoso','Bienvenido',
+            {
+              closeButton: true,
+              timeOut: 3000,
+              progressBar: true,
+              progressAnimation: 'decreasing',
+              positionClass: "toast-bottom-right"
+            }
+          );          
+        },
+        error: (err) => {
+          this.toastService.error('No te has Podido Logear','Espera que el administrador te de acceso',
+            {
+              closeButton: true,
+              timeOut: 3000,
+              progressBar: true,
+              progressAnimation: 'decreasing',
+              positionClass: "toast-bottom-right"
+            }
+          );
+          console.error(err);
+        }
+      });
+      
     }else{
-      console.log('Form is invalid');
     }
   }
   resetForm():void{

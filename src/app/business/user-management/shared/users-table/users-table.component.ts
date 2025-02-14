@@ -1,13 +1,14 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../../../../core/services/User/user.service';
-import { User } from '../../../../models/Users/UserModel';
+import { FormsModule } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { User, UpdateUserRole } from '../../../../models/Users/UserModel';
 @Component({
   selector: 'app-users-table',
   standalone: true,
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './users-table.component.html',
-  styleUrl: './users-table.component.css'
 })
 export  class UsersTableComponent {
   @Input() headers: string[] = [];

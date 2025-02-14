@@ -15,6 +15,7 @@
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Organizacion</th>
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Solicitado</th>
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Monto</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Monto Pendiente</th>
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Interes</th>
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Propósito</th>
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Acciones</th>
@@ -53,6 +54,7 @@
                 <td class="px-4 py-2">{{getOrganizationNameById(loan.organization_id)}}</td>
                 <td class="px-4 py-2">{{loan.issued_at}}</td>
                 <td class="px-4 py-2">${{loan.amount}}.00</td>
+                <td class="px-4 py-2">${{loan.total_amount_due}}.00</td>
                 <td class="px-4 py-2">{{loan.interest_rate}}%</td>
                 <td class="px-4 py-2">{{loan.purpose}}</td>
                 @if(loan.status === 'pending'){
@@ -60,22 +62,20 @@
                       <div class="flex space-x-2">
                         <button  (click)="approveLoan(loan.loan_id)" class="pi pi-check  text-green-500 hover:text-green-400 text-2xl "></button>
                         <button  (click)="rejectLoan(loan.loan_id)" class="pi pi-times text-red-500 hover:text-red-400 text-2xl "></button>
-                        <button  (click)="openModal(loan)" class="pi pi-eye text-blue-500 hover:text-blue-400 text-2xl"></button>
-                        
+                        <button  (click)="openModal(loan)" class="pi pi-eye text-blue-500 hover:text-blue-400 text-2xl p-2 "></button>
+                        @if(modalIsOpen){
+                          <app-loan-details-modal [loan]="this.cosa" [userRole]="this.user_role" (closeModal)="closeModal()"></app-loan-details-modal>
+                        }             
                       </div>
                     </td>
                   }@else {
                     <td class="px-4 py-2">
                       <div class="content-center align-middle">
-                        <button  (click)="openModal(loan)" class="pi pi-eye text-blue-500 hover:text-blue-400 text-2xl "></button>
-                        @if(modalIsOpen){
-                          <app-loan-details-modal [loan]="this.cosa" (closeModal)="closeModal()"></app-loan-details-modal>
-                        }    
-                        @if(payModalIsOpen){
-                          <app-pay-modal [loan_id]="loan.loan_id" (closeModal)="closePayModal()"></app-pay-modal>
-                        }        
-        
+                        <button  (click)="openModal(loan)" class="pi pi-eye text-blue-500 hover:text-blue-400 text-2xl p-2 "></button>
                       </div>
+                      @if(modalIsOpen){
+                        <app-loan-details-modal [loan]="this.cosa" [userRole]="this.user_role" (closeModal)="closeModal()"></app-loan-details-modal>
+                      }             
                     </td>
                   }
               </tr>
@@ -100,6 +100,7 @@
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Organizacion</th>
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Solicitado</th>
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Monto</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Monto Faltante</th>
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Interes</th>
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Propósito</th>
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Acciones</th>
@@ -114,7 +115,7 @@
                 @if(loan.status === 'approved'){
                   <td class="px-6 py-4 whitespace-nowrap uppercase">
                   <span class="active">
-                    {{loan.status}}
+                    Aprobado
                   </span>
                   </td>
                 } @else if(loan.status === 'declined'){
@@ -122,21 +123,22 @@
                     <span
                     class="inactive"
                   >
-                  {{loan.status}}
+                    Rechazado
                 </span>
                 </td>
-                }@else {
+                }@else if(loan.status === 'inactive'){
                   <td  class="px-6 py-4 whitespace-nowrap uppercase">
                     <span
                     class="pending"
                   >
-                  {{loan.status}}
-                  </span>
-                  </td>
+                    Inactivo
+                </span>
+                </td>
                 }
                 <td class="px-4 py-2">{{getOrganizationNameById(loan.organization_id)}}</td>
                 <td class="px-4 py-2">{{loan.issued_at}}</td>
                 <td class="px-4 py-2">${{loan.amount}}.00</td>
+                <td class="px-4 py-2">${{loan.total_amount_due}}.00</td>
                 <td class="px-4 py-2">{{loan.interest_rate}}%</td>
                 <td class="px-4 py-2">{{loan.purpose}}</td>
                 @if(loan.status === 'pending'){
@@ -146,7 +148,7 @@
                       <button  (click)="rejectLoan(loan.loan_id)" class="pi pi-times text-red-500 hover:text-red-400 text-2xl "></button>
                       <button  (click)="openModal(loan)" class="pi pi-eye text-blue-500 hover:text-blue-400 text-2xl"></button>
                       @if(modalIsOpen){
-                        <app-loan-details-modal [loan]="this.cosa" (closeModal)="closeModal()"></app-loan-details-modal>
+                        <app-loan-details-modal [loan]="this.cosa" [userRole]="this.user_role" (closeModal)="closeModal()"></app-loan-details-modal>
                       }
     
                     </div>
@@ -155,6 +157,9 @@
                   <td class="px-4 py-2">
                     <div class="content-center align-middle">
                       <button  (click)="openModal(loan)" class="pi pi-eye text-blue-500 hover:text-blue-400 text-2xl "></button>               
+                      @if(modalIsOpen){
+                        <app-loan-details-modal [loan]="this.cosa" [userRole]="this.user_role" (closeModal)="closeModal()"></app-loan-details-modal>
+                      }
                     </div>
                   </td>
                 }
@@ -186,7 +191,8 @@
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Estado</th>
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Organizacion</th>
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Solicitado</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Monto</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Monto Solicitado</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Monto a Pagar</th>
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Interes</th>
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Propósito</th>
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Acciones</th>
@@ -201,7 +207,7 @@
                 @if(loan.status === 'approved'){
                   <td class="px-4 py-2">
                   <span class="active">
-                    {{loan.status}}
+                    Aprobado
                   </span>
                   </td>
                 } @else if(loan.status === 'declined'){
@@ -209,21 +215,30 @@
                     <span
                     class="inactive"
                   >
-                  {{loan.status}}
-                  </span>
+                    Rechazado
+                </span>
                 </td>
-                }@else {
+                }@else if(loan.status === 'inactive'){
                   <td  class="px-6 py-4 whitespace-nowrap uppercase">
                     <span
                     class="pending"
                   >
-                  {{loan.status}}
-                  </span>
+                    Inactivo
+                </span>
+                  </td>
+                }@else if(loan.status === 'pending'){
+                  <td  class="px-6 py-4 whitespace-nowrap uppercase">
+                    <span
+                    class="pending"
+                  >
+                    Pendiente
+                </span>
                   </td>
                 }
                 <td class="px-4 py-2">{{getOrganizationNameById(loan.organization_id)}}</td>
                 <td class="px-4 py-2">{{loan.issued_at}}</td>
                 <td class="px-4 py-2">${{loan.amount}}.00</td>
+                <td class="px-4 py-2">${{loan.total_amount_due}}.00</td>
                 <td class="px-4 py-2">{{loan.interest_rate}}%</td>
                 <td class="px-4 py-2">{{loan.purpose}}</td>
                 <td class="px-4 py-2">
@@ -233,7 +248,7 @@
                       <button  (click)="openPayModal(loan.loan_id)" class="pi pi-dollar text-green-500 hover:text-green-400 text-2xl p-2 "></button>
                     }
                     @if(modalIsOpen){
-                      <app-loan-details-modal [loan]="this.cosa" (closeModal)="closeModal()"></app-loan-details-modal>
+                      <app-loan-details-modal [loan]="this.cosa" [userRole]="this.user_role" (closeModal)="closeModal()"></app-loan-details-modal>
                     }         
                     @if(payModalIsOpen){
                       <app-pay-modal [loan_id]="this.selectedId" (onClose)="closePayModal()"></app-pay-modal>
@@ -248,69 +263,5 @@
     }
    
   </div>
-
-  <!-- Loan Application Dialog 
-  <div  class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-    @if(dialogIsOpen){
-      <div class="bg-[#1E293B] p-6 rounded-lg w-full max-w-md">
-        <h2 class="text-2xl font-bold mb-4">Solicitud de Préstamo</h2>
-        <form >
-          <div class="mb-4">
-            <label for="amount" class="block mb-2">Monto</label>
-            <input type="number" id="amount" formControlName="amount" class="w-full px-3 py-2 bg-white rounded text-black">
-          </div>
-          <div class="mb-4">
-            <label for="purpose" class="block mb-2">Propósito</label>
-            <input type="text" id="purpose" formControlName="purpose" class="w-full px-3 py-2 bg-white rounded text-black">
-          </div>
-          <div class="mb-4">
-            <label for="organization" class="block mb-2">Organización</label>
-            <select id="organization" formControlName="organization" class="w-full px-3 py-2 bg-white rounded text-black">
-              <option >
-                @for(organization of organizations; track $index){
-                  {{organization.organization_name}}
-                }
-              </option>
-            </select>
-          </div>
-          <div class="flex justify-end">
-            <button type="button" (click)="dialogIsOpen = false" class="bg-gray-500 hover:bg-gray-600 text-black px-4 py-2 rounded mr-2">Cancelar</button>
-            <button type="submit"  class="bg-blue-500 hover:bg-blue-600 text-black px-4 py-2 rounded">
-            <!--[disabled]="!loanApplicationForm.valid"
-              Enviar Solicitud</button>
-          </div>
-        </form>
-      </div>
-    }
-    
-  </div>
--->
-
-  <!-- Loan Approval Dialog 
-  @if(loanDetailModalIsOpen){
-  <div  class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-    <div class="bg-[#1E293B] p-6 rounded-lg w-full max-w-md">
-      <h2 class="text-2xl font-bold mb-4">Informacion del Préstamo</h2>
-        <div class="mb-4">
-          <label for="deadline" class="block mb-2">Fecha Límite</label>
-          <input type="date" id="deadline" formControlName="deadline" class="w-full px-3 py-2 bg-white rounded text-black">
-        </div>
-        <div class="mb-4">
-          <label for="interestRate" class="block mb-2">Tasa de Interés (%)</label>
-          <input type="number" id="interestRate" formControlName="interestRate" class="w-full px-3 py-2 bg-white rounded text-black">
-        </div>
-        <div class="mb-4">
-          <label for="lateInterestRate" class="block mb-2">Tasa de Interés Tardío (%)</label>
-          <input type="number" id="lateInterestRate" formControlName="lateInterestRate" class="w-full px-3 py-2 bg-white rounded text-black">
-        </div>
-        <div class="flex justify-end">
-          <button type="button"  (click)="loanDetailModalIsOpen = false" class="bg-blue-500 hover:bg-blue-600 text-black px-4 py-2 rounded">
-            Cerrar Informacion
-          </button>
-        </div>
-      </div>
-  </div>
-      }
--->
   
 </div>

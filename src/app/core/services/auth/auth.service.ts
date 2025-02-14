@@ -27,6 +27,8 @@ export class AuthService {
           this.setRefreshToken(body.refreshToken);  
           this.setUsername(body.user.user);    
           this.setUserId(body.user.user_id);
+        }else{
+          return body;
         }
       })
     );

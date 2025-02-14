@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../../../../../core/services/User/user.service';
-import { User, UserDetails } from '../../../../../models/Users/UserModel';
+import { UpdateUserRole, User, UserDetails } from '../../../../../models/Users/UserModel';
 import { FormsModule } from '@angular/forms';
 import { UserDetailsModalComponent } from '../user-details-modal/user-details-modal.component';
 @Component({
@@ -9,7 +9,6 @@ import { UserDetailsModalComponent } from '../user-details-modal/user-details-mo
   standalone: true,
   imports: [FormsModule, UserDetailsModalComponent, UserDetailsModalComponent],
   templateUrl: './user-detail-table.component.html',
-  styleUrl: './user-detail-table.component.css'
 })
 export class UserDetailTableComponent implements OnChanges {
     @Input() headers: string[] = [];
@@ -20,6 +19,7 @@ export class UserDetailTableComponent implements OnChanges {
     filteredUsers: UserDetails[] = [];
     editUserModalIsOpen: boolean = false;
     selected_User: UserDetails = {} as UserDetails;
+    constructor(private userService: UserService, private router: Router) {}
     ngOnChanges(changes: SimpleChanges): void {
       if(changes['users']){
         this.filteredUsers = this.users;
@@ -41,10 +41,25 @@ export class UserDetailTableComponent implements OnChanges {
       this.editUserModalIsOpen = true;
     }
     closeEditUserModal(): void {
-      this.selected_User = {} as UserDetails;
       this.editUserModalIsOpen = false;
+      this.selected_User = {} as UserDetails;
     }
     deleteUser(id: number): void {
       this.delete.emit(id);
+    }
+    changeUserRole(user_id:number,user_role:string | null){
+      const user:  UpdateUserRole = {
+        user_id: user_id,
+        role: user_role
+      }
+      console.log(user_role);
+      this.userService.updateUserRole(user).subscribe({
+        next: (res) => {
+          console.log("Response: ",res);
+        },
+        error: (err) => {
+          console.error(err);
+        }
+      });
     }
 }

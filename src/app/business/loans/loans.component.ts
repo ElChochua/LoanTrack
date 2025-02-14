@@ -33,6 +33,7 @@ export default class LoansComponent implements OnInit {
   ngOnInit(): void {
     this.user_role = this.authService.getRole();
     this.loadForRole();
+    console.log(this.modalIsOpen);
   }
   loadForRole():void{
     if(this.user_role === 'SUPER_ADMIN'){
@@ -60,7 +61,6 @@ export default class LoansComponent implements OnInit {
           this.loanService.getLoansByOrganizationId(this.organization_id).subscribe({
             next: (loans) => {
               this.loans = loans;
-              console.log("cosa ",this.loans);
             },
             error: (err) => {
               console.error(err);
@@ -128,8 +128,8 @@ export default class LoansComponent implements OnInit {
   }
   openModal(loan:Loans):void{
     this.cosa = loan;
-    console.log(this.cosa);
     this.modalIsOpen = true;
+    console.log(this.modalIsOpen);
   }
   closePayModal():void{
     this.payModalIsOpen = false;

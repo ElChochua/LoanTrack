@@ -96,6 +96,13 @@ export class LoansService {
       )
     );
   }
+  getAllCredits():Observable<UserCredits[]>{
+    return this.httpClient.get<UserCredits[]>(`${this.api_url}get-all-credits`).pipe(
+      tap(
+         response => {console.log(response)}
+      )
+    );
+  }
   getAllCreditsByUser(user_id:number):Observable<UserCredits[]>{
     return this.httpClient.get<UserCredits[]>(`${this.api_url}get-all-credits-by-user/${user_id}`).pipe(
       tap(
@@ -105,6 +112,20 @@ export class LoansService {
   }
   makePayment(payment:PaymentDto):Observable<any>{
     return this.httpClient.post<any>(`${this.api_url}make-payment/`,payment).pipe(
+      tap(
+         response => {console.log(response)}
+      )
+    );
+  }
+  getAllCreditsByOrganizaitonId(organization_id:number):Observable<UserCredits[]>{
+    return this.httpClient.get<UserCredits[]>(`${this.api_url}get-all-credits-by-organization/${organization_id}`).pipe(
+      tap(
+         response => {console.log(response)}
+        ),
+    );
+  }
+  updateLoan(loan:Loans):Observable<any>{
+    return this.httpClient.put<any>(`${this.api_url}update-loan`,loan).pipe(
       tap(
          response => {console.log(response)}
       )

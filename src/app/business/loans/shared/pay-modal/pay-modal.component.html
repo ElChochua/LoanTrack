@@ -23,6 +23,7 @@
                 <label for="transactionType" class="block text-sm font-medium text-gray-400">Tipo de Transacción</label>
                 <select formControlName="transactionType" id="transactionType" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                   <option value="payment">Pago</option>
+                  <option value="pass">Abono</option>
                 @if(user_role !='User'){
                   <option value="refund">Reembolso</option>
                   <option value="disbursement">Desembolso</option>

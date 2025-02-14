@@ -36,8 +36,8 @@ export class OrganizationsService {
       //tap(response => {console.log(response)})
     );
   }
-  getOrganizationByOwner(id:number):Observable<OrganizationDetailsModel>{
-    return this.httpClient.get<OrganizationDetailsModel>(`${this.api_url}get-all-organizations-by-owner/${id}`).pipe(
+  getOrganizationByOwner(id:number):Observable<OrganizationDetailsModel[]>{
+    return this.httpClient.get<OrganizationDetailsModel[]>(`${this.api_url}get-all-organizations-by-owner/${id}`).pipe(
      // tap(response => {console.log(response)})
     );
   }

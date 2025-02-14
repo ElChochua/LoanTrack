@@ -9,7 +9,6 @@ import ActiveLoansComponent from "../../../loans/shared/active-loans/active-loan
   standalone: true,
   imports: [ActiveLoansComponent],
   templateUrl: './organizations-table.component.html',
-  styleUrl: './organizations-table.component.css'
 })
 export class OrganizationsTableComponent implements OnInit {
   organizations: OrganizationDetailsModel[] = [];

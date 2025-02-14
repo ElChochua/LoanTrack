@@ -30,20 +30,20 @@ export const routes: Routes = [
                 loadComponent:() => import('./business/loans/loans.component')
             },
             {
-                path: 'administration',
-                loadComponent:() => import('./business/user-management/user-management.component') 
+                path: 'transactions',
+                loadComponent:() => import('./business/transactions/transactions-table-detail.component')
             },
             {
                 path: 'organizations',
                 loadComponent:() => import('./business/organizations/organizations.component')
             },
             {
-                path: 'profile',
-                loadComponent:() => import('./business/profile/profile.component')
+                path: 'administration',
+                loadComponent:() => import('./business/user-management/user-management.component')
             },
             {
-                path: 'settings',
-                loadComponent:() => import('./business/settings/settings.component')
+                path: 'profile',
+                loadComponent:() => import('./business/profile/profile.component')
             },
             {
                 path: 'loans/active',
