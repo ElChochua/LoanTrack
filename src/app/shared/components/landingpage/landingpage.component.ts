@@ -7,7 +7,6 @@ import { FooterComponent } from "../footer/footer.component";
   standalone: true,
   imports: [FooterComponent],
   templateUrl: './landingpage.component.html',
-  styleUrl: './landingpage.component.css'
 })
 export default class LandingpageComponent {
 

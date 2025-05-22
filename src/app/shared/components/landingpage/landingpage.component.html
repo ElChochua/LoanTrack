@@ -1,71 +1,359 @@
-<!-- HERO -->
-<div class="hero relative bg-gradient-to-br from-azul-perron to-purple-800 text-white py-20">
-    <div class="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between">
-      <div class="text">
-        <h1 class="text-5xl font-extrabold mb-4 leading-tight">
-          Gestiona tus préstamos con <span class="text-yellow-400">LoanTrack</span>
-        </h1>
-        <p class="text-lg text-gray-200 mb-6">
-          Soluciones integrales para administrar organizaciones y préstamos en un solo lugar.
+
+<body class="font-sans antialiased text-gray-900">
+  <!-- Navegación -->
+  <nav class="bg-white shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16">
+        <div class="flex items-center">
+          <div class="flex-shrink-0">
+            <span class="text-2xl font-bold text-indigo-600">LoanTrack</span>
+          </div>
+        </div>
+        <div class="flex items-center">
+          <div class="hidden md:ml-6 md:flex md:space-x-8">
+            <a href="#features" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 hover:text-gray-700">
+              Características
+            </a>
+            <a href="#how-it-works" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 hover:text-gray-700">
+              Cómo Funciona
+            </a>
+            <a href="#contact" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 hover:text-gray-700">
+              Contacto
+            </a>
+          </div>
+          <div class="ml-6">
+            <a href="/login" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-indigo-600 bg-white hover:bg-gray-50">
+              Iniciar Sesión
+            </a>
+            <a href="/register" class="ml-3 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
+              Registrarse
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <div class="relative bg-white overflow-hidden">
+    <div class="max-w-7xl mx-auto">
+      <div class="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
+        <main class="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
+          <div class="sm:text-center lg:text-left">
+            <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
+              <span class="block">Gestión de préstamos</span>
+              <span class="block text-indigo-600">simplificada</span>
+            </h1>
+            <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+              LoanTrack te ayuda a gestionar tus préstamos de manera eficiente. Realiza un seguimiento de pagos, visualiza el progreso y administra toda tu cartera de préstamos en un solo lugar.
+            </p>
+            <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
+              <div class="rounded-md shadow">
+                <a href="register.html" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">
+                  Comenzar Ahora
+                </a>
+              </div>
+              <div class="mt-3 sm:mt-0 sm:ml-3">
+                <a href="#features" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 md:py-4 md:text-lg md:px-10">
+                  Ver Características
+                </a>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
+      <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80" alt="Persona revisando finanzas">
+    </div>
+  </div>
+
+  <!-- Features Section -->
+  <div id="features" class="py-12 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="lg:text-center">
+        <h2 class="text-base text-indigo-600 font-semibold tracking-wide uppercase">Características</h2>
+        <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+          Todo lo que necesitas para gestionar tus préstamos
         </p>
-        <button class="px-8 py-3 bg-yellow-400 text-gray-900 font-bold rounded-lg shadow-md hover:bg-yellow-300 transition">
-          Regístrate Ahora
-        </button>
-        <button class="ml-4 px-8 py-3 bg-transparent border border-white text-white rounded-lg hover:bg-white hover:text-indigo-600 transition" >
-            <a href="login">Inicia Sesión</a>
-        </button>
+        <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+          LoanTrack ofrece herramientas completas para el seguimiento y gestión de préstamos.
+        </p>
+      </div>
+
+      <div class="mt-10">
+        <dl class="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10">
+          <div class="relative">
+            <dt>
+              <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+              </div>
+              <p class="ml-16 text-lg leading-6 font-medium text-gray-900">Panel de Control Intuitivo</p>
+            </dt>
+            <dd class="mt-2 ml-16 text-base text-gray-500">
+              Visualiza todos tus préstamos, pagos pendientes y estadísticas en un solo lugar con nuestro panel de control fácil de usar.
+            </dd>
+          </div>
+
+          <div class="relative">
+            <dt>
+              <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <p class="ml-16 text-lg leading-6 font-medium text-gray-900">Recordatorios de Pago</p>
+            </dt>
+            <dd class="mt-2 ml-16 text-base text-gray-500">
+              Nunca te pierdas un pago con nuestros recordatorios automáticos que te alertan sobre fechas de vencimiento próximas.
+            </dd>
+          </div>
+
+          <div class="relative">
+            <dt>
+              <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+              </div>
+              <p class="ml-16 text-lg leading-6 font-medium text-gray-900">Informes Detallados</p>
+            </dt>
+            <dd class="mt-2 ml-16 text-base text-gray-500">
+              Genera informes detallados sobre el estado de tus préstamos, historial de pagos y proyecciones futuras.
+            </dd>
+          </div>
+
+          <div class="relative">
+            <dt>
+              <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+              </div>
+              <p class="ml-16 text-lg leading-6 font-medium text-gray-900">Seguridad Avanzada</p>
+            </dt>
+            <dd class="mt-2 ml-16 text-base text-gray-500">
+              Tu información financiera está protegida con las últimas tecnologías de seguridad y encriptación.
+            </dd>
+          </div>
+        </dl>
       </div>
     </div>
   </div>
 
-  
-  <!-- CARACTERÍSTICAS -->
-  <div class="features py-8 px-6 ">
-    <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">¿Qué Ofrecemos?</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div class="feature bg-white shadow-md rounded-lg p-6 text-center transition-transform transform hover:scale-105">
-        <svg class="w-12 h-12 mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
-          </svg>
-        <h3 class="text-2xl font-semibold mb-2">Organizaciones</h3>
-        <p class="text-gray-600">Crea y gestiona múltiples organizaciones sin complicaciones.</p>
+  <!-- How It Works Section -->
+  <div id="how-it-works" class="bg-gray-50 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="lg:text-center">
+        <h2 class="text-base text-indigo-600 font-semibold tracking-wide uppercase">Cómo Funciona</h2>
+        <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+          Gestiona tus préstamos en tres simples pasos
+        </p>
       </div>
-      <div class="feature bg-white shadow-md rounded-lg p-6 text-center transition-transform transform hover:scale-105">
-        <svg  class="w-12 h-12 mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z" />
-          </svg>
-          
-        <h3 class="text-2xl font-semibold mb-2">Gestión de Préstamos</h3>
-        <p class="text-gray-600">Automatiza el seguimiento de pagos y plazos.</p>
-      </div>
-      <div class="feature bg-white shadow-md rounded-lg p-6 text-center transition-transform transform hover:scale-105">
-        <svg  class="w-12 h-12 mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
-          </svg>          
-        <h3 class="text-2xl font-semibold mb-2">Roles Personalizados</h3>
-        <p class="text-gray-600">Asigna permisos según las necesidades de tu equipo.</p>
-      </div>
-    </div>
-  </div>
-  
-  <!-- TESTIMONIOS -->
-  <div class="testimonials relative bg-gradient-to-br from-azul-perron to-purple-800 text-white py-10">
-    <h2 class="text-3xl font-bold text-center mb-8">Lo que dicen nuestros usuarios</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 px-6">
-      <div class="testimonial bg-white text-gray-800 p-6 rounded-lg shadow-md">
-        <p class="italic">"LoanTrack revolucionó la forma en que administro mis préstamos. Es fácil y eficiente."</p>
-        <h4 class="mt-4 font-semibold">- Bryan Daniel Négrete(Deudor de Amaral)</h4>
-      </div>
-      <div class="testimonial bg-white text-gray-800 p-6 rounded-lg shadow-md">
-        <p class="italic">"Desde que usamos LoanTrack, nuestro equipo trabaja más organizado y enfocado."</p>
-        <h4 class="mt-4 font-semibold">- Ernesto Amaral(Nieto de Amlo)</h4>
-      </div>
-      <div class="testimonial bg-white text-gray-800 p-6 rounded-lg shadow-md">
-        <p class="italic">"Desde que uso LoanTrack puedo estar al tanto de lo que Negrete me debe."</p>
-        <h4 class="mt-4 font-semibold">- Ilan Ivan(El Terror de Redes I)</h4>
+
+      <div class="mt-10">
+        <div class="md:grid md:grid-cols-3 md:gap-8">
+          <div class="md:col-span-1">
+            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white mx-auto">
+              <span class="text-lg font-bold">1</span>
+            </div>
+            <h3 class="mt-6 text-lg font-medium text-gray-900 text-center">Registra tus préstamos</h3>
+            <p class="mt-2 text-base text-gray-500 text-center">
+              Ingresa los detalles de tus préstamos existentes o solicita nuevos préstamos directamente desde la plataforma.
+            </p>
+          </div>
+          <div class="mt-10 md:mt-0 md:col-span-1">
+            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white mx-auto">
+              <span class="text-lg font-bold">2</span>
+            </div>
+            <h3 class="mt-6 text-lg font-medium text-gray-900 text-center">Realiza seguimiento</h3>
+            <p class="mt-2 text-base text-gray-500 text-center">
+              Visualiza el progreso de tus préstamos, recibe recordatorios de pagos y mantén un registro de todas las transacciones.
+            </p>
+          </div>
+          <div class="mt-10 md:mt-0 md:col-span-1">
+            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white mx-auto">
+              <span class="text-lg font-bold">3</span>
+            </div>
+            <h3 class="mt-6 text-lg font-medium text-gray-900 text-center">Optimiza tus finanzas</h3>
+            <p class="mt-2 text-base text-gray-500 text-center">
+              Utiliza nuestros informes y análisis para tomar mejores decisiones financieras y optimizar tu estrategia de pagos.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  
-  <!-- FOOTER -->
- <app-footer/>
+
+  <!-- Testimonials Section -->
+  <div class="bg-white py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="lg:text-center">
+        <h2 class="text-base text-indigo-600 font-semibold tracking-wide uppercase">Testimonios</h2>
+        <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+          Lo que dicen nuestros usuarios
+        </p>
+      </div>
+      <div class="mt-10">
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+            <div class="flex items-center mb-4">
+              <img class="h-12 w-12 rounded-full" src="https://randomuser.me/api/portraits/women/32.jpg" alt="Usuario">
+              <div class="ml-4">
+                <h4 class="text-lg font-bold">María García</h4>
+                <p class="text-gray-500">Propietaria de Negocio</p>
+              </div>
+            </div>
+            <p class="text-gray-600">"LoanTrack ha simplificado completamente la gestión de mis préstamos comerciales. Ahora puedo ver exactamente cuánto debo y cuándo son mis próximos pagos."</p>
+          </div>
+          <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+            <div class="flex items-center mb-4">
+              <img class="h-12 w-12 rounded-full" src="https://randomuser.me/api/portraits/men/45.jpg" alt="Usuario">
+              <div class="ml-4">
+                <h4 class="text-lg font-bold">Carlos Rodríguez</h4>
+                <p class="text-gray-500">Estudiante Universitario</p>
+              </div>
+            </div>
+            <p class="text-gray-600">"Como estudiante con múltiples préstamos educativos, LoanTrack me ha ayudado a organizar mis pagos y planificar mi futuro financiero. ¡Increíble herramienta!"</p>
+          </div>
+          <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+            <div class="flex items-center mb-4">
+              <img class="h-12 w-12 rounded-full" src="https://randomuser.me/api/portraits/women/68.jpg" alt="Usuario">
+              <div class="ml-4">
+                <h4 class="text-lg font-bold">Ana Martínez</h4>
+                <p class="text-gray-500">Profesional Financiero</p>
+              </div>
+            </div>
+            <p class="text-gray-600">"Como asesora financiera, recomiendo LoanTrack a todos mis clientes. La interfaz es intuitiva y los informes son exactamente lo que necesitan para tomar decisiones informadas."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Section -->
+  <div id="contact" class="bg-gray-50 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="lg:text-center">
+        <h2 class="text-base text-indigo-600 font-semibold tracking-wide uppercase">Contacto</h2>
+        <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+          ¿Tienes preguntas? Estamos aquí para ayudarte
+        </p>
+        <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+          Nuestro equipo de soporte está disponible para responder cualquier pregunta que puedas tener.
+        </p>
+      </div>
+
+      <div class="mt-10 max-w-lg mx-auto">
+        <form action="#" method="POST" class="grid grid-cols-1 gap-y-6">
+          <div>
+            <label for="name" class="block text-sm font-medium text-gray-700">Nombre</label>
+            <div class="mt-1">
+              <input type="text" name="name" id="name" class="py-3 px-4 block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md">
+            </div>
+          </div>
+          <div>
+            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+            <div class="mt-1">
+              <input type="email" name="email" id="email" class="py-3 px-4 block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md">
+            </div>
+          </div>
+          <div>
+            <label for="message" class="block text-sm font-medium text-gray-700">Mensaje</label>
+            <div class="mt-1">
+              <textarea id="message" name="message" rows="4" class="py-3 px-4 block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"></textarea>
+            </div>
+          </div>
+          <div>
+            <button type="submit" class="w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+              Enviar Mensaje
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA Section -->
+  <div class="bg-indigo-700">
+    <div class="max-w-2xl mx-auto text-center py-16 px-4 sm:py-20 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+        <span class="block">¿Listo para simplificar la gestión de tus préstamos?</span>
+      </h2>
+      <p class="mt-4 text-lg leading-6 text-indigo-200">
+        Comienza a usar LoanTrack hoy mismo y toma el control de tus finanzas.
+      </p>
+      <a href="register.html" class="mt-8 w-full inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-indigo-50 sm:w-auto">
+        Registrarse Gratis
+      </a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-white">
+    <div class="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
+      <nav class="-mx-5 -my-2 flex flex-wrap justify-center" aria-label="Footer">
+        <div class="px-5 py-2">
+          <a href="#" class="text-base text-gray-500 hover:text-gray-900">
+            Acerca de
+          </a>
+        </div>
+        <div class="px-5 py-2">
+          <a href="#" class="text-base text-gray-500 hover:text-gray-900">
+            Blog
+          </a>
+        </div>
+        <div class="px-5 py-2">
+          <a href="#" class="text-base text-gray-500 hover:text-gray-900">
+            Empleos
+          </a>
+        </div>
+        <div class="px-5 py-2">
+          <a href="#" class="text-base text-gray-500 hover:text-gray-900">
+            Prensa
+          </a>
+        </div>
+        <div class="px-5 py-2">
+          <a href="#" class="text-base text-gray-500 hover:text-gray-900">
+            Socios
+          </a>
+        </div>
+        <div class="px-5 py-2">
+          <a href="#" class="text-base text-gray-500 hover:text-gray-900">
+            Privacidad
+          </a>
+        </div>
+        <div class="px-5 py-2">
+          <a href="#" class="text-base text-gray-500 hover:text-gray-900">
+            Términos
+          </a>
+        </div>
+      </nav>
+      <div class="mt-8 flex justify-center space-x-6">
+        <a href="#" class="text-gray-400 hover:text-gray-500">
+          <span class="sr-only">Facebook</span>
+          <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" />
+          </svg>
+        </a>
+        <a href="#" class="text-gray-400 hover:text-gray-500">
+          <span class="sr-only">Instagram</span>
+          <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd" />
+          </svg>
+        </a>
+        <a href="#" class="text-gray-400 hover:text-gray-500">
+          <span class="sr-only">Twitter</span>
+          <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+          </svg>
+        </a>
+      </div>
+      <p class="mt-8 text-center text-base text-gray-400">
+        &copy; 2023 LoanTrack, Inc. Todos los derechos reservados.
+      </p>
+    </div>
+  </footer>
+</body>

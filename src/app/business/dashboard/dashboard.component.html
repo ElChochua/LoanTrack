@@ -1,68 +1,90 @@
-<div class="flex flex-col h-screen bg-gray-100">
-  @if(spinner.loading$ | async){
-    <app-spinner/>
-    }
-  <!-- Área de contenido principal -->
-  <div class="flex-1 p-4">
-    <!-- Contenedor de las 4 secciones (Matriz 2x2) -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2 p-2">
-      <!-- Sección 1: Usuarios -->
-      <div class="bg-white p-4 rounded-md">
-        @if(userRole === 'SUPER_ADMIN'){
-          <h2 class=" text-lg font-semibold pb-1">Usuarios</h2>
-          <div class="bg-gradient-to-r from-cyan-300 to-cyan-500 h-px mb-6"></div>
-          <div class="relative overflow-x-auto">
-            <app-users-table [headers]="headers" [users]="users"></app-users-table>
-          </div>
-        }@else if(userRole === 'User') {
-          <h2 class=" text-lg font-semibold pb-1">Mis Prestamos</h2>
-          <div class="bg-gradient-to-r from-cyan-300 to-cyan-500 h-px mb-6"></div>
-          <app-loans-table [loans]="loans"></app-loans-table>
-        }@else if(userRole === 'Client'){
-          <h2 class=" text-lg font-semibold pb-1">Transacciones de la Organizacion</h2>
-          <app-transactions-table></app-transactions-table>
-        }
+<div class="min-h-screen bg-gray-100">
+  
+  <div class="flex">
+    
+    <div class="flex-1 p-6">
+      <h1 class="text-2xl font-semibold text-gray-900 mb-6">Dashboard</h1>
+      
+      <!-- Summary Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div class="bg-white rounded-lg shadow p-6">
+          <h2 class="text-sm font-medium text-gray-500">Total Loans</h2>
+          <p class="text-3xl font-bold text-gray-900">{{ loanSummary().totalLoans }}</p>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow p-6">
+          <h2 class="text-sm font-medium text-gray-500">Active Loans</h2>
+          <p class="text-3xl font-bold text-gray-900">{{ loanSummary().activeLoans }}</p>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow p-6">
+          <h2 class="text-sm font-medium text-gray-500">Pending Approval</h2>
+          <p class="text-3xl font-bold text-gray-900">{{ loanSummary().pendingApproval }}</p>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow p-6">
+          <h2 class="text-sm font-medium text-gray-500">Total Amount</h2>
+          <p class="text-3xl font-bold text-gray-900">${{ loanSummary().totalAmount.toLocaleString() }}</p>
+          <p class="text-sm text-gray-500 mt-2">
+            Paid: ${{ loanSummary().paidAmount.toLocaleString() }}
+          </p>
+        </div>
       </div>
-
-      <!-- Sección 2: Organizaciones -->
-      <div class="bg-white p-4 rounded-md">
-        <h2 class="text-lg font-semibold pb-1">Organizaciones</h2>
-        <div class="bg-gradient-to-r from-cyan-300 to-cyan-500 h-px mb-6"></div>
-        <app-organizations-table></app-organizations-table>
+      
+      <!-- Recent Payments -->
+      <div class="bg-white rounded-lg shadow mb-8">
+        <div class="px-6 py-4 border-b border-gray-200">
+          <h2 class="text-lg font-medium text-gray-900">Recent Payments</h2>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+              <tr>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Amount</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+              @for (payment of recentPayments(); track payment.id) {
+                <tr>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ payment.id }}</td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ payment.date }}</td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${{ payment.amount }}</td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <span [ngClass]="{
+                      'px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full': true,
+                      'bg-green-100 text-green-800': payment.status === 'completed',
+                      'bg-yellow-100 text-yellow-800': payment.status === 'pending',
+                      'bg-red-100 text-red-800': payment.status === 'failed'
+                    }">
+                      {{ payment.status }}
+                    </span>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
       </div>
-
-      <div class="bg-white p-4 rounded-md">
-        @if(userRole === 'SUPER_ADMIN'){
-          <h2 class=" text-lg font-semibold pb-1">Usuarios Pendientes</h2>
-          <div class="bg-gradient-to-r from-cyan-300 to-cyan-500 h-px mb-6"></div>
-          <app-unassigned-users></app-unassigned-users>
-        }@else if(userRole === 'User') { 
-          <h2 class=" text-lg font-semibold pb-1">Mis Transacciones</h2>
-          <div class="bg-gradient-to-r from-cyan-300 to-cyan-500 h-px mb-6"></div>
-          <app-transactions-table></app-transactions-table>
-        }@else if(userRole === 'Client'){
-          <h2 class=" text-lg font-semibold pb-1">Mis Prestamos</h2>
-          <div class="bg-gradient-to-r from-cyan-300 to-cyan-500 h-px mb-6"></div>
-          <app-loans-table [loans]="loans"></app-loans-table>
-        }
-      </div>
-
-      <!-- Sección 4: Transacciones -->
-      <div class="bg-white p-4 rounded-md">
-        @if(userRole === 'Client'){
-          <h2 class="  text-lg font-semibold pb-1">Credito de usuarios</h2>
-          <div class="bg-gradient-to-r from-cyan-300 to-cyan-500 h-px mb-6"></div>
-          <app-user-credit-table></app-user-credit-table>
-
-        }@else if(userRole === 'SUPER_ADMIN'){
-          <h2 class=" text-lg font-semibold pb-1">Transacciones</h2>
-          <div class="bg-gradient-to-r from-cyan-300 to-cyan-500 h-px mb-6"></div>
-          <app-transactions-table></app-transactions-table>
-        }@else if(userRole === 'User'){
-          <h2 class=" text-lg font-semibold pb-1">Mis Creditos</h2>
-          <div class="bg-gradient-to-r from-cyan-300 to-cyan-500 h-px mb-6"></div>
-          <app-user-credit-table></app-user-credit-table>
-        }
+      
+      <!-- Quick Actions -->
+      <div class="bg-white rounded-lg shadow">
+        <div class="px-6 py-4 border-b border-gray-200">
+          <h2 class="text-lg font-medium text-gray-900">Quick Actions</h2>
+        </div>
+        <div class="p-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+          <a routerLink="/loans/new" class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
+            Apply for New Loan
+          </a>
+          <a routerLink="/loans" class="inline-flex items-center justify-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+            View All Loans
+          </a>
+          <a routerLink="/payments" class="inline-flex items-center justify-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+            Make a Payment
+          </a>
+        </div>
       </div>
     </div>
   </div>

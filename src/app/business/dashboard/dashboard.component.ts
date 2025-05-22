@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { AuthService } from '../../core/services/auth/auth.service';
 import { Router } from '@angular/router';
@@ -17,15 +17,32 @@ import { CreditTableComponent } from '../loans/shared/credit-table/credit-table.
 import { UserCreditsComponent } from '../loans/shared/users-credits-table/user-credit-table.component';
 import { TransactionsTable } from '../transactions/shared/transactions-table/transactions-table.component';
 import { OrganizationsService } from '../../core/services/organizations-service/organizations.service';
+import { SideBarComponent } from '../../shared/components/side-bar/side-bar.component';
+import { HeaderComponent } from "../../shared/components/header/header.component";
 
+interface LoanSummary {
+  totalLoans: number
+  activeLoans: number
+  pendingApproval: number
+  totalAmount: number
+  paidAmount: number
+}
+
+interface RecentPayment {
+  id: string
+  date: string
+  amount: number
+  status: "completed" | "pending" | "failed"
+}
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule,UnassignedUsersComponent, OrganizationsTableComponent,
-            UsersTableComponent, SpinnerComponent, LoansTableComponent, CreditTableComponent, UserCreditsComponent,TransactionsTable],
+  imports: [CommonModule, UnassignedUsersComponent, OrganizationsTableComponent,
+    UsersTableComponent, SpinnerComponent, LoansTableComponent, CreditTableComponent, UserCreditsComponent, TransactionsTable, SideBarComponent, HeaderComponent],
   templateUrl: './dashboard.component.html',
 })
-export default class DashboardComponent implements OnInit {
+export default class DashboardComponent  {
+  /*
   userRole: string |null = null;
   user: User|null = null;
   users: User[] = [];
@@ -83,4 +100,19 @@ export default class DashboardComponent implements OnInit {
       }
     });
   }
+    */
+    
+    loanSummary = signal<LoanSummary>({
+    totalLoans: 5,
+    activeLoans: 3,
+    pendingApproval: 1,
+    totalAmount: 25000,
+    paidAmount: 8500,
+  })
+
+  recentPayments = signal<RecentPayment[]>([
+    { id: "PAY-001", date: "2023-05-15", amount: 500, status: "completed" },
+    { id: "PAY-002", date: "2023-05-01", amount: 500, status: "completed" },
+    { id: "PAY-003", date: "2023-04-15", amount: 500, status: "completed" },
+  ])
 }

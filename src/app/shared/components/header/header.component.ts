@@ -6,17 +6,25 @@ import { User } from '../../../models/Users/UserModel';
   standalone: true,
   imports: [],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
 })
 export class HeaderComponent implements OnInit {
-  constructor(private authService: AuthService) {
-  }
-user_name:string|null='';
+  isProfileMenuOpen = false
+  isNotificationsOpen = false
+
   ngOnInit(): void {
-    this.user_name = this.authService.getUser();
+    
   }
-  
-  isLogedIn():boolean{
-    return this.authService.isAutenticated();
+  toggleProfileMenu() {
+    this.isProfileMenuOpen = !this.isProfileMenuOpen
+    if (this.isProfileMenuOpen) {
+      this.isNotificationsOpen = false
+    }
+  }
+
+  toggleNotifications() {
+    this.isNotificationsOpen = !this.isNotificationsOpen
+    if (this.isNotificationsOpen) {
+      this.isProfileMenuOpen = false
+    }
   }
 }

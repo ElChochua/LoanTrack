@@ -3,13 +3,12 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
 import { HeaderComponent } from '../../../shared/components/header/header.component';
 import { UserCreds } from "../../../models/Users/UserModel";
 import { AuthService } from '../../../core/services/auth/auth.service';
-import { UserService } from '../../../core/services/User/user.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [HeaderComponent, ReactiveFormsModule, ],
+  imports: [HeaderComponent, ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -65,4 +64,6 @@ export class LoginComponent {
   resetForm():void{
     this.logInForm.reset();
   }
+
 }
+
