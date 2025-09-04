@@ -7,7 +7,6 @@
       <button class="active" (click)="filterUsers('active')">Usuarios Activos</button>
     </div>
     
-    <!-- Tabla de Usuarios -->
     <div >
       @if(spinner.loading$ | async){
         <app-spinner/>
@@ -15,4 +14,5 @@
       <app-user-detail-table [users]="users" [headers]="headers" (delete)="deleteUser($event)" (edit)="modifyUser($event)"></app-user-detail-table>
     </div>
   </div>
-  
+-->
+</div>

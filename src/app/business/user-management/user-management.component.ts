@@ -1,18 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UsersTableComponent } from "./shared/users-table/users-table.component";
 import { UserService } from '../../core/services/User/user.service';
 import { UserDetails } from '../../models/Users/UserModel';
-import { UserDetailTableComponent } from "./shared/users-table/user-detail-table/user-detail-table.component";
 import { SpinnerComponent } from '../../shared/components/spinner/spinner.component';
 import { SpinnerService } from '../../core/services/spinner/spinner.service';
 
 @Component({
   selector: 'app-user-management',
   standalone: true,
-  imports: [UserDetailTableComponent, UserDetailTableComponent, SpinnerComponent, CommonModule],
+  imports: [ SpinnerComponent, CommonModule],
    templateUrl: './user-management.component.html',
-  styleUrls: ['./user-management.component.css'] 
 })
 export default class UserManagementComponent implements OnInit {
   users: UserDetails[] = [];

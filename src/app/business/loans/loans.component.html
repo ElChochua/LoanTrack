@@ -1,267 +1,332 @@
-<div class="container mx-auto px-4 py-8 bg-white text-black min-h-screen">
-  <h1 class="text-3xl font-bold mb-6">Gestión de Préstamos</h1>
+<body class="bg-gray-50">
+  <div class="max- mx-auto p-6">
+    <!-- Header -->
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold text-gray-900 mb-2">Mis Préstamos</h1>
+      <p class="text-gray-600">
+        Gestiona tus préstamos activos y próximos pagos
+      </p>
+    </div>
 
-  @if(user_role === 'Client'){
-    <div class="bg-white rounded-lg p-6">
-      <h2 class="text-2xl font-bold mb-4">Solicitudes de Préstamos</h2>
-      <p class="mb-4 text-gray-400">Gestiona las solicitudes de préstamos para tu organización.</p>
-      
-      <div class="overflow-x-auto">
-        <table class="min-w-full table-auto">
-          <thead class="bg-[#2D3748]">
-            <tr>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">ID</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Estado</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Organizacion</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Solicitado</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Monto</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Monto Pendiente</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Interes</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Propósito</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Acciones</th>
+    <!-- KPIs Summary -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+      <div class="bg-white rounded-lg shadow-sm border p-6">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-sm font-medium text-gray-600">Total Prestado</p>
+            <p class="text-2xl font-bold text-gray-900">$45,000</p>
+            <p class="text-xs text-gray-500 mt-1">3 préstamos activos</p>
+          </div>
+          <div
+            class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center"
+          >
+            <svg
+              class="w-6 h-6 text-blue-600"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"
+              ></path>
+            </svg>
+          </div>
+        </div>
+      </div>
 
-            </tr>
-          </thead>
-          <tbody>
-            @for(loan of loans; track $index){
-              <tr  class="border-b border-gray-700">
-                <td class="px-4 py-2">
-                  {{loan.loan_id}}
-                </td>
-                @if(loan.status === 'approved'){
-                  <td class="px-4 py-2 ">
-                  <span class="active">
-                    {{loan.status}}
-                  </span>
-                  </td>
-                } @else if(loan.status === 'declined'){
-                  <td  class="px-6 py-4 whitespace-nowrap uppercase">
-                    <span
-                    class="inactive"
-                  >
-                  {{loan.status}}
-                  </span>
-                </td>
-                }@else {
-                  <td  class="px-6 py-4 whitespace-nowrap uppercase">
-                    <span
-                    class="pending"
-                  >
-                  {{loan.status}}
-                  </span>
-                  </td>
-                }
-                <td class="px-4 py-2">{{getOrganizationNameById(loan.organization_id)}}</td>
-                <td class="px-4 py-2">{{loan.issued_at}}</td>
-                <td class="px-4 py-2">${{loan.amount}}.00</td>
-                <td class="px-4 py-2">${{loan.total_amount_due}}.00</td>
-                <td class="px-4 py-2">{{loan.interest_rate}}%</td>
-                <td class="px-4 py-2">{{loan.purpose}}</td>
-                @if(loan.status === 'pending'){
-                  <td class="px-4 py-2">
-                      <div class="flex space-x-2">
-                        <button  (click)="approveLoan(loan.loan_id)" class="pi pi-check  text-green-500 hover:text-green-400 text-2xl "></button>
-                        <button  (click)="rejectLoan(loan.loan_id)" class="pi pi-times text-red-500 hover:text-red-400 text-2xl "></button>
-                        <button  (click)="openModal(loan)" class="pi pi-eye text-blue-500 hover:text-blue-400 text-2xl p-2 "></button>
-                        @if(modalIsOpen){
-                          <app-loan-details-modal [loan]="this.cosa" [userRole]="this.user_role" (closeModal)="closeModal()"></app-loan-details-modal>
-                        }             
-                      </div>
-                    </td>
-                  }@else {
-                    <td class="px-4 py-2">
-                      <div class="content-center align-middle">
-                        <button  (click)="openModal(loan)" class="pi pi-eye text-blue-500 hover:text-blue-400 text-2xl p-2 "></button>
-                      </div>
-                      @if(modalIsOpen){
-                        <app-loan-details-modal [loan]="this.cosa" [userRole]="this.user_role" (closeModal)="closeModal()"></app-loan-details-modal>
-                      }             
-                    </td>
-                  }
-              </tr>
-              }
- 
-          </tbody>
-        </table>
+      <div class="bg-white rounded-lg shadow-sm border p-6">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-sm font-medium text-gray-600">Próximo Pago</p>
+            <p class="text-2xl font-bold text-orange-600">$1,250</p>
+            <p class="text-xs text-gray-500 mt-1">Vence en 5 días</p>
+          </div>
+          <div
+            class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center"
+          >
+            <svg
+              class="w-6 h-6 text-orange-600"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+              ></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-lg shadow-sm border p-6">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-sm font-medium text-gray-600">En Mora</p>
+            <p class="text-2xl font-bold text-red-600">$2,100</p>
+            <p class="text-xs text-gray-500 mt-1">1 préstamo atrasado</p>
+          </div>
+          <div
+            class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center"
+          >
+            <svg
+              class="w-6 h-6 text-red-600"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"
+              ></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-lg shadow-sm border p-6">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-sm font-medium text-gray-600">Total Pagado</p>
+            <p class="text-2xl font-bold text-green-600">$18,750</p>
+            <p class="text-xs text-gray-500 mt-1">41.7% completado</p>
+          </div>
+          <div
+            class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center"
+          >
+            <svg
+              class="w-6 h-6 text-green-600"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+              ></path>
+            </svg>
+          </div>
+        </div>
       </div>
     </div>
-    
-  }@else if(user_role === 'SUPER_ADMIN') {
-    <div class="bg-white rounded-lg p-6">
-      <h2 class="text-2xl font-bold mb-4">Solicitudes de Préstamos</h2>
-      <p class="mb-4 text-gray-400">Gestiona las solicitudes de préstamos para tu organización.</p>
-      
-      <div class="overflow-x-auto">
-        <table class="min-w-full table-auto">
-          <thead class="bg-[#2D3748]">
-            <tr>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">ID</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Estado</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Organizacion</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Solicitado</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Monto</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Monto Faltante</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Interes</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Propósito</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            @for(loan of loans; track $index){
-                <tr  class="border-b border-gray-700">
-                <td class="px-4 py-2">
-                  {{loan.loan_id}}
-                </td>
-                @if(loan.status === 'approved'){
-                  <td class="px-6 py-4 whitespace-nowrap uppercase">
-                  <span class="active">
-                    Aprobado
-                  </span>
-                  </td>
-                } @else if(loan.status === 'declined'){
-                  <td  class="px-6 py-4 whitespace-nowrap uppercase">
-                    <span
-                    class="inactive"
-                  >
-                    Rechazado
-                </span>
-                </td>
-                }@else if(loan.status === 'inactive'){
-                  <td  class="px-6 py-4 whitespace-nowrap uppercase">
-                    <span
-                    class="pending"
-                  >
-                    Inactivo
-                </span>
-                </td>
-                }
-                <td class="px-4 py-2">{{getOrganizationNameById(loan.organization_id)}}</td>
-                <td class="px-4 py-2">{{loan.issued_at}}</td>
-                <td class="px-4 py-2">${{loan.amount}}.00</td>
-                <td class="px-4 py-2">${{loan.total_amount_due}}.00</td>
-                <td class="px-4 py-2">{{loan.interest_rate}}%</td>
-                <td class="px-4 py-2">{{loan.purpose}}</td>
-                @if(loan.status === 'pending'){
-                <td class="px-4 py-2">
-                    <div class="flex space-x-2">
-                      <button  (click)="approveLoan(loan.loan_id)" class="pi pi-check  text-green-500 hover:text-green-400 text-2xl "></button>
-                      <button  (click)="rejectLoan(loan.loan_id)" class="pi pi-times text-red-500 hover:text-red-400 text-2xl "></button>
-                      <button  (click)="openModal(loan)" class="pi pi-eye text-blue-500 hover:text-blue-400 text-2xl"></button>
-                      @if(modalIsOpen){
-                        <app-loan-details-modal [loan]="this.cosa" [userRole]="this.user_role" (closeModal)="closeModal()"></app-loan-details-modal>
-                      }
-    
-                    </div>
-                  </td>
-                }@else {
-                  <td class="px-4 py-2">
-                    <div class="content-center align-middle">
-                      <button  (click)="openModal(loan)" class="pi pi-eye text-blue-500 hover:text-blue-400 text-2xl "></button>               
-                      @if(modalIsOpen){
-                        <app-loan-details-modal [loan]="this.cosa" [userRole]="this.user_role" (closeModal)="closeModal()"></app-loan-details-modal>
-                      }
-                    </div>
-                  </td>
-                }
-              </tr>
-              }
- 
-          </tbody>
-        </table>
-      </div>
-    </div>
-  }
-  <div class="bg-white rounded-lg p-6">
-    @if(user_role === 'User'){
-      <h2 class="text-2xl font-bold mb-4">Solicitar Préstamo</h2>
-      <p class="mb-4 text-gray-600">Completa el formulario para solicitar un nuevo préstamo.</p>
-      
-      <button (click)="openRequestModal()"  class="bg-blue-500 hover:bg-blue-600 text-black px-4 py-2 rounded mb-4">
-        Solicitar Nuevo Préstamo 
-      </button>
-      @if(requestModalIsOpen){
-        <app-request-loan-modal [organizations]="organizations" (closeModal)="closeRequestModal()" (submitLoanDetails)="loanApply($event)"></app-request-loan-modal>
-      }
-      <h3 class="text-xl font-semibold mb-4">Mis Préstamos</h3>
-      <div class="overflow-x-auto bg-white shadow-md rounded-lg">
-        <table class="min-w-full table-auto">
-          <thead class="bg-[#2D3748]">
-            <tr>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">ID</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Estado</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Organizacion</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Solicitado</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Monto Solicitado</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Monto a Pagar</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Interes</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Propósito</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            @for(loan of loans; track $index){
-              <tr  class="border-b border-gray-700">
-                <td class="px-4 py-2">
-                  {{loan.loan_id}}
-                </td>
-                @if(loan.status === 'approved'){
-                  <td class="px-4 py-2">
-                  <span class="active">
-                    Aprobado
-                  </span>
-                  </td>
-                } @else if(loan.status === 'declined'){
-                  <td  class="px-6 py-4 whitespace-nowrap uppercase">
-                    <span
-                    class="inactive"
-                  >
-                    Rechazado
-                </span>
-                </td>
-                }@else if(loan.status === 'inactive'){
-                  <td  class="px-6 py-4 whitespace-nowrap uppercase">
-                    <span
-                    class="pending"
-                  >
-                    Inactivo
-                </span>
-                  </td>
-                }@else if(loan.status === 'pending'){
-                  <td  class="px-6 py-4 whitespace-nowrap uppercase">
-                    <span
-                    class="pending"
-                  >
-                    Pendiente
-                </span>
-                  </td>
-                }
-                <td class="px-4 py-2">{{getOrganizationNameById(loan.organization_id)}}</td>
-                <td class="px-4 py-2">{{loan.issued_at}}</td>
-                <td class="px-4 py-2">${{loan.amount}}.00</td>
-                <td class="px-4 py-2">${{loan.total_amount_due}}.00</td>
-                <td class="px-4 py-2">{{loan.interest_rate}}%</td>
-                <td class="px-4 py-2">{{loan.purpose}}</td>
-                <td class="px-4 py-2">
-                  <div class="content-center align-middle">
-                    <button  (click)="openModal(loan)" class="pi pi-eye text-blue-500 hover:text-blue-400 text-2xl p-2 "></button>
-                    @if(loan.status === 'approved'){
-                      <button  (click)="openPayModal(loan.loan_id)" class="pi pi-dollar text-green-500 hover:text-green-400 text-2xl p-2 "></button>
-                    }
-                    @if(modalIsOpen){
-                      <app-loan-details-modal [loan]="this.cosa" [userRole]="this.user_role" (closeModal)="closeModal()"></app-loan-details-modal>
-                    }         
-                    @if(payModalIsOpen){
-                      <app-pay-modal [loan_id]="this.selectedId" (onClose)="closePayModal()"></app-pay-modal>
-                    }
+
+    <!-- Active Loans Section -->
+    <!-- Loan Card 1 - Active -->
+    <div class="bg-white rounded-lg shadow-sm border p-6">
+                    <div  class="border border-gray-200 rounded-lg p-6">
+                <div  class="flex items-start justify-between mb-4">
+                  <div>
+                    <h3  class="text-lg font-semibold text-gray-900">Préstamo #001</h3>
+                    <p  class="text-sm text-gray-600">Grupo Familiar López</p>
+                    <span  class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full mt-1">
+                      Al día
+                    </span>
                   </div>
-                </td>
-              </tr>
-              }
-          </tbody>
-        </table>
-      </div>
-    }
-   
+                  <div  class="text-right">
+                    <p  class="text-xl font-bold text-gray-900">$5,000</p>
+                    <p  class="text-sm text-gray-600">Saldo restante</p>
+                  </div>
+                </div>
+
+                <div  class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
+                  <div>
+                    <p  class="text-sm text-gray-600">Monto original</p>
+                    <p  class="font-semibold">$8,000</p>
+                  </div>
+                  <div>
+                    <p  class="text-sm text-gray-600">Cuota mensual</p>
+                    <p  class="font-semibold">$728</p>
+                  </div>
+                  <div>
+                    <p  class="text-sm text-gray-600">Próximo pago</p>
+                    <p  class="font-semibold">15 Ene 2024</p>
+                  </div>
+                  <div>
+                    <p  class="text-sm text-gray-600">Pagos restantes</p>
+                    <p  class="font-semibold">7 de 12</p>
+                  </div>
+                </div>
+
+                <div  class="mb-4">
+                  <div  class="flex items-center justify-between mb-2">
+                    <span  class="text-sm font-medium text-gray-700">Progreso de pago</span>
+                    <span  class="text-sm text-gray-600">62.5% completado</span>
+                  </div>
+                  <div  class="w-full bg-gray-200 rounded-full h-2">
+                    <div  class="bg-green-600 h-2 rounded-full w-24"></div>
+                  </div>
+                </div>
+
+                <div  class="flex space-x-3">
+                  <button  class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center space-x-2">
+                    <i  class="pi pi-card pi-credit-cardw-4 h-4"></i>
+                    <span>Realizar Pago</span>
+                  </button>
+                  <button  class="border border-gray-300 px-4 py-2 rounded-lg hover:bg-gray-50">
+                    Ver Amortización
+                  </button>
+                  <button  class="border border-gray-300 px-4 py-2 rounded-lg hover:bg-gray-50">
+                    Historial de Pagos
+                  </button>
+                </div>
+              </div>
+    </div>
   </div>
-  
-</div>
+
+  <!-- Upcoming Payments Section (Hidden by default, shown when tab is active) -->
+  <div class="hidden space-y-4">
+    <h2 class="text-xl font-semibold text-gray-900 mb-4">Próximos Pagos</h2>
+
+    <!-- Payment Card -->
+    <div class="bg-white rounded-lg shadow-sm border p-4">
+      <div class="flex items-center justify-between">
+        <div class="flex-1">
+          <div class="flex items-center gap-3 mb-2">
+            <h4 class="font-medium text-gray-900">Préstamo #12458</h4>
+            <span class="text-sm text-gray-500">Cooperativa Familiar</span>
+          </div>
+          <p class="text-sm text-gray-600">Vence: 15 de Marzo, 2025</p>
+        </div>
+        <div class="text-right">
+          <p class="text-lg font-semibold text-gray-900">$625</p>
+          <p class="text-sm text-orange-600">En 5 días</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-sm border p-4">
+      <div class="flex items-center justify-between">
+        <div class="flex-1">
+          <div class="flex items-center gap-3 mb-2">
+            <h4 class="font-medium text-gray-900">Préstamo #12789</h4>
+            <span class="text-sm text-gray-500">Amigos Emprendedores</span>
+          </div>
+          <p class="text-sm text-gray-600">Vence: 20 de Marzo, 2025</p>
+        </div>
+        <div class="text-right">
+          <p class="text-lg font-semibold text-gray-900">$625</p>
+          <p class="text-sm text-green-600">En 10 días</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Actions -->
+  <div class="mt-8 bg-gray-100 rounded-lg p-6">
+    <h3 class="text-lg font-semibold text-gray-900 mb-4">Acciones Rápidas</h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <button
+        class="flex items-center gap-3 p-4 bg-white rounded-lg border hover:shadow-md transition-shadow"
+      >
+        <div
+          class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center"
+        >
+          <svg
+            class="w-5 h-5 text-blue-600"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+            ></path>
+          </svg>
+        </div>
+        <div class="text-left">
+          <p class="font-medium text-gray-900">Solicitar Préstamo</p>
+          <p class="text-sm text-gray-500">Nueva solicitud</p>
+        </div>
+      </button>
+
+      <button
+        class="flex items-center gap-3 p-4 bg-white rounded-lg border hover:shadow-md transition-shadow"
+      >
+        <div
+          class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center"
+        >
+          <svg
+            class="w-5 h-5 text-green-600"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+            ></path>
+          </svg>
+        </div>
+        <div class="text-left">
+          <p class="font-medium text-gray-900">Hacer Pago</p>
+          <p class="text-sm text-gray-500">Pago anticipado</p>
+        </div>
+      </button>
+
+      <button
+        class="flex items-center gap-3 p-4 bg-white rounded-lg border hover:shadow-md transition-shadow"
+      >
+        <div
+          class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center"
+        >
+          <svg
+            class="w-5 h-5 text-purple-600"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+            ></path>
+          </svg>
+        </div>
+        <div class="text-left">
+          <p class="font-medium text-gray-900">Historial</p>
+          <p class="text-sm text-gray-500">Ver movimientos</p>
+        </div>
+      </button>
+
+      <button
+        class="flex items-center gap-3 p-4 bg-white rounded-lg border hover:shadow-md transition-shadow"
+      >
+        <div
+          class="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center"
+        >
+          <svg
+            class="w-5 h-5 text-orange-600"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            ></path>
+          </svg>
+        </div>
+        <div class="text-left">
+          <p class="font-medium text-gray-900">Ayuda</p>
+          <p class="text-sm text-gray-500">Soporte técnico</p>
+        </div>
+      </button>
+    </div>
+  </div>
+</body>

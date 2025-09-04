@@ -8,10 +8,6 @@ export const routes: Routes = [
         loadComponent:() => import('./shared/components/landingpage/landingpage.component')
     },
     {
-        path: 'register',
-        loadComponent:() => import('./business/auth/register/register.component')
-    },
-    {
         path:'login',
             component: LoginComponent, 
             canActivate:[PreventGuard]
@@ -26,16 +22,16 @@ export const routes: Routes = [
              loadComponent:() => import('./business/dashboard/dashboard.component')
             },
             {
+                path: 'organizations',
+                loadComponent:() => import('./business/organizations/organizations.component')
+            },
+            {
                 path: 'loans',
                 loadComponent:() => import('./business/loans/loans.component')
             },
             {
-                path: 'transactions',
-                loadComponent:() => import('./business/transactions/transactions-table-detail.component')
-            },
-            {
-                path: 'organizations',
-                loadComponent:() => import('./business/organizations/organizations.component')
+                path: 'loans/request',
+                loadComponent:() => import('./business/loans/request-loan/request-loan.component')
             },
             {
                 path: 'administration',
@@ -46,16 +42,16 @@ export const routes: Routes = [
                 loadComponent:() => import('./business/profile/profile.component')
             },
             {
-                path: 'loans/active',
-                loadComponent:() => import('./business/loans/shared/active-loans/active-loans.component')
+                path: 'organizations/deposit',
+                loadComponent:() => import('./business/organizations/deposit/deposit.component')
             },
             {
-                path: 'loans/inactive',
-                loadComponent:() => import('./business/loans/shared/inactive-component/inactive-loans.component')
+                path: 'loans/pending',
+                loadComponent: () => import('./business/loans/pending/pending.component')
             },
             {
-                path: 'loans/rejected',
-                loadComponent:() => import('./business/loans/shared/rejected-loans/rejected-loans.component')
+                path: 'notifications',
+                loadComponent: () => import('./business/notifications/notifications.component')
             }
         ]
     }  

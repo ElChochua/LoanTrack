@@ -2,20 +2,13 @@ import { Component, signal } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { AuthService } from '../../core/services/auth/auth.service';
 import { Router } from '@angular/router';
-import { UnassignedUsersComponent } from "../user-management/shared/users-table/unassigned-users/unassigned-users.component";
 import { User } from '../../models/Users/UserModel';
-import { OrganizationsTableComponent } from "../organizations/shared/organizations-table/organizations-table.component";
-import { UsersTableComponent } from "../user-management/shared/users-table/users-table.component";
 import { UserService } from '../../core/services/User/user.service';
 import { SpinnerComponent } from '../../shared/components/spinner/spinner.component';
 import { SpinnerService } from '../../core/services/spinner/spinner.service';
 import { CommonModule } from '@angular/common';
 import { LoansService } from '../../core/services/loans/loans.service';
-import { Loans } from '../../models/Loans/LoansModel';
-import { LoansTableComponent } from '../loans/shared/loans-table/loans-table.component';
-import { CreditTableComponent } from '../loans/shared/credit-table/credit-table.component';
-import { UserCreditsComponent } from '../loans/shared/users-credits-table/user-credit-table.component';
-import { TransactionsTable } from '../transactions/shared/transactions-table/transactions-table.component';
+
 import { OrganizationsService } from '../../core/services/organizations-service/organizations.service';
 import { SideBarComponent } from '../../shared/components/side-bar/side-bar.component';
 import { HeaderComponent } from "../../shared/components/header/header.component";
@@ -37,8 +30,7 @@ interface RecentPayment {
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, UnassignedUsersComponent, OrganizationsTableComponent,
-    UsersTableComponent, SpinnerComponent, LoansTableComponent, CreditTableComponent, UserCreditsComponent, TransactionsTable, SideBarComponent, HeaderComponent],
+  imports: [CommonModule, SpinnerComponent, SideBarComponent, HeaderComponent],
   templateUrl: './dashboard.component.html',
 })
 export default class DashboardComponent  {

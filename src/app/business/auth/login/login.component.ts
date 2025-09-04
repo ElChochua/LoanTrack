@@ -10,9 +10,10 @@ import { ToastrService } from 'ngx-toastr';
   standalone: true,
   imports: [HeaderComponent, ReactiveFormsModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
 })
 export class LoginComponent {
+  passwordFieldType: string = "password";
+  toggleForm: string = "login";
   logInForm: FormGroup;
   constructor(
     private toastService: ToastrService,
@@ -30,7 +31,8 @@ export class LoginComponent {
         email: this.logInForm.get('email')?.value,
         password: this.logInForm.get('password')?.value
       };
-
+      this.authService.clearLocalStorage();
+      console.log("webos");
       this.authService.login(userCreds).subscribe({
         next: (response) => {
           this.router.navigate(['/dashboard']);
@@ -45,7 +47,7 @@ export class LoginComponent {
           );          
         },
         error: (err) => {
-          this.toastService.error('No te has Podido Logear','Espera que el administrador te de acceso',
+          this.toastService.error('No ha sido posible iniciar sesión','Verifica tu correo electrónico y contraseña',
             {
               closeButton: true,
               timeOut: 3000,
@@ -60,6 +62,12 @@ export class LoginComponent {
       
     }else{
     }
+  }
+  changePasswordVisibility():void{
+    this.passwordFieldType = this.passwordFieldType === "password" ? "text" : "password";
+  }
+  toggleFormF():void{
+    this.toggleForm = this.toggleForm === "login" ? "register" : "login";
   }
   resetForm():void{
     this.logInForm.reset();

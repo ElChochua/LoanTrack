@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, Observer, tap } from 'rxjs';
-import { UpdateUserRole, User, UserCreds, UserDetail, UserDetails } from '../../../models/Users/UserModel';
+import { User, UserCreds, UserDetails } from '../../../models/Users/UserModel';
 
 @Injectable({
   providedIn: 'root'
@@ -16,12 +16,12 @@ export class UserService {
     //  tap(response => {console.log(response)})
     );
   }
-  updateUserDetails(user:UserDetail):Observable<any>{
+  updateUserDetails(user:UserDetails):Observable<any>{
     return this.httpClient.put<any>(`${this.api_url}user/update-user`,user).pipe(
     //  tap(response => {console.log(response)})
     );
   }
-  updateUserRole(user:UpdateUserRole):Observable<any>{
+  updateUserRole(user:User):Observable<any>{
     return this.httpClient.put<any>(`${this.api_url}superadmin/update-user-role`,user).pipe(
     //  tap(response => {console.log(response)})
     );

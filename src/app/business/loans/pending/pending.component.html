@@ -1,0 +1,286 @@
+ <div  class="min-h-screen bg-gray-50">
+
+        <div  class="mb-8">
+          <h1  class="text-2xl font-bold text-gray-900">Centro de Votación</h1>
+          <p  class="text-gray-600">Revisa y vota en las solicitudes de préstamo pendientes</p>
+        </div>
+
+        <div  class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 mb-6">
+          <div  class="flex flex-col md:flex-row gap-4">
+            <select  class="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+              <option>Todas las organizaciones</option>
+              <option>Grupo Familiar López</option>
+              <option>Amigos Universidad</option>
+              <option>Vecinos Colonia Norte</option>
+            </select>
+
+            <select  class="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+              <option>Todos los estados</option>
+              <option>Pendiente de mi voto</option>
+              <option>Ya voté</option>
+              <option>Próximo a vencer</option>
+            </select>
+
+            <select  class="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+              <option>Ordenar por fecha</option>
+              <option>Ordenar por monto</option>
+              <option>Ordenar por progreso</option>
+            </select>
+          </div>
+        </div>
+
+        <div  class="space-y-6">
+          <div  class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+            <div  class="p-6">
+              <div  class="flex items-start justify-between mb-4">
+                <div  class="flex items-center space-x-4">
+                  <div  class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                    <span  class="text-blue-600 font-semibold">AG</span>
+                  </div>
+                  <div>
+                    <h3  class="text-lg font-semibold text-gray-900">Ana García</h3>
+                    <p  class="text-sm text-gray-600">Grupo Familiar López</p>
+                    <div  class="flex items-center mt-1">
+                      <i  class="pi pi-star w-4 h-4 text-yellow-500 mr-1" ></i>
+                      <span  class="text-sm text-gray-600">Mayor aportante del ciclo</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div  class="text-right">
+                  <p  class="text-2xl font-bold text-gray-900">$5,000</p>
+                  <p  class="text-sm text-gray-600">Solicitado</p>
+                  <span  class="inline-block bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded-full mt-1">
+                    Pendiente de tu voto
+                  </span>
+                </div>
+              </div>
+
+              <div  class="mb-4">
+                <p  class="text-sm text-gray-700 mb-2">
+                  <strong>Motivo:</strong> Reparación de vehículo para trabajo. Necesito arreglar la transmisión de mi
+                  auto que uso para trabajar como delivery. Sin el vehículo no puedo generar ingresos.
+                </p>
+                <div  class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                  <div>
+                    <span  class="text-gray-600">Plazo:</span>
+                    <span  class="font-medium ml-1">12 meses</span>
+                  </div>
+                  <div>
+                    <span  class="text-gray-600">Cuota mensual:</span>
+                    <span  class="font-medium ml-1">$456</span>
+                  </div>
+                  <div>
+                    <span  class="text-gray-600">Tasa:</span>
+                    <span  class="font-medium ml-1">4.5%</span>
+                  </div>
+                  <div>
+                    <span  class="text-gray-600">Aporte en ciclo:</span>
+                    <span  class="font-medium ml-1">$3,500</span>
+                  </div>
+                </div>
+              </div>
+
+              <div  class="mb-4">
+                <div  class="flex items-center justify-between mb-2">
+                  <span  class="text-sm font-medium text-gray-700">Progreso de votación</span>
+                  <span  class="text-sm text-gray-600">5 de 8 votos (62.5%)</span>
+                </div>
+                <div  class="w-full bg-gray-200 rounded-full h-2">
+                  <div  class="bg-green-600 h-2 rounded-full w-24"></div>
+                </div>
+                <div  class="flex items-center justify-between mt-2 text-xs text-gray-500">
+                  <span>Mínimo requerido: 25% (2 votos)</span>
+                  <div  class="flex items-center">
+                    <i  class="pi pi-clock w-3 h-3 mr-1" ></i>
+                    <span>Vence en 4 días</span>
+                  </div>
+                </div>
+              </div>
+
+              <div  class="mb-4">
+                <p  class="text-sm font-medium text-gray-700 mb-2">Votos registrados:</p>
+                <div  class="flex items-center space-x-4 text-sm">
+                  <div  class="flex items-center">
+                    <i  class="pi pi-check-circle w-4 h-4 text-green-600 mr-1" ></i>
+                    <span  class="text-green-700">4 a favor</span>
+                  </div>
+                  <div  class="flex items-center">
+                    <i  class="pi pi-times-circle w-4 h-4 text-red-600 mr-1" ></i>
+                    <span  class="text-red-700">1 en contra</span>
+                  </div>
+                  <div  class="flex items-center">
+                    <i  class="pi pi-envelope w-4 h-4 text-blue-600 mr-1" ></i>
+                    <span  class="text-blue-700">3 comentarios</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div  class="border-t border-gray-200 px-6 py-4 bg-gray-50">
+              <div  class="flex space-x-3">
+                <button  class="flex-1 bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 flex items-center justify-center space-x-2">
+                  <i  class="pi pi-check w-4 h-4" ></i>
+                  <span>Aprobar</span>
+                </button>
+                <button  class="flex-1 bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 flex items-center justify-center space-x-2">
+                  <i  class="pi pi-times-circle w-4 h-4" ></i>
+                  <span>Rechazar</span>
+                </button>
+                <button  class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 flex items-center space-x-2">
+                  <i  class="pi pi-eye w-4 h-4" ></i>
+                  <span>Ver Detalles</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div  class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+            <div  class="p-6">
+              <div  class="flex items-start justify-between mb-4">
+                <div  class="flex items-center space-x-4">
+                  <div  class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                    <span  class="text-purple-600 font-semibold">RS</span>
+                  </div>
+                  <div>
+                    <h3  class="text-lg font-semibold text-gray-900">Roberto Sánchez</h3>
+                    <p  class="text-sm text-gray-600">Grupo Familiar López</p>
+                  </div>
+                </div>
+
+                <div  class="text-right">
+                  <p  class="text-2xl font-bold text-gray-900">$3,500</p>
+                  <p  class="text-sm text-gray-600">Solicitado</p>
+                  <span  class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mt-1">
+                    Ya votaste: A favor
+                  </span>
+                </div>
+              </div>
+
+              <div  class="mb-4">
+                <p  class="text-sm text-gray-700 mb-2">
+                  <strong>Motivo:</strong> Gastos médicos familiares urgentes.
+                </p>
+                <div  class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                  <div>
+                    <span  class="text-gray-600">Plazo:</span>
+                    <span  class="font-medium ml-1">6 meses</span>
+                  </div>
+                  <div>
+                    <span  class="text-gray-600">Cuota mensual:</span>
+                    <span  class="font-medium ml-1">$613</span>
+                  </div>
+                  <div>
+                    <span  class="text-gray-600">Tasa:</span>
+                    <span  class="font-medium ml-1">5.0%</span>
+                  </div>
+                  <div>
+                    <span  class="text-gray-600">Aporte en ciclo:</span>
+                    <span  class="font-medium ml-1">$1,200</span>
+                  </div>
+                </div>
+              </div>
+
+              <div  class="mb-4">
+                <div  class="flex items-center justify-between mb-2">
+                  <span  class="text-sm font-medium text-gray-700">Progreso de votación</span>
+                  <span  class="text-sm text-gray-600">2 de 8 votos (25%)</span>
+                </div>
+                <div  class="w-full bg-gray-200 rounded-full h-2">
+                  <div  class="bg-yellow-500 h-2 rounded-full w-24"></div>
+                </div>
+                <div  class="flex items-center justify-between mt-2 text-xs text-gray-500">
+                  <span>Mínimo alcanzado: 25% (2 votos)</span>
+                  <div  class="flex items-center">
+                    <i  class="pi pi-clock w-3 h-3 mr-1" ></i>
+                    <span>Vence en 6 días</span>
+                  </div>
+                </div>
+              </div>
+
+              <div  class="mb-4">
+                <div  class="flex items-center space-x-4 text-sm">
+                  <div  class="flex items-center">
+                    <i  class="pi pi-check-circle w-4 h-4 text-green-600 mr-1" ></i>
+                    <span  class="text-green-700">2 a favor</span>
+                  </div>
+                  <div  class="flex items-center">
+                    <i  class="pi pi-times-circle w-4 h-4 text-red-600 mr-1" ></i>
+                    <span  class="text-red-700">0 en contra</span>
+                  </div>
+                  <div  class="flex items-center">
+                    <i  class="pi pi-envelope w-4 h-4 text-blue-600 mr-1" ></i>
+                    <span  class="text-blue-700">1 comentario</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div  class="border-t border-gray-200 px-6 py-4 bg-gray-50">
+              <div  class="flex items-center justify-between">
+                <div  class="flex items-center text-sm text-gray-600">
+                  <i  class="pi pi-check-circle w-4 h-4 text-green-600 mr-2" ></i>
+                  <span>Votaste a favor el 10 de Enero</span>
+                </div>
+                <button  class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 flex items-center space-x-2">
+                  <i  class="pi pi-eye w-4 h-4" ></i>
+                  <span>Ver Detalles</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div  class="bg-white rounded-lg shadow-sm border border-green-200 overflow-hidden">
+            <div  class="p-6">
+              <div  class="flex items-start justify-between mb-4">
+                <div  class="flex items-center space-x-4">
+                  <div  class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                    <i  class="pi pi-check-circle w-6 h-6 text-green-600" ></i>
+                  </div>
+                  <div>
+                    <h3  class="text-lg font-semibold text-gray-900">María López</h3>
+                    <p  class="text-sm text-gray-600">Amigos Universidad</p>
+                  </div>
+                </div>
+
+                <div  class="text-right">
+                  <p  class="text-2xl font-bold text-gray-900">$8,000</p>
+                  <p  class="text-sm text-gray-600">Aprobado</p>
+                  <span  class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full mt-1">
+                    Aprobado - Desembolsado
+                  </span>
+                </div>
+              </div>
+
+              <div  class="mb-4">
+                <p  class="text-sm text-gray-700 mb-2">
+                  <strong>Motivo:</strong> Inversión en equipo para negocio familiar.
+                </p>
+              </div>
+
+              <div  class="flex items-center space-x-4 text-sm text-gray-600">
+                <div  class="flex items-center">
+                  <i  class="pi pi-check-circle w-4 h-4 text-green-600 mr-1" ></i>
+                  <span>Aprobado por unanimidad (12/12 votos)</span>
+                </div>
+                <span>•</span>
+                <span>Desembolsado el 8 de Enero</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div  class="mt-8 flex items-center justify-between">
+          <p  class="text-sm text-gray-700">
+            Mostrando <span  class="font-medium">1</span> a <span  class="font-medium">3</span>
+            <span  class="font-medium">8</span> solicitudes
+          </p>
+
+          <div  class="flex space-x-2">
+            <button  class="px-3 py-2 border border-gray-300 rounded-lg text-sm hover:bg-gray-50">Anterior</button>
+            <button  class="px-3 py-2 bg-blue-600 text-white rounded-lg text-sm">1</button>
+            <button  class="px-3 py-2 border border-gray-300 rounded-lg text-sm hover:bg-gray-50">2</button>
+            <button  class="px-3 py-2 border border-gray-300 rounded-lg text-sm hover:bg-gray-50">Siguiente</button>
+          </div>
+        </div>
+    </div>

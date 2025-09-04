@@ -2,7 +2,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, tap, map } from 'rxjs';
-import { UserCreds, User, UserRegister } from '../../../models/Users/UserModel';
+import { UserCreds, User } from '../../../models/Users/UserModel';
 
 @Injectable({
   providedIn: 'root'
@@ -44,6 +44,20 @@ export class AuthService {
       return 0;
     }
   }
+  getUserMail():string{
+    const token = this.getToken();
+    if(!token){
+      return '';
+    }
+    //get the subject from the token
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    const userMail = payload.sub;
+    if(userMail){
+      return userMail;
+    }else{
+      return '';
+    }
+  }
   setUser(user:User):void{
     this.userSubject.next(user);
     console.log(user);
@@ -51,7 +65,12 @@ export class AuthService {
   setUsername(user:string):void{
     localStorage.setItem(this.user_name, user);
   }
-
+  clearLocalStorage():void{
+    localStorage.removeItem(this.tokenkey);
+    localStorage.removeItem(this.refreshTokenKey);
+    localStorage.removeItem(this.user_name);
+    localStorage.removeItem(this.user_id);
+  }
   getUser():string | null{
     if(typeof window !== 'undefined'){
       return localStorage.getItem(this.user_name);
@@ -83,11 +102,12 @@ export class AuthService {
   setRefreshToken(refreshToken:string):void{
     localStorage.setItem(this.refreshTokenKey, refreshToken);
   }
-  register(user: UserRegister):Observable<any>{
+ /* register(user: UserRegister):Observable<any>{
     return this.httpClient.post<any>(this.api_url + '/register', user).pipe(
       tap(response => {console.log(response)})
     );
   }
+  */
   private setToken(token:string): void{
       localStorage.setItem(this.tokenkey, token);
   }

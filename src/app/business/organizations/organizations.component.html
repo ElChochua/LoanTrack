@@ -1,1 +1,146 @@
-<app-organizations-details-table></app-organizations-details-table>
+  <div  class="p-6 space-y-6">
+      <div  class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+          <h1  class="text-2xl font-bold text-gray-900">Organizaciones</h1>
+          <p  class="text-gray-600">Gestiona tus organizaciones financieras</p>
+        </div>
+
+      </div>
+      <div  class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 ">
+  <p-card class="border border-gray-200 rounded-sm shadow-sm hover:shadow-md transition-shadow w-auto h-auto">
+  <div class="flex justify-between items-start mb-1">
+    <div class="px-2">
+      <h2 class="text-lg font-semibold text-gray-900">Grupo Familiar López</h2>
+    </div>
+    <span class="px-4 py-2 text-xs font-medium rounded-full bg-green-100 text-green-600">
+      Activo
+    </span>
+  </div>
+
+  <p class="text-gray-600 text-sm mb-4 px-4">
+    Organización familiar para ahorros y préstamos entre miembros de la familia.
+  </p>
+
+  <div class="flex items-center justify-between text-gray-700 mb-3">
+    <div class="flex items-center space-x-2 px-4">
+      <i class="pi pi-dollar text-gray-500"></i>
+      <span class="font-semibold">45,000</span>
+    </div>
+    <div class="flex items-center px-3">
+      <i class="pi pi-users text-gray-500"></i>
+      <span>8 miembros</span>
+    </div>
+  </div>
+
+  <div class="flex items-center justify-between text-gray-700 mb-3">
+    <div class="flex items-center space-x-2 px-4">
+      <span class="text-sm text-gray-500">Código de invitación</span>
+      <span class="px-2 py-1 bg-gray-100 text-gray-800 text-sm font-mono rounded">
+        FAM-2024-001
+      </span>
+    </div>
+    <div class="flex items-center px-3">
+      <span>Admin</span>
+    </div>
+  </div>
+
+  <div class="flex gap-2 pt-3 border-t border-gray-200">
+    <button pButton type="button" label="Ver" icon="pi pi-eye"
+      class="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-lg"></button>
+    <button pButton type="button" label="Unirse"
+      class="flex-1 bg-gray-100 text-gray-500 hover:bg-gray-200 px-3 py-2 rounded-lg"></button>
+  </div>
+</p-card>
+  <p-card class="border border-gray-200 rounded-sm shadow-sm hover:shadow-md transition-shadow w-auto h-auto">
+  <div class="flex justify-between items-start mb-1">
+    <div class="px-2">
+      <h2 class="text-lg font-semibold text-gray-900">SexomatasFc</h2>
+    </div>
+    <span class="px-4 py-2 text-xs font-medium rounded-full bg-green-100 text-green-600">
+      Activo
+    </span>
+  </div>
+
+  <p class="text-gray-600 text-sm mb-4 px-4">
+    Organizacion para gestionar los fondos de los papartidos.
+  </p>
+
+  <div class="flex items-center justify-between text-gray-700 mb-3">
+    <div class="flex items-center space-x-2 px-4">
+      <i class="pi pi-dollar text-gray-500"></i>
+      <span class="font-semibold">45,000</span>
+    </div>
+    <div class="flex items-center px-3">
+      <i class="pi pi-users text-gray-500"></i>
+      <span>8 miembros</span>
+    </div>
+  </div>
+
+  <div class="flex items-center justify-between text-gray-700 mb-3">
+    <div class="flex items-center space-x-2 px-4">
+      <span class="text-sm text-gray-500">Código de invitación</span>
+      <span class="px-2 py-1 bg-gray-100 text-gray-800 text-sm font-mono rounded">
+        FAM-2024-001
+      </span>
+    </div>
+    <div class="flex items-center px-3">
+      <span>Admin</span>
+    </div>
+  </div>
+
+  <div class="flex gap-2 pt-3 border-t border-gray-200">
+    <button pButton type="button" label="Ver" icon="pi pi-eye"
+      class="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-lg"></button>
+    <button pButton type="button" label="Unirse"
+      class="flex-1 bg-gray-100 text-gray-500 hover:bg-gray-200 px-3 py-2 rounded-lg"></button>
+  </div>
+</p-card>
+<!--
+  Create Organization Card
+-->
+  <p-card class="border border-dashed border-gray-300 rounded-sm shadow-sm hover:shadow-md transition-shadow flex items-center justify-center h-auto">
+    <div class="p-6">
+      <h3 class="font-semibold text-gray-900 mb-2">Crear Nueva Organización</h3>
+      <p class="text-sm text-gray-500 mb-4">Inicia una nueva cooperativa financiera</p>
+      <p-button label="Crear Organización" icon="pi pi-plus" class="w-full"></p-button>
+    </div>
+  </p-card>
+
+
+        <mat-card>
+          <mat-card-content  class="flex items-center p-6">
+            <div  class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-4">
+              <i  class="pi pi-dollar  h-6 w-6 text-green-600"></i>
+            </div>
+            <div>
+              <p  class="text-2xl font-bold">$67,500</p>
+              <p  class="text-sm text-gray-500">Fondo Total Disponible</p>
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card>
+          <mat-card-content  class="flex items-center p-6">
+            <div  class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
+              <i  class="pi pi-trending-up h-6 w-6 text-purple-600" ></i>
+            </div>
+            <div>
+              <p  class="text-2xl font-bold">23</p>
+              <p  class="text-sm text-gray-500">Total de Miembros</p>
+            </div>
+          </mat-card-content>
+        </mat-card>
+                <mat-card>
+          <mat-card-content  class="flex items-center p-6">
+            <div  class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
+              <i  class="pi pi-trending-up h-6 w-6 text-purple-600" ></i>
+            </div>
+            <div>
+              <p  class="text-2xl font-bold">23</p>
+              <p  class="text-sm text-gray-500">Total de Miembros</p>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+    

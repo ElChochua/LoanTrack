@@ -1,38 +1,51 @@
-<div class="hidden md:flex md:flex-shrink-0">
-  <div class="flex flex-col w-64">
-    <div class="flex flex-col h-0 flex-1 border-r border-gray-200 bg-white">
-      <div class="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
-        <div class="flex items-center flex-shrink-0 px-4">
-          <!-- Logo or branding could go here if needed -->
-        </div>
-        <nav class="mt-5 flex-1 px-2 bg-white space-y-1">
-          @for (item of navItems; track item.label) {
-            <a 
-              [routerLink]="item.route" 
-              routerLinkActive="bg-indigo-50 text-indigo-600" 
-              [routerLinkActiveOptions]="{exact: item.route === '/dashboard'}"
-              class="group flex items-center px-2 py-2 text-sm font-medium rounded-md"
-              [ngClass]="{'text-gray-600 hover:bg-gray-50 hover:text-gray-900': true}"
-            >
-              <span [innerHTML]="item.icon" class="mr-3 flex-shrink-0 h-6 w-6"></span>
-              {{ item.label }}
-            </a>
-          }
-        </nav>
-      </div>
-      <div class="flex-shrink-0 flex border-t border-gray-200 p-4">
-        <div class="flex-shrink-0 w-full group block">
-          <div class="flex items-center">
-            <div>
-              <img class="inline-block h-9 w-9 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+<div class="flex flex-1  h-full">
+        <aside
+          class=
+"          w-64 bg-white border-r border-gray-200 fixed left-0 top-16 bottom-0 z-40 transform transition-transform duration-300 ease-in-out
+          lg:translate-x-0 lg:static lg:z-0
+          -translate-x-full"
+        >
+          <nav class="h-full overflow-y-auto py-6">
+            <div class="px-6 mb-8">
+              <h2 class="text-lg font-semibold text-gray-900">Navegación</h2>
             </div>
-            <div class="ml-3">
-              <p class="text-sm font-medium text-gray-700 group-hover:text-gray-900">John Doe</p>
-              <p class="text-xs font-medium text-gray-500 group-hover:text-gray-700">View profile</p>
+
+            <div class="space-y-1 px-3">
+              <a routerLink="/dashboard" routerLinkActive="active" class="block px-4 py-2 rounded hover:bg-gray-100 font-medium text-gray-700">
+                Dashboard
+              </a>
+              <a routerLink="/organizations" routerLinkActive="active" class="block px-4 py-2 rounded hover:bg-gray-100 font-medium text-gray-700">
+                Organizaciones
+              </a>
+              <a routerLink="/loans" routerLinkActive="active" class="block px-4 py-2 rounded hover:bg-gray-100 font-medium text-gray-700">
+                Mis Préstamos
+              </a>
+              <a routerLink="/loans/pending" routerLinkActive="active" class="block px-4 py-2 rounded hover:bg-gray-100 font-medium text-gray-700">
+                Aprobaciones
+              </a>
+              <a routerLink="/profile" routerLinkActive="active" class="block px-4 py-2 rounded hover:bg-gray-100 font-medium text-gray-700">
+                Mi Perfil
+              </a>
+              <a routerLink="/notifications" routerLinkActive="active" class="block px-4 py-2 rounded hover:bg-gray-100 font-medium text-gray-700">
+                Notificaciones
+              </a>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+
+            <div class="mt-8 px-6">
+              <div class="border-t border-gray-200 pt-6">
+                <h3 class="text-sm font-medium text-gray-500 mb-3">ACCIONES RÁPIDAS</h3>
+                <div class="space-y-2">
+                  <button type="button" class="w-full justify-start bg-transparent border border-gray-300 rounded px-4 py-2 text-sm font-medium hover:bg-gray-100">
+                    Crear Organización
+                  </button>
+                  <button type="button" routerLink="/organizations/deposit" class="w-full justify-start bg-transparent border border-gray-300 rounded px-4 py-2 text-sm font-medium hover:bg-gray-100">
+                    Realizar Aportación
+                  </button>
+                  <button type="button" routerLink="/loans/request" class="w-full justify-start bg-transparent border border-gray-300 rounded px-4 py-2 text-sm font-medium hover:bg-gray-100">
+                    Solicitar Préstamo
+                  </button>
+                </div>
+              </div>
+            </div>
+          </nav>
+        </aside>

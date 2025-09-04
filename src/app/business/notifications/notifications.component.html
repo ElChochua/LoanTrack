@@ -1,0 +1,208 @@
+ <div  class="min-h-screen p-4 bg-gray-50">
+
+        <div  class="flex items-center justify-between mb-8">
+          <div>
+            <h1  class="text-2xl font-bold text-gray-900">Notificaciones</h1>
+            <p  class="text-gray-600">Mantente al día con toda tu actividad financiera</p>
+          </div>
+          <button  class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center space-x-2">
+            <i  class="w-4 h-4 pi pi-check-square"></i>
+            <span>Marcar todas como leídas</span>
+          </button>
+        </div>
+
+        <div  class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 mb-6">
+          <div  class="flex flex-col md:flex-row gap-4">
+            <select  class="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+              <option>Todos los tipos</option>
+              <option>Préstamos aprobados</option>
+              <option>Préstamos rechazados</option>
+              <option>Pagos vencidos</option>
+              <option>Nuevas solicitudes</option>
+              <option>Fechas de corte</option>
+            </select>
+
+            <select  class="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+              <option>Todas las organizaciones</option>
+              <option>Grupo Familiar López</option>
+              <option>Amigos Universidad</option>
+              <option>Vecinos Colonia Norte</option>
+            </select>
+
+            <select  class="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+              <option>Todas</option>
+              <option>No leídas</option>
+              <option>Leídas</option>
+            </select>
+          </div>
+        </div>
+
+        <div  class="space-y-4">
+          <div  class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 border-l-4 border-l-green-500">
+            <div  class="flex items-start space-x-4">
+              <div  class="bg-green-100 p-2 rounded-full">
+                <i  class="w-5 h-5 text-green-600 pi pi-check-circle"></i>
+              </div>
+              <div  class="flex-1">
+                <div  class="flex items-center justify-between mb-2">
+                  <h3  class="font-semibold text-gray-900">Préstamo Aprobado</h3>
+                  <div  class="flex items-center space-x-2">
+                    <span  class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">No leída</span>
+                    <span  class="text-sm text-gray-500">Hace 2 horas</span>
+                  </div>
+                </div>
+                <p  class="text-gray-700 mb-2">
+                  Tu solicitud de préstamo por <strong>$5,000</strong> ha sido aprobada por unanimidad en
+                  <strong>Grupo Familiar López</strong>.
+                </p>
+                <p  class="text-sm text-gray-600 mb-3">
+                  El dinero será transferido a tu cuenta en las próximas 24 horas.
+                </p>
+                <button  class="text-blue-600 hover:text-blue-700 text-sm font-medium">
+                  Ver detalles del préstamo →
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div  class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 border-l-4 border-l-blue-500">
+            <div  class="flex items-start space-x-4">
+              <div  class="bg-blue-100 p-2 rounded-full">
+                <i  class="w-5 h-5 text-blue-600 pi pi-check-square"></i>
+              </div>
+              <div  class="flex-1">
+                <div  class="flex items-center justify-between mb-2">
+                  <h3  class="font-semibold text-gray-900">Nueva Solicitud de Préstamo</h3>
+                  <div  class="flex items-center space-x-2">
+                    <span  class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">No leída</span>
+                    <span  class="text-sm text-gray-500">Hace 4 horas</span>
+                  </div>
+                </div>
+                <p  class="text-gray-700 mb-2">
+                  <strong>Ana García</strong> ha solicitado un préstamo de <strong>$3,500</strong>
+                  en <strong>Amigos Universidad</strong>.
+                </p>
+                <p  class="text-sm text-gray-600 mb-3">
+                  Motivo: Gastos médicos familiares urgentes. Tu voto es necesario para la aprobación.
+                </p>
+                <div  class="flex space-x-3">
+                  <button  class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 text-sm">
+                    Aprobar
+                  </button>
+                  <button  class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 text-sm">
+                    Rechazar
+                  </button>
+                  <button  class="border border-gray-300 px-4 py-2 rounded-lg hover:bg-gray-50 text-sm">
+                    Ver detalles
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div  class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 border-l-4 border-l-orange-500 opacity-75">
+            <div  class="flex items-start space-x-4">
+              <div  class="bg-orange-100 p-2 rounded-full">
+                <i  class="w-5 h-5 text-orange-600 pi pi-calendar"></i>
+              </div>
+              <div  class="flex-1">
+                <div  class="flex items-center justify-between mb-2">
+                  <h3  class="font-semibold text-gray-900">Recordatorio de Pago</h3>
+                  <div  class="flex items-center space-x-2">
+                    <span  class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">Leída</span>
+                    <span  class="text-sm text-gray-500">Ayer</span>
+                  </div>
+                </div>
+                <p  class="text-gray-700 mb-2">
+                  Tu pago de <strong>$728</strong> vence el <strong>15 de Enero</strong>.
+                </p>
+                <p  class="text-sm text-gray-600 mb-3">Préstamo #001 - Grupo Familiar López</p>
+                <button  class="text-blue-600 hover:text-blue-700 text-sm font-medium">Realizar pago →</button>
+              </div>
+            </div>
+          </div>
+
+          <div  class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 border-l-4 border-l-green-500 opacity-75">
+            <div  class="flex items-start space-x-4">
+              <div  class="bg-green-100 p-2 rounded-full">
+                <i  class="w-5 h-5 text-green-600 pi pi-dollar"></i>
+              </div>
+              <div  class="flex-1">
+                <div  class="flex items-center justify-between mb-2">
+                  <h3  class="font-semibold text-gray-900">Aportación Confirmada</h3>
+                  <div  class="flex items-center space-x-2">
+                    <span  class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">Leída</span>
+                    <span  class="text-sm text-gray-500">Hace 2 días</span>
+                  </div>
+                </div>
+                <p  class="text-gray-700 mb-2">
+                  Tu aportación de <strong>$2,000</strong> ha sido procesada exitosamente.
+                </p>
+                <p  class="text-sm text-gray-600 mb-3">Grupo Familiar López - Ciclo Enero 2024</p>
+                <button  class="text-blue-600 hover:text-blue-700 text-sm font-medium">Ver comprobante →</button>
+              </div>
+            </div>
+          </div>
+
+          <div  class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 border-l-4 border-l-red-500 opacity-75">
+            <div  class="flex items-start space-x-4">
+              <div  class="bg-red-100 p-2 rounded-full">
+                <i  class="w-5 h-5 text-red-600 pi pi-x-circle"></i>
+              </div>
+              <div  class="flex-1">
+                <div  class="flex items-center justify-between mb-2">
+                  <h3  class="font-semibold text-gray-900">Préstamo Rechazado</h3>
+                  <div  class="flex items-center space-x-2">
+                    <span  class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">Leída</span>
+                    <span  class="text-sm text-gray-500">Hace 3 días</span>
+                  </div>
+                </div>
+                <p  class="text-gray-700 mb-2">
+                  Tu solicitud de préstamo por <strong>$10,000</strong> no fue aprobada.
+                </p>
+                <p  class="text-sm text-gray-600 mb-3">
+                  Vecinos Colonia Norte - Razón: Monto excede el límite disponible
+                </p>
+                <button  class="text-blue-600 hover:text-blue-700 text-sm font-medium">Ver comentarios →</button>
+              </div>
+            </div>
+          </div>
+
+          <div  class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 border-l-4 border-l-purple-500 opacity-75">
+            <div  class="flex items-start space-x-4">
+              <div  class="bg-purple-100 p-2 rounded-full">
+                <i  class="w-5 h-5 text-purple-600 pi pi-calendar"></i>
+              </div>
+              <div  class="flex-1">
+                <div  class="flex items-center justify-between mb-2">
+                  <h3  class="font-semibold text-gray-900">Fecha de Corte Próxima</h3>
+                  <div  class="flex items-center space-x-2">
+                    <span  class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">Leída</span>
+                    <span  class="text-sm text-gray-500">Hace 5 días</span>
+                  </div>
+                </div>
+                <p  class="text-gray-700 mb-2">
+                  El ciclo de <strong>Grupo Familiar López</strong> cierra el <strong>31 de Enero</strong>.
+                </p>
+                <p  class="text-sm text-gray-600 mb-3">Asegúrate de completar tu aportación mínima de $1,000</p>
+                <button  class="text-blue-600 hover:text-blue-700 text-sm font-medium">Realizar aportación →</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div  class="mt-8 flex items-center justify-between">
+          <p  class="text-sm text-gray-700">
+            Mostrando <span  class="font-medium">1</span> a <span  class="font-medium">6</span> de
+            <span  class="font-medium">24</span> notificaciones
+          </p>
+
+          <div  class="flex space-x-2">
+            <button  class="px-3 py-2 border border-gray-300 rounded-lg text-sm hover:bg-gray-50">Anterior</button>
+            <button  class="px-3 py-2 bg-blue-600 text-white rounded-lg text-sm">1</button>
+            <button  class="px-3 py-2 border border-gray-300 rounded-lg text-sm hover:bg-gray-50">2</button>
+            <button  class="px-3 py-2 border border-gray-300 rounded-lg text-sm hover:bg-gray-50">3</button>
+            <button  class="px-3 py-2 border border-gray-300 rounded-lg text-sm hover:bg-gray-50">Siguiente</button>
+          </div>
+        </div>
+    </div>

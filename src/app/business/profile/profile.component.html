@@ -1,72 +1,318 @@
-<div class="min-h-screen bg-gray-100 py-6 flex flex-col justify-start sm:py-20">
-  <div class="relative py-3 sm:max-w-xl sm:mx-auto">
-    <div class="absolute inset-0 bg-gradient-to-r from-blue-400 to-blue-600 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
-    <div class="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
-      <div class="max-w-md mx-auto">
-        <div class="flex justify-between items-center mb-6">
-          <h1 class="text-2xl font-semibold">Perfil de Usuario</h1>
-          @if(userProfile.name == null){
-            <button (click)="toggleEditMode()" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-300">
-              {{ editMode ? 'Cancelar' : 'Editar' }}
-            </button>
-          }
+    <div  class="min-h-screen p-3 bg-gray-50">
+
+        <div  class="mb-8">
+          <h1  class="text-2xl font-bold text-gray-900">Mi Perfil</h1>
+          <p  class="text-gray-600">Gestiona tu información personal y configuración</p>
         </div>
-        @if (!editMode) {
-          <div class="divide-y divide-gray-200">
-            <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4">
-              <dt class="text-sm font-medium text-gray-500">Nombre</dt>
-              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ userProfile.name }}</dd>
+
+        <div  class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div  class="lg:col-span-2 space-y-6">
+            <div  class="bg-white rounded-lg shadow-sm border border-gray-200">
+              <div  class="p-6">
+                <h2  class="text-lg font-semibold text-gray-900 mb-6">Información Personal</h2>
+
+                <form  class="space-y-6">
+                  <div  class="flex items-center space-x-6">
+                    <div  class="relative">
+                      <div  class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center">
+                        <i  class="pi pi-user w-8 h-8 text-blue-600" ></i>
+                      </div>
+                      <button  class="absolute -bottom-1 -right-1 bg-blue-600 text-white p-1 rounded-full hover:bg-blue-700">
+                        <i  class="pi pi-camera w-3 h-3" ></i>
+                      </button>
+                    </div>
+                    <div>
+                      <h3  class="font-medium text-gray-900">Foto de perfil</h3>
+                      <p  class="text-sm text-gray-600">JPG, PNG hasta 2MB</p>
+                    </div>
+                  </div>
+
+                  <div  class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label  class="block text-sm font-medium text-gray-700 mb-2">Nombre completo *</label>
+                      <input
+                        type="text"
+                        defaultValue="Juan Pérez García"
+                         class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      />
+                    </div>
+
+                    <div>
+                      <label  class="block text-sm font-medium text-gray-700 mb-2">Nombre de usuario</label>
+                      <input
+                        type="text"
+                        defaultValue="juanperez"
+                         class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      />
+                    </div>
+
+                    <div>
+                      <label  class="block text-sm font-medium text-gray-700 mb-2">Correo electrónico *</label>
+                      <div  class="relative">
+                        <i  class="pi pi-mail absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" ></i>
+                        <input
+                          type="email"
+                          defaultValue="juan.perez@email.com"
+                           class="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label  class="block text-sm font-medium text-gray-700 mb-2">Teléfono</label>
+                      <div  class="relative">
+                        <i  class="pi pi-phone absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" ></i>
+                        <input
+                          type="tel"
+                          defaultValue="+52 555 123 4567"
+                           class="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label  class="block text-sm font-medium text-gray-700 mb-2">CURP</label>
+                      <input
+                        type="text"
+                        defaultValue="PEGJ850315HDFRRN09"
+                         class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      />
+                    </div>
+
+                    <div>
+                      <label  class="block text-sm font-medium text-gray-700 mb-2">Fecha de nacimiento</label>
+                      <div  class="relative">
+                        <i  class="pi pi-calendar absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" ></i>
+                        <input
+                          type="date"
+                          defaultValue="1985-03-15"
+                           class="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+
+              <div  class="border-t border-gray-200 px-6 py-4 bg-gray-50">
+                <div  class="flex justify-end space-x-3">
+                  <button  class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50">
+                    Cancelar
+                  </button>
+                  <button  class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                    Guardar Cambios
+                  </button>
+                </div>
+              </div>
             </div>
-            <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4">
-              <dt class="text-sm font-medium text-gray-500">Apellido</dt>
-              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ userProfile.last_name }}</dd>
+
+            <div  class="bg-white rounded-lg shadow-sm border border-gray-200">
+              <div  class="p-6">
+                <h2  class="text-lg font-semibold text-gray-900 mb-6">Seguridad</h2>
+
+                <div  class="space-y-6">
+                  <div>
+                    <h3  class="font-medium text-gray-900 mb-3">Cambiar contraseña</h3>
+                    <div  class="space-y-4">
+                      <div>
+                        <label  class="block text-sm font-medium text-gray-700 mb-2">Contraseña actual</label>
+                        <div  class="relative">
+                          <i  class="pi pi-lock absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4"></i>
+                          <input
+                            type="password"
+                             class="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="••••••••"
+                          />
+                        </div>
+                      </div>
+
+                      <div  class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                          <label  class="block text-sm font-medium text-gray-700 mb-2">Nueva contraseña</label>
+                          <input
+                            type="password"
+                             class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="••••••••"
+                          />
+                        </div>
+
+                        <div>
+                          <label  class="block text-sm font-medium text-gray-700 mb-2">Confirmar contraseña</label>
+                          <input
+                            type="password"
+                             class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="••••••••"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div  class="border-t border-gray-200 pt-6">
+                    <div  class="flex items-center justify-between">
+                      <div>
+                        <h3  class="font-medium text-gray-900">Autenticación de dos factores</h3>
+                        <p  class="text-sm text-gray-600">Agrega una capa extra de seguridad a tu cuenta</p>
+                      </div>
+                      <label  class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox"  class="sr-only peer" />
+                        <div  class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4">
-              <dt class="text-sm font-medium text-gray-500">Fecha de Nacimiento</dt>
-              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ userProfile.birthdate| date:'dd/MM/yyyy' }}</dd>
-            </div>
-            <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4">
-              <dt class="text-sm font-medium text-gray-500">CURP</dt>
-              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ userProfile.curp }}</dd>
-            </div>
-            <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4">
-              <dt class="text-sm font-medium text-gray-500">Número de Teléfono</dt>
-              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ userProfile.phone_number }}</dd>
-            </div>
-            <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4">
-              <dt class="text-sm font-medium text-gray-500">Fecha de Registro</dt>
-              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ userProfile.created_at | date:'dd/MM/yyyy HH:mm' }}</dd>
+
+            <div  class="bg-white rounded-lg shadow-sm border border-gray-200">
+              <div  class="p-6">
+                <h2  class="text-lg font-semibold text-gray-900 mb-6">Configuración de Notificaciones</h2>
+
+                <div  class="space-y-6">
+                  <div>
+                    <h3  class="font-medium text-gray-900 mb-4">Notificaciones por email</h3>
+                    <div  class="space-y-3">
+                      <label  class="flex items-center justify-between">
+                        <div>
+                          <p  class="font-medium text-gray-900">Solicitudes de préstamo</p>
+                          <p  class="text-sm text-gray-600">
+                            Cuando alguien solicite un préstamo en tus organizaciones
+                          </p>
+                        </div>
+                        <input type="checkbox"  class="rounded border-gray-300 text-blue-600" defaultChecked />
+                      </label>
+
+                      <label  class="flex items-center justify-between">
+                        <div>
+                          <p  class="font-medium text-gray-900">Aprobaciones y rechazos</p>
+                          <p  class="text-sm text-gray-600">Resultado de tus solicitudes de préstamo</p>
+                        </div>
+                        <input type="checkbox"  class="rounded border-gray-300 text-blue-600" defaultChecked />
+                      </label>
+
+                      <label  class="flex items-center justify-between">
+                        <div>
+                          <p  class="font-medium text-gray-900">Recordatorios de pago</p>
+                          <p  class="text-sm text-gray-600">3 días antes del vencimiento de cuotas</p>
+                        </div>
+                        <input type="checkbox"  class="rounded border-gray-300 text-blue-600" defaultChecked />
+                      </label>
+
+                      <label  class="flex items-center justify-between">
+                        <div>
+                          <p  class="font-medium text-gray-900">Fechas de corte</p>
+                          <p  class="text-sm text-gray-600">Recordatorios de cierre de ciclo</p>
+                        </div>
+                        <input type="checkbox"  class="rounded border-gray-300 text-blue-600" />
+                      </label>
+                    </div>
+                  </div>
+
+                  <div  class="border-t border-gray-200 pt-6">
+                    <h3  class="font-medium text-gray-900 mb-4">Notificaciones en la app</h3>
+                    <div  class="space-y-3">
+                      <label  class="flex items-center justify-between">
+                        <div>
+                          <p  class="font-medium text-gray-900">Actividad en tiempo real</p>
+                          <p  class="text-sm text-gray-600">Aportaciones, pagos y votaciones</p>
+                        </div>
+                        <input type="checkbox"  class="rounded border-gray-300 text-blue-600" defaultChecked />
+                      </label>
+
+                      <label  class="flex items-center justify-between">
+                        <div>
+                          <p  class="font-medium text-gray-900">Mensajes y comentarios</p>
+                          <p  class="text-sm text-gray-600">Cuando alguien comente en tus solicitudes</p>
+                        </div>
+                        <input type="checkbox"  class="rounded border-gray-300 text-blue-600" defaultChecked />
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        } @else {
-          <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="space-y-4">
-            <div>
-              <label for="firstName" class="block text-sm font-medium text-gray-700">Nombre</label>
-              <input type="text" id="firstName" formControlName="name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+
+          <div  class="space-y-6">
+            <div  class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+              <h3  class="font-semibold text-gray-900 mb-4">Resumen de Cuenta</h3>
+              <div  class="space-y-3">
+                <div  class="flex justify-between">
+                  <span  class="text-gray-600">Miembro desde:</span>
+                  <span  class="font-medium">Enero 2023</span>
+                </div>
+                <div  class="flex justify-between">
+                  <span  class="text-gray-600">Organizaciones:</span>
+                  <span  class="font-medium">3</span>
+                </div>
+                <div  class="flex justify-between">
+                  <span  class="text-gray-600">Score crediticio:</span>
+                  <span  class="font-medium text-green-600">95 - Excelente</span>
+                </div>
+                <div  class="flex justify-between">
+                  <span  class="text-gray-600">Préstamos totales:</span>
+                  <span  class="font-medium">8</span>
+                </div>
+                <div  class="flex justify-between">
+                  <span  class="text-gray-600">Pagos a tiempo:</span>
+                  <span  class="font-medium text-green-600">100%</span>
+                </div>
+              </div>
             </div>
-            <div>
-              <label for="lastName" class="block text-sm font-medium text-gray-700">Apellido</label>
-              <input type="text" id="lastName" formControlName="last_name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+
+            <div  class="bg-green-50 rounded-lg p-4">
+              <div  class="flex items-center mb-3">
+                <i  class="pi pi-shield w-5 h-5 text-green-600 mr-2" ></i>
+                <h4  class="font-medium text-green-900">Cuenta Verificada</h4>
+              </div>
+              <div  class="space-y-2 text-sm text-green-800">
+                <div  class="flex items-center">
+                  <div  class="w-2 h-2 bg-green-600 rounded-full mr-2"></div>
+                  <span>Email verificado</span>
+                </div>
+                <div  class="flex items-center">
+                  <div  class="w-2 h-2 bg-green-600 rounded-full mr-2"></div>
+                  <span>Teléfono verificado</span>
+                </div>
+                <div  class="flex items-center">
+                  <div  class="w-2 h-2 bg-green-600 rounded-full mr-2"></div>
+                  <span>Identidad verificada</span>
+                </div>
+              </div>
             </div>
-            <div>
-              <label for="dateOfBirth" class="block text-sm font-medium text-gray-700">Fecha de Nacimiento</label>
-              <input type="date" id="dateOfBirth" formControlName="birthdate" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+
+            <div  class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+              <h3  class="font-semibold text-gray-900 mb-4">Actividad Reciente</h3>
+              <div  class="space-y-3">
+                <div  class="flex items-start space-x-3">
+                  <div  class="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
+                  <div  class="flex-1">
+                    <p  class="text-sm text-gray-900">Aportación realizada</p>
+                    <p  class="text-xs text-gray-500">Hace 2 días</p>
+                  </div>
+                </div>
+
+                <div  class="flex items-start space-x-3">
+                  <div  class="w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
+                  <div  class="flex-1">
+                    <p  class="text-sm text-gray-900">Voto emitido</p>
+                    <p  class="text-xs text-gray-500">Hace 5 días</p>
+                  </div>
+                </div>
+
+                <div  class="flex items-start space-x-3">
+                  <div  class="w-2 h-2 bg-purple-500 rounded-full mt-2"></div>
+                  <div  class="flex-1">
+                    <p  class="text-sm text-gray-900">Pago realizado</p>
+                    <p  class="text-xs text-gray-500">Hace 1 semana</p>
+                  </div>
+                </div>
+              </div>
+
+              <button  class="w-full mt-4 text-center text-blue-600 hover:text-blue-700 text-sm font-medium">
+                Ver historial completo
+              </button>
             </div>
-            <div>
-              <label for="curp" class="block text-sm font-medium text-gray-700">CURP</label>
-              <input type="text" id="curp" formControlName="curp" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
-            </div>
-            <div>
-              <label for="phoneNumber" class="block text-sm font-medium text-gray-700">Número de Teléfono</label>
-              <input type="tel" id="phoneNumber" formControlName="phone_number" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
-            </div>
-            <div class="flex justify-end space-x-3">
-              <button type="button" (click)="toggleEditMode()" class="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 transition duration-300">Cancelar</button>
-              <button type="submit" [disabled]="!profileForm.valid" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-300 disabled:opacity-50">Guardar Cambios</button>
-            </div>
-          </form>
-        }
-      </div>
+          </div>
+        </div>
     </div>
-  </div>
-</div>

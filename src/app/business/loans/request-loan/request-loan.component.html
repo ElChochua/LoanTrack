@@ -1,0 +1,242 @@
+<div  class=" p-4 bg-gray-50">
+
+        <div  class="mb-8">
+          <h1  class="text-2xl font-bold text-gray-900">Solicitar Préstamo</h1>
+          <p  class="text-gray-600">Solicita un préstamo del fondo común de tu organización</p>
+        </div>
+
+        <div  class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div  class="lg:col-span-2 space-y-6">
+            <div  class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+              <div  class="flex items-center mb-4">
+                <i  class="pi pi-chart-line w-5 h-5 text-green-600 mr-2" ></i>
+                <h2  class="text-lg font-semibold text-gray-900">Tu Elegibilidad</h2>
+              </div>
+
+              <div  class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div  class="text-center p-4 bg-green-50 rounded-lg">
+                  <p  class="text-2xl font-bold text-green-600">$8,500</p>
+                  <p  class="text-sm text-green-700">Tus aportes en ciclo actual</p>
+                </div>
+                <div  class="text-center p-4 bg-blue-50 rounded-lg">
+                  <p  class="text-2xl font-bold text-blue-600">$25,500</p>
+                  <p  class="text-sm text-blue-700">Máximo autorizable (300%)</p>
+                </div>
+                <div  class="text-center p-4 bg-purple-50 rounded-lg">
+                  <div  class="flex items-center justify-center mb-1">
+                    <i  class="pi pi-star w-5 h-5 text-purple-600 mr-1" ></i>
+                    <p  class="text-lg font-bold text-purple-600">4.5%</p>
+                  </div>
+                  <p  class="text-sm text-purple-700">Tasa preferencial</p>
+                </div>
+              </div>
+
+              <div  class="mt-4 p-3 bg-yellow-50 rounded-lg flex items-start">
+                <i  class="pi pi-exclamation-triangle w-5 h-5 text-yellow-600 mr-2 mt-0.5" ></i>
+                <div>
+                  <p  class="text-sm text-yellow-800">
+                    <strong>Mayor aportante:</strong> Como el mayor contribuyente del ciclo, tienes acceso a una tasa de
+                    interés preferencial del 4.5% (vs 5.0% estándar).
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div  class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+              <h2  class="text-lg font-semibold text-gray-900 mb-6">Detalles del Préstamo</h2>
+
+              <form  class="space-y-6">
+                <div  class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label  class="block text-sm font-medium text-gray-700 mb-2">Monto solicitado *</label>
+                    <div  class="relative">
+                      <i  class="pi pi-dollar-sign absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" ></i>
+                      <input
+                        type="number"
+                         class="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg"
+                        placeholder="0.00"
+                      />
+                    </div>
+                    <p  class="text-sm text-gray-500 mt-1">Máximo disponible: $25,500</p>
+                  </div>
+
+                  <div>
+                    <label  class="block text-sm font-medium text-gray-700 mb-2">Plazo (meses) *</label>
+                    <select  class="w-full px-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                      <option>Seleccionar plazo</option>
+                      <option>3 meses</option>
+                      <option>6 meses</option>
+                      <option>12 meses</option>
+                      <option>18 meses</option>
+                      <option>24 meses</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label  class="block text-sm font-medium text-gray-700 mb-2">Motivo del préstamo</label>
+                  <textarea
+                    rows={4}
+                     class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="Describe brevemente para qué necesitas el préstamo..."
+                  ></textarea>
+                  <p  class="text-sm text-gray-500 mt-1">Opcional pero recomendado para facilitar la aprobación</p>
+                </div>
+
+                <div>
+                  <label  class="block text-sm font-medium text-gray-700 mb-2">Frecuencia de pago</label>
+                  <div  class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <label  class="flex items-center p-3 border border-gray-300 rounded-lg hover:bg-gray-50 cursor-pointer">
+                      <input type="radio" name="frequency"  class="text-blue-600" defaultChecked />
+                      <span  class="ml-2 text-sm font-medium">Mensual</span>
+                    </label>
+                    <label  class="flex items-center p-3 border border-gray-300 rounded-lg hover:bg-gray-50 cursor-pointer">
+                      <input type="radio" name="frequency"  class="text-blue-600" />
+                      <span  class="ml-2 text-sm font-medium">Quincenal</span>
+                    </label>
+                    <label  class="flex items-center p-3 border border-gray-300 rounded-lg hover:bg-gray-50 cursor-pointer">
+                      <input type="radio" name="frequency"  class="text-blue-600" />
+                      <span  class="ml-2 text-sm font-medium">Semanal</span>
+                    </label>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <div  class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+              <div  class="flex items-center mb-4">
+                <i  class="pi pi-calculator w-5 h-5 text-blue-600 mr-2" ></i>
+                <h2  class="text-lg font-semibold text-gray-900">Simulador de Pagos</h2>
+              </div>
+
+              <div  class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                <div  class="text-center p-4 bg-gray-50 rounded-lg">
+                  <p  class="text-xl font-bold text-gray-900">$15,000</p>
+                  <p  class="text-sm text-gray-600">Monto solicitado</p>
+                </div>
+                <div  class="text-center p-4 bg-gray-50 rounded-lg">
+                  <p  class="text-xl font-bold text-gray-900">$1,356</p>
+                  <p  class="text-sm text-gray-600">Pago mensual</p>
+                </div>
+                <div  class="text-center p-4 bg-gray-50 rounded-lg">
+                  <p  class="text-xl font-bold text-gray-900">$1,272</p>
+                  <p  class="text-sm text-gray-600">Interés total</p>
+                </div>
+              </div>
+
+              <div  class="overflow-x-auto">
+                <table  class="w-full text-sm">
+                  <thead>
+                    <tr  class="border-b border-gray-200">
+                      <th  class="text-left py-2">Pago</th>
+                      <th  class="text-right py-2">Cuota</th>
+                      <th  class="text-right py-2">Capital</th>
+                      <th  class="text-right py-2">Interés</th>
+                      <th  class="text-right py-2">Saldo</th>
+                    </tr>
+                  </thead>
+                  <tbody  class="text-gray-600">
+                    <tr  class="border-b border-gray-100">
+                      <td  class="py-2">1</td>
+                      <td  class="text-right py-2">$1,356</td>
+                      <td  class="text-right py-2">$1,300</td>
+                      <td  class="text-right py-2">$56</td>
+                      <td  class="text-right py-2">$13,700</td>
+                    </tr>
+                    <tr  class="border-b border-gray-100">
+                      <td  class="py-2">2</td>
+                      <td  class="text-right py-2">$1,356</td>
+                      <td  class="text-right py-2">$1,305</td>
+                      <td  class="text-right py-2">$51</td>
+                      <td  class="text-right py-2">$12,395</td>
+                    </tr>
+                    <tr  class="border-b border-gray-100">
+                      <td  class="py-2">3</td>
+                      <td  class="text-right py-2">$1,356</td>
+                      <td  class="text-right py-2">$1,310</td>
+                      <td  class="text-right py-2">$46</td>
+                      <td  class="text-right py-2">$11,085</td>
+                    </tr>
+                    <tr>
+                      <td  class="py-2 text-gray-400">...</td>
+                      <td  class="text-right py-2 text-gray-400">...</td>
+                      <td  class="text-right py-2 text-gray-400">...</td>
+                      <td  class="text-right py-2 text-gray-400">...</td>
+                      <td  class="text-right py-2 text-gray-400">...</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div  class="flex justify-end space-x-3">
+              <button
+                type="button"
+                 class="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50"
+              >
+                Cancelar
+              </button>
+              <button type="submit"  class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                Enviar Solicitud
+              </button>
+            </div>
+          </div>
+
+          <div  class="space-y-6">
+            <div  class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+              <h3  class="font-semibold text-gray-900 mb-4">Grupo Familiar López</h3>
+              <div  class="space-y-3 text-sm">
+                <div  class="flex justify-between">
+                  <span  class="text-gray-600">Fondo disponible:</span>
+                  <span  class="font-medium">$45,000</span>
+                </div>
+                <div  class="flex justify-between">
+                  <span  class="text-gray-600">Préstamos activos:</span>
+                  <span  class="font-medium">3</span>
+                </div>
+                <div  class="flex justify-between">
+                  <span  class="text-gray-600">Tu historial:</span>
+                  <span  class="font-medium text-green-600">Excelente</span>
+                </div>
+                <div  class="flex justify-between">
+                  <span  class="text-gray-600">Pagos a tiempo:</span>
+                  <span  class="font-medium text-green-600">100%</span>
+                </div>
+              </div>
+            </div>
+
+            <div  class="bg-blue-50 rounded-lg p-4">
+              <h4  class="font-medium text-blue-900 mb-3">Proceso de Aprobación</h4>
+              <div  class="space-y-3 text-sm text-blue-800">
+                <div  class="flex items-center">
+                  <div  class="w-2 h-2 bg-blue-600 rounded-full mr-3"></div>
+                  <span>Se requieren mínimo 2 votos (25% de miembros)</span>
+                </div>
+                <div  class="flex items-center">
+                  <div  class="w-2 h-2 bg-blue-600 rounded-full mr-3"></div>
+                  <span>Los miembros tienen 7 días para votar</span>
+                </div>
+                <div  class="flex items-center">
+                  <div  class="w-2 h-2 bg-blue-600 rounded-full mr-3"></div>
+                  <span>Recibirás notificación del resultado</span>
+                </div>
+                <div  class="flex items-center">
+                  <div  class="w-2 h-2 bg-blue-600 rounded-full mr-3"></div>
+                  <span>Si se aprueba, el dinero se transfiere en 24h</span>
+                </div>
+              </div>
+            </div>
+
+            <div  class="bg-yellow-50 rounded-lg p-4">
+              <h4  class="font-medium text-yellow-900 mb-3">Términos Importantes</h4>
+              <ul  class="text-sm text-yellow-800 space-y-1">
+                <li>• Tasa de interés: 4.5% anual</li>
+                <li>• Penalización por mora: 2.0% semanal</li>
+                <li>• No se permiten pagos anticipados parciales</li>
+                <li>• El préstamo debe ser pagado en su totalidad</li>
+                <li>• Máximo 2 préstamos activos por persona</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+    </div>

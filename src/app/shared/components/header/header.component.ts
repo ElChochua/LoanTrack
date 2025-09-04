@@ -10,9 +10,12 @@ import { User } from '../../../models/Users/UserModel';
 export class HeaderComponent implements OnInit {
   isProfileMenuOpen = false
   isNotificationsOpen = false
-
+  isLogedIn = false
+  constructor(private authService: AuthService) {}
   ngOnInit(): void {
-    
+      if(this.authService.isAutenticated()){
+        this.isLogedIn = true
+      }
   }
   toggleProfileMenu() {
     this.isProfileMenuOpen = !this.isProfileMenuOpen
